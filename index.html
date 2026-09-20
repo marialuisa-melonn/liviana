@@ -404,7 +404,10 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
   </div>
   <div id="mktList"></div>
   <div class="note terra">
-    <b>Ojo con las etiquetas.</b> El protocolo dice que hay azúcar y gluten escondidos en muchísimos productos. Revisa el pan sin gluten, la leche de almendras (que diga «sin azúcar») y la mantequilla de almendras (que el único ingrediente sea almendra).
+    <b>Las tres etiquetas que tienes que leer antes de pagar.</b> El <b>pan de arroz</b>, las <b>tortillas de coco</b> y la <b>arepa de arroz</b> son la trampa clásica: muchos productos «sin gluten» llevan <b>almidón de maíz</b>, y el maíz está eliminado. Busca también azúcar y soya en la lista. Si alguno trae maíz, déjalo — no es urgente y el plan funciona sin él.
+  </div>
+  <div class="note">
+    <b>Y las de siempre.</b> Leche de almendras: que diga «sin azúcar». Mantequilla de almendras: que el único ingrediente sea almendra. Leche de coco: sin azúcar añadida.
   </div>
 </section>
 
@@ -498,14 +501,47 @@ pancakestrop:{n:"Pancakes tropicales de avena",min:12,rinde:"1 porción",
     "Monta el mango tibio encima y ralla limón por encima."],
   nota:"El mango salteado es el truco: el calor le saca el azúcar natural y sabe a postre sin agregarle nada."},
 
-omelette:{n:"Omelette verde con papa criolla",min:14,rinde:"1 porción",
-  ing:[["2","huevos"],["2","claras"],["50 g","espinaca"],["80 g","tomate"],["50–70 g","aguacate"],["150 g","papa criolla"],["1 cdta","aceite de oliva"],["","sal y pimienta"]],
-  pasos:["Lava las papas criollas y ponlas enteras en el airfryer con la cucharadita de aceite y sal, 200 °C por 18–20 minutos.",
-    "Mientras tanto, bate los huevos con las claras, sal y pimienta hasta que hagan burbujas.",
+/* ---- Los cuatro desayunos exprés, montados sobre los productos de Pasteur ---- */
+wrapcoco:{n:"Wrap de huevo en tortilla de coco",min:6,rinde:"1 porción",
+  ing:[["1","tortilla de harina de coco (Bodai)"],["2","huevos"],["2","claras"],["1 tajada","queso vegano Violife"],["1 puñado","espinaca"],["50 g","aguacate"],["1 cdta","ghee o AOVE"],["","sal y pimienta"]],
+  pasos:["Bate los huevos con las claras, sal y pimienta.",
+    "Sartén a fuego medio-bajo con el ghee. Echa la espinaca 30 segundos y vierte el huevo encima.",
+    "Revuelve lento 2 minutos. Cuando todavía se vea brillante, pon la tajada de queso encima y apaga: el calor que queda la derrite sola.",
+    "Calienta la tortilla 30 segundos por lado en el mismo sartén, sin nada de grasa.",
+    "Rellena con el huevo y el aguacate, enrolla y listo."],
+  nota:"Seis minutos de principio a fin y se come con una mano. Envuelto en papel aluminio te lo llevas al carro."},
+
+arepaarroz:{n:"Arepa de arroz con hogao y huevo",min:8,rinde:"1 porción",
+  ing:[["1","arepa de arroz (La Mary)"],["2","huevos"],["2","claras"],["3 cdas","hogao (del prep del domingo)"],["70 g","aguacate"],["1 cdta","ghee o AOVE"],["","sal y pimienta"]],
+  pasos:["Mete la arepa al airfryer a 180 °C por 3–4 minutos, y mientras tanto haces el huevo.",
+    "Huevos revueltos a fuego medio-bajo, revolviendo lento. Retíralos cuando todavía se vean brillantes.",
+    "Calienta el hogao 40 segundos en el microondas.",
+    "Monta: arepa, huevo encima, el hogao encima del huevo y el aguacate al lado."],
+  nota:"Reemplaza la arepa de yuca casera: mismo resultado sin cocinar yuca ni sacarle la vena. El hogao es lo que hace de queso aquí, y lo hace mejor."},
+
+quesadilla:{n:"Quesadilla de huevo y queso",min:12,rinde:"1 porción",
+  ing:[["1","tortilla de harina de coco (Bodai)"],["2","huevos"],["2","claras"],["2 tajadas","queso vegano Violife"],["80 g","tomate"],["70 g","aguacate"],["100 g","fresas"],["1 cdta","ghee"],["","cilantro, sal y pimienta"]],
+  pasos:["Huevos revueltos suaves, a fuego bajo, con sal y pimienta. Resérvalos.",
+    "En el mismo sartén pon la tortilla a fuego medio. Encima una tajada de queso, el huevo, el tomate en cubos y la segunda tajada arriba.",
+    "Dobla la tortilla por la mitad y dora 2 minutos por lado, presionando con la espátula.",
+    "Corta en dos, cilantro encima, y sirve con el aguacate y las fresas al lado."],
+  nota:"El brunch del sábado sin papa. La segunda tajada va ARRIBA, no abajo: es la que pega la quesadilla cuando la doblas."},
+
+tostadas:{n:"Tostadas de pan de arroz",min:6,rinde:"1 porción",
+  ing:[["3 tajadas","pan de arroz (Spiga)"],["2","huevos"],["2","claras"],["70 g","aguacate"],["80 g","tomate"],["1 cdta","ghee o AOVE"],["","limón, sal y pimienta"]],
+  pasos:["Pan a la tostadora mientras haces el huevo.",
+    "Huevos revueltos a fuego medio-bajo. Retíralos cuando todavía se vean brillantes.",
+    "Machaca el aguacate con limón y sal y úntalo sobre el pan.",
+    "Encima el huevo y el tomate en rodajas. Pimienta y ya."],
+  nota:"Esto es literalmente el desayuno n.º 2 del Mod1: «2 huevos revueltos + 2 claras + 3 tajadas de pan de arroz o de quinoa sin gluten». Tu nutrióloga ya lo tenía escrito."},
+
+omelette:{n:"Omelette verde",min:9,rinde:"1 porción",extra:1,
+  ing:[["2","huevos"],["2","claras"],["50 g","espinaca"],["80 g","tomate"],["50–70 g","aguacate"],["1 cdta","aceite de oliva"],["","sal y pimienta"]],
+  pasos:["Bate los huevos con las claras, sal y pimienta hasta que hagan burbujas.",
     "Saltea la espinaca y el tomate 1–2 minutos en el sartén.",
     "Vierte el huevo encima, baja el fuego y tapa 3–4 minutos.",
-    "Dobla por la mitad y sirve con el aguacate en tajadas y las papas criollas."],
-  nota:"Nada de huevo frito. Aquí queda tipo omelette, hecho pero jugoso — retíralo cuando todavía se vea brillante, se termina de cocinar en el plato."},
+    "Dobla por la mitad y sirve con el aguacate en tajadas."],
+  nota:"Nada de huevo frito. Queda tipo omelette, hecho pero jugoso — retíralo cuando todavía se vea brillante, se termina de cocinar en el plato."},
 
 avenafresa:{n:"Avena cremosa de fresa",min:8,rinde:"1 porción",
   ing:[["60 g","avena en hojuelas"],["200 ml","leche de almendras sin azúcar"],["150 g","fresas"],["15 g","mantequilla de almendras"],["","canela"],["1 pizca","sal"]],
@@ -513,22 +549,6 @@ avenafresa:{n:"Avena cremosa de fresa",min:8,rinde:"1 porción",
     "Machaca la mitad de las fresas y agrégalas en el último minuto: tiñen la avena de rosado y la vuelven cremosa.",
     "Sirve con el resto de las fresas en trozos y la mantequilla de almendras encima."],
   nota:"Versión de afán: deja la avena con la leche en un frasco en la nevera desde la noche anterior. Al otro día la comes fría o 40 segundos al microondas."},
-
-arepahogao:{n:"Arepa de yuca con hogao y omelette",min:20,rinde:"1 porción",
-  ing:[["120 g","arepa de yuca (del prep)"],["2","huevos"],["2","claras"],["70 g","aguacate"],["80 g","tomate"],["40 g","cebolla"],["1 cdta","aceite de oliva"],["","limón, sal y pimienta"]],
-  pasos:["Hogao rápido: pica el tomate y la cebolla muy finos. Sofríelos con el aceite 6–8 minutos a fuego medio, hasta que el tomate se deshaga y quede una salsa espesa. Sal al gusto.",
-    "Calienta la arepa de yuca en el airfryer, 4 minutos a 180 °C.",
-    "Haz el omelette con los huevos y las claras, bien hecho pero sin dorar de más.",
-    "Sirve el hogao sobre el omelette, con la arepa y el aguacate al lado. Limón encima."],
-  nota:"El hogao es lo que reemplaza el queso aquí, y lo hace mejor: sabor de verdad en vez de un sustituto ultraprocesado."},
-
-brunch:{n:"Brunch de sábado",min:22,rinde:"1 porción",
-  ing:[["150 g","papa criolla"],["2","huevos"],["2","claras"],["70 g","aguacate"],["100 g","fresas"],["1 cdta","aceite de oliva"],["","sal, pimienta, cilantro"]],
-  pasos:["Papas criollas al airfryer con aceite y sal, 200 °C por 18–20 minutos, sacudiendo a la mitad. Deben quedar doradas y reventadas.",
-    "Omelette sencillo con los huevos y las claras.",
-    "Monta el plato con calma: el omelette, las papas, el aguacate en abanico, las fresas al lado.",
-    "Cilantro y pimienta encima."],
-  nota:"Es el mismo desayuno de siempre, pero emplatado como si fuera un restaurante. El sábado te lo mereces y no cuesta ni un ingrediente más."},
 
 /* ====================== ALMUERZOS ====================== */
 bowlmex:{n:"Bowl mexicano de pollo",min:18,rinde:"1 porción",
@@ -662,7 +682,16 @@ pollobase:{n:"Pollo cocido para toda la semana",min:30,rinde:"~1,1 kg cocido",pr
     "El agua de cocción es caldo: no la botes."],
   nota:"El corazón del meal prep. De aquí salen las cinco sopas, el loaded potato del viernes y el pollo crispy."},
 
-arepayuca:{n:"Arepas de yuca",min:25,rinde:"4 arepas",prep:1,
+hogao:{n:"Hogao",min:10,rinde:"para 4–5 días",prep:1,
+  ing:[["4","tomates"],["1","cebolla"],["1 cdta","aceite de oliva"],["","sal, pimienta y una pizca de comino"],["","cilantro al final"]],
+  pasos:["Pica el tomate y la cebolla muy finos. Entre más finos, mejor queda la salsa.",
+    "Sofríe la cebolla con el aceite 4 minutos a fuego medio, sin dejar que dore.",
+    "Agrega el tomate, la sal, la pimienta y el comino.",
+    "Cocina 8–10 minutos hasta que el tomate se deshaga y quede espeso, no aguado.",
+    "Cilantro fuera del fuego."],
+  nota:"Dura 5 días en la nevera, así que el del domingo te alcanza para la arepa del jueves. Es lo que reemplaza el queso sin meter nada procesado, y levanta cualquier huevo aburrido."},
+
+arepayuca:{n:"Arepas de yuca",min:25,rinde:"4 arepas",extra:1,
   ing:[["1 taza","yuca pelada (≈250 g)"],["1 cdta","linaza"],["1 cdta","ajonjolí"],["1 cdta","aceite de coco u oliva"],["","sal"]],
   pasos:["Cocina la yuca en agua hirviendo 15 minutos o hasta que esté muy blanda.",
     "Deja enfriar y RETIRA LA VENA del centro. Si la dejas, la arepa queda con hilos.",
@@ -751,7 +780,7 @@ const DIAS = [
      {k:"c",r:"sopatomate",sub:"con pollo desmechado encima",min:5,prep:1,soup:"🍅"}]},
 
  {dia:"Martes", lema:"Hoy hay hamburguesa. Esto no es una dieta triste.",
-  m:[{k:"d",r:"omelette",sub:"espinaca, tomate, aguacate y papa criolla",min:14},
+  m:[{k:"d",r:"wrapcoco",sub:"huevo, queso vegano, espinaca y aguacate",min:6},
      {k:"a",r:"hamburguesa",sub:"papas a la francesa al airfryer + guacamole",min:35},
      {k:"c",r:"sopazanahoria",sub:"con pollo crispy encima",min:8,prep:1,soup:"🥕"}]},
 
@@ -761,7 +790,7 @@ const DIAS = [
      {k:"c",r:"sopapapa",sub:"con pollo crispy en el centro",min:10,prep:1,soup:"🥔"}]},
 
  {dia:"Jueves", lema:"Noche de prep corto: dejas listo el fin de semana.",
-  m:[{k:"d",r:"arepahogao",sub:"omelette, aguacate y hogao casero",min:20,prep:1},
+  m:[{k:"d",r:"arepaarroz",sub:"huevo, hogao del prep y aguacate",min:8,prep:1},
      {k:"a",r:"tilapia",sub:"papas al airfryer, ensalada y mango",min:24},
      {k:"c",r:"sopaahuyama",sub:"la más sofisticada de las cinco",min:5,prep:1,soup:"🎃"}]},
 
@@ -771,12 +800,12 @@ const DIAS = [
      {k:"c",r:"sopapollo",sub:"reconfortante y completa",min:5,prep:1,soup:"🍗"}]},
 
  {dia:"Sábado", lema:"Brunch sin afán. Hoy desayunas como en restaurante.",
-  m:[{k:"d",r:"brunch",sub:"papa criolla, omelette, aguacate y fresas",min:22},
+  m:[{k:"d",r:"quesadilla",sub:"tomate, aguacate y fresas al lado",min:12},
      {k:"a",r:"bowlmedi",sub:"quinoa y verduras asadas",min:25,prep:1},
      {k:"c",r:"sopatomate",sub:"la segunda porción del domingo pasado",min:5,prep:1,soup:"🍅"}]},
 
  {dia:"Domingo", lema:"Cierras la semana 1. Mañana ajustamos lo que no funcionó.",
-  m:[{k:"d",r:"pancakes",sub:"fresas + mantequilla de almendras",min:12},
+  m:[{k:"d",r:"tostadas",sub:"huevo revuelto, aguacate y tomate",min:6},
      {k:"a",r:"carnepapas",sub:"papas a la francesa, guacamole y pico de gallo",min:30},
      {k:"c",r:"sopazanahoria",sub:"la segunda porción",min:5,prep:1,soup:"🥕"}]}
 ];
@@ -821,11 +850,12 @@ const MERCADO = [
 
  {g:"Carbohidratos", e:"🥔", it:[
    ["Papa","1,5 kg","francesas, loaded potato y la crema de puerro"],
-   ["Papa criolla","400 g","martes y sábado al airfryer"],
    ["Arroz blanco","500 g","bowls y sopa de pollo"],
    ["Quinoa","250 g","bowl mediterráneo del sábado"],
    ["Avena en hojuelas","500 g","pancakes y avena cremosa"],
-   ["Yuca","1 mediana","arepas del jueves"]]},
+   ["Pan de arroz tajado · Spiga","1 bolsa","domingo · revisa que no traiga almidón de maíz"],
+   ["Tortillas de harina de coco · Bodai","1 bolsa × 5","martes y sábado · te sobran 3"],
+   ["Arepa de arroz skinny · La Mary","1 bolsa × 5","jueves · te sobran 4"]]},
 
  {g:"Frutas", e:"🍓", it:[
    ["Fresas","700 g","lunes, miércoles, sábado y domingo"],
@@ -862,7 +892,8 @@ const MERCADO = [
    ["Almendras","200 g","snacks"],
    ["Leche de almendras sin azúcar","1 litro","revisa que diga SIN AZÚCAR"],
    ["Leche de coco sin azúcar","1 lata","crema de ahuyama"],
-   ["Ghee","1 frasco","para sofreír, junto con el aceite de oliva"]]},
+   ["Ghee","1 frasco","para sofreír, junto con el aceite de oliva"],
+   ["Queso mozzarella vegano · Violife","1 paquete de 200 g","martes y sábado · 3 tajadas de 10"]]},
 
  {g:"Despensa y especias", e:"🧂", it:[
    ["Cúrcuma","","antiinflamatoria de verdad"],
@@ -901,16 +932,16 @@ const PREPS = [
    ["75 min","Cuela el caldo y guárdalo","En frascos de 500 ml. Lo que no uses esta semana, al congelador."],
    ["80 min","Arroz","1½ tazas. Porciona en tuppers de 200 g: lunes y miércoles."],
    ["85 min","Pico de gallo","Dura 2 días. Lo vuelves a hacer el jueves."],
+   ["88 min","Hogao","Tomate y cebolla muy finos, 10 minutos al sartén. Dura 5 días, así que te alcanza para la arepa del jueves."],
    ["88 min","Lava y seca las hojas","Guárdalas en un tupper con papel de cocina abajo: aguantan 4 días crujientes."],
-   ["90 min","Deja las papas listas","Criollas lavadas. Las de bastón, cortadas y sumergidas en agua fría en la nevera."]]},
+   ["92 min","Deja las papas listas","Cortadas en bastón y sumergidas en agua fría en la nevera. Así el martes solo las secas y van al airfryer."]]},
 
  {id:"p2", when:"Jueves por la noche", t:"Prep corto", dur:"≈ 60 min",
-  covers:"Cierra la semana: las dos sopas que faltan, las arepas del viernes y todo lo del fin de semana.",
+  covers:"Cierra la semana: las dos sopas que faltan y todo lo del fin de semana. Los desayunos ya no necesitan prep — salen del paquete.",
   tasks:[
    ["0 min","Rostiza la ahuyama","500 g a 190 °C por 18–20 minutos."],
    ["5 min","🍗 Sopa de pollo, arroz y verduras","Pollo, zanahoria, apio, cebolla, tomillo y laurel en el caldo, 20–25 min. Desmechas, agregas el arroz 12–15 min. Cocina el arroz APARTE si la vas a guardar: si no, se bebe todo el caldo."],
    ["25 min","🎃 Crema de ahuyama, coco y jengibre","Sofríe cebolla y jengibre, agrega la ahuyama rostizada, cúrcuma y caldo, licúa con la leche de coco. Sin hervir después del coco."],
-   ["35 min","Arepas de yuca","Cocina la yuca, retira la vena, tritura y forma. 15 minutos al airfryer. Son el desayuno del jueves y sobran para el fin de semana."],
    ["45 min","Quinoa","Enjuágala frotándola. Tuéstala 2 minutos antes de cocinarla y cambia por completo. Para el bowl del sábado."],
    ["52 min","Verduras asadas al airfryer","Calabacín, pimentón, berenjena y cebolla, 190 °C por 15–18 min. Sin brócoli."],
    ["58 min","Renueva el pico de gallo","El del domingo ya cumplió. Este alcanza para viernes y domingo."]]}
