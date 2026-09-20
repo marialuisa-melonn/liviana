@@ -449,8 +449,10 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
     <label class="fl">Día en que arrancaste</label>
     <input class="txt" id="inStart" type="date">
     <button class="btn ghost" id="btnExport">Exportar mi registro para la nutrióloga</button>
+    <button class="btn ghost" id="btnUpdate">Buscar actualización</button>
     <button class="btn danger" id="btnReset">Borrar todo y empezar de cero</button>
     <p class="tiny muted" style="margin-top:12px">Todo lo que marcas se guarda solo en este teléfono. No sale a ningún servidor.</p>
+    <p class="tiny muted mono" style="margin-top:6px" id="verLine"></p>
   </div>
 </section>
 
@@ -579,14 +581,14 @@ salmonjengibre:{n:"Salmón al jengibre y limón",min:16,rinde:"1 porción",
     "Baña con el resto de la salsa al servir."],
   nota:"Esto NO es teriyaki, aunque se le parezca. El teriyaki lleva salsa de soya y azúcar, y la soja está en la lista de eliminación del protocolo. Esta versión da el mismo golpe de sabor sin romper nada."},
 
-tilapia:{n:"Tilapia crocante con papas y mango",min:24,rinde:"1 porción",
-  ing:[["120 g","filete de tilapia"],["200 g","papa en cubos"],["150 g","mango"],["","ensalada de hojas y tomate"],["5 g","aceite de oliva"],["","paprika, ajo en polvo, limón y sal"]],
-  pasos:["Papa en cubos con aceite, paprika y sal. Airfryer a 200 °C, 18–22 minutos.",
+tilapia:{n:"Tilapia crocante con papa criolla",min:24,rinde:"1 porción",
+  ing:[["120 g","filete de tilapia"],["200 g","papa criolla"],["150 g","mango"],["","ensalada de hojas y tomate"],["5 g","aceite de oliva"],["","paprika, ajo en polvo, limón y sal"]],
+  pasos:["Lava las papas criollas y ponlas ENTERAS, con cáscara, mezcladas con el aceite, paprika y sal. Airfryer a 200 °C, 18–20 minutos, sacudiendo a la mitad. Deben quedar doradas y reventadas.",
     "Seca muy bien la tilapia con papel de cocina — es lo que la deja crocante y no aguada.",
     "Sazónala con paprika, ajo, limón y sal.",
     "Airfryer a 190 °C, 8–10 minutos. No hay que voltearla.",
     "Sirve con la ensalada de hojas y tomate, y el mango en cubos al lado."],
-  nota:"El pescado está listo cuando se desmenuza fácil con un tenedor. Si dudas, sácalo: se sigue cocinando con su propio calor."},
+  nota:"La criolla va entera: ni la pelas ni la cortas, así que es más rápida que la papa en cubos. Si te provoca, reemplaza también los bastones del martes y del domingo — mismo peso, 200–250 g."},
 
 loadedpotato:{n:"Loaded potato de pollo",min:20,rinde:"1 porción",
   ing:[["120 g","pollo desmechado (del prep)"],["280 g","papa"],["70 g","aguacate"],["100 g","tomate"],["40 g","cebolla"],["","cilantro y limón"],["","sal y pimienta"]],
@@ -791,7 +793,7 @@ const DIAS = [
 
  {dia:"Jueves", lema:"Noche de prep corto: dejas listo el fin de semana.",
   m:[{k:"d",r:"arepaarroz",sub:"huevo, hogao del prep y aguacate",min:8,prep:1},
-     {k:"a",r:"tilapia",sub:"papas al airfryer, ensalada y mango",min:24},
+     {k:"a",r:"tilapia",sub:"papa criolla al airfryer, ensalada y mango",min:24},
      {k:"c",r:"sopaahuyama",sub:"la más sofisticada de las cinco",min:5,prep:1,soup:"🎃"}]},
 
  {dia:"Viernes", lema:"Loaded potato. Te lo ganaste.",
@@ -850,6 +852,7 @@ const MERCADO = [
 
  {g:"Carbohidratos", e:"🥔", it:[
    ["Papa","1,5 kg","francesas, loaded potato y la crema de puerro"],
+   ["Papa criolla","300 g","el almuerzo del jueves · entera al airfryer"],
    ["Arroz blanco","500 g","bowls y sopa de pollo"],
    ["Quinoa","250 g","bowl mediterráneo del sábado"],
    ["Avena en hojuelas","500 g","pancakes y avena cremosa"],
@@ -974,6 +977,7 @@ const LOGROS = [
 /* =========================================================
    ESTADO
    ========================================================= */
+const APP_VERSION = "2026-09-20 · 4";
 const KEY = "liviana.v1";
 const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", aguaV2:1});
 let S = DEF();
@@ -1474,9 +1478,50 @@ $("#btnReset").onclick = () => {
   go("hoy"); toast("Todo limpio. Cuando quieras empezamos.");
 };
 
+/* ---------- actualizaciones ----------
+   Sin esto la app se queda pegada en una versión vieja: al abrirla desde la pantalla
+   de inicio, el navegador sirve lo que tenga guardado. Aquí se avisa y se recarga. */
+let recargando = false;
+function forzarRecarga(){
+  if(recargando) return;
+  recargando = true;
+  toast("Versión nueva. Actualizando…");
+  setTimeout(() => location.reload(), 900);
+}
+if("serviceWorker" in navigator){
+  navigator.serviceWorker.addEventListener("controllerchange", forzarRecarga);
+  navigator.serviceWorker.register("sw.js").then(reg => {
+    reg.update().catch(()=>{});
+    reg.addEventListener("updatefound", () => {
+      const nuevo = reg.installing;
+      if(!nuevo) return;
+      nuevo.addEventListener("statechange", () => {
+        if(nuevo.state === "installed" && navigator.serviceWorker.controller) forzarRecarga();
+      });
+    });
+    // Al volver a la app después de un rato, revisa si hay algo nuevo.
+    document.addEventListener("visibilitychange", () => {
+      if(!document.hidden) reg.update().catch(()=>{});
+    });
+  }).catch(()=>{});
+}
+
+$("#verLine").textContent = "Versión " + APP_VERSION;
+$("#btnUpdate").onclick = async () => {
+  toast("Buscando…");
+  try{
+    const ks = await caches.keys();
+    await Promise.all(ks.map(k => caches.delete(k)));
+    if("serviceWorker" in navigator){
+      const rs = await navigator.serviceWorker.getRegistrations();
+      await Promise.all(rs.map(r => r.unregister()));
+    }
+  }catch(e){}
+  location.replace(location.pathname + "?v=" + Date.now());
+};
+
 /* ---------- arranque ---------- */
 renderHoy();
-if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
 </script>
 </body>
 </html>
