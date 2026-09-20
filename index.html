@@ -1,0 +1,1422 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Liviana</title>
+<meta name="description" content="Plan antiinflamatorio de 7 días: comidas, recetas, mercado y meal prep.">
+<meta name="theme-color" content="#3C5A45">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Liviana">
+<meta name="robots" content="noindex,nofollow">
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-180.png">
+<link rel="icon" href="icon-192.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,400&family=Karla:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#F5F2EA;
+  --surface:#FFFFFF;
+  --surface-2:#EFEBE0;
+  --surface-3:#E4DECF;
+  --line:#DCD5C4;
+  --line-soft:#EAE4D6;
+  --text:#25302A;
+  --text-2:#4C5A50;
+  --muted:#7C8A7F;
+  --sage:#3C5A45;
+  --sage-2:#5C8A6A;
+  --sage-soft:#DCE8DE;
+  --terra:#B85C38;
+  --terra-soft:#F6E2D8;
+  --gold:#B08428;
+  --gold-soft:#F5E9CC;
+  --berry:#8C4A63;
+  --berry-soft:#F2DFE6;
+  --sky:#3A6E86;
+  --sky-soft:#D9E9EF;
+  --ok:#3C7A5A;
+  --shadow:0 1px 2px rgba(37,48,42,.05), 0 8px 22px -14px rgba(37,48,42,.28);
+  --shadow-lift:0 2px 6px rgba(37,48,42,.08), 0 20px 44px -22px rgba(37,48,42,.4);
+  --r:16px;
+  --r-sm:11px;
+  --fd:"Fraunces", Georgia, serif;
+  --fb:"Karla", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --fm:"IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --navh:calc(58px + env(safe-area-inset-bottom));
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#131813; --surface:#1C231D; --surface-2:#242D25; --surface-3:#2D3830;
+    --line:#38453A; --line-soft:#2B352D; --text:#E9EFE8; --text-2:#BECBBF;
+    --muted:#8CA091; --sage:#8FC2A0; --sage-2:#6FA982; --sage-soft:#22331F;
+    --terra:#E89170; --terra-soft:#38221A; --gold:#DDB65C; --gold-soft:#39301A;
+    --berry:#D98FA8; --berry-soft:#331E27; --sky:#7FBBD3; --sky-soft:#17303A;
+    --ok:#6FC79C;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -16px rgba(0,0,0,.8);
+    --shadow-lift:0 2px 8px rgba(0,0,0,.5), 0 22px 46px -22px rgba(0,0,0,.9);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#131813; --surface:#1C231D; --surface-2:#242D25; --surface-3:#2D3830;
+  --line:#38453A; --line-soft:#2B352D; --text:#E9EFE8; --text-2:#BECBBF;
+  --muted:#8CA091; --sage:#8FC2A0; --sage-2:#6FA982; --sage-soft:#22331F;
+  --terra:#E89170; --terra-soft:#38221A; --gold:#DDB65C; --gold-soft:#39301A;
+  --berry:#D98FA8; --berry-soft:#331E27; --sky:#7FBBD3; --sky-soft:#17303A;
+  --ok:#6FC79C;
+  --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 26px -16px rgba(0,0,0,.8);
+  --shadow-lift:0 2px 8px rgba(0,0,0,.5), 0 22px 46px -22px rgba(0,0,0,.9);
+}
+
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--bg); color:var(--text); font-family:var(--fb);
+  font-size:16px; line-height:1.5; -webkit-font-smoothing:antialiased;
+  padding-bottom:var(--navh); overscroll-behavior-y:none;
+}
+button{font:inherit;color:inherit;background:none;border:none;padding:0;cursor:pointer}
+h1,h2,h3,h4{font-family:var(--fd);font-weight:600;margin:0;line-height:1.18;letter-spacing:-.01em}
+.mono{font-family:var(--fm);font-variant-numeric:tabular-nums}
+
+/* ---------- APP HEADER ---------- */
+.appbar{
+  position:sticky;top:0;z-index:40;background:var(--bg);
+  padding:calc(env(safe-area-inset-top) + 12px) 16px 10px;
+  border-bottom:1px solid transparent;transition:border-color .2s, background .2s;
+}
+.appbar.scrolled{border-bottom-color:var(--line-soft);background:color-mix(in srgb, var(--bg) 88%, transparent);backdrop-filter:saturate(1.6) blur(14px)}
+.appbar-row{display:flex;align-items:center;gap:10px}
+.brand{font-family:var(--fd);font-size:22px;font-weight:700;letter-spacing:-.02em;flex:1;min-width:0}
+.brand em{font-style:italic;font-weight:400;color:var(--sage)}
+.lvlchip{
+  display:inline-flex;align-items:center;gap:6px;background:var(--sage-soft);color:var(--sage);
+  border-radius:999px;padding:5px 11px;font-size:12.5px;font-weight:700;white-space:nowrap;
+}
+.lvlchip .xp{font-family:var(--fm);font-size:11.5px;opacity:.8;font-weight:500}
+.iconbtn{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:var(--surface-2);color:var(--text-2);font-size:15px;flex:none}
+
+/* ---------- LAYOUT ---------- */
+main{padding:4px 16px 28px;max-width:640px;margin:0 auto}
+.view{display:none;animation:fade .22s ease}
+.view.active{display:block}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.sect{margin:24px 0 10px;display:flex;align-items:baseline;gap:9px}
+.sect h2{font-size:18.5px}
+.sect .cnt{font-family:var(--fm);font-size:12px;color:var(--muted)}
+.sect .act{margin-left:auto;font-size:12.5px;font-weight:700;color:var(--sage);letter-spacing:.01em}
+.card{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);box-shadow:var(--shadow)}
+.muted{color:var(--muted)}
+.tiny{font-size:12.5px}
+
+/* ---------- BOTTOM NAV ---------- */
+nav.tabs{
+  position:fixed;left:0;right:0;bottom:0;z-index:50;
+  background:color-mix(in srgb, var(--surface) 92%, transparent);
+  backdrop-filter:saturate(1.7) blur(18px);
+  border-top:1px solid var(--line-soft);
+  padding-bottom:env(safe-area-inset-bottom);
+  display:grid;grid-template-columns:repeat(5,1fr);
+}
+nav.tabs button{
+  padding:8px 2px 7px;display:flex;flex-direction:column;align-items:center;gap:3px;
+  font-size:10px;font-weight:700;letter-spacing:.02em;color:var(--muted);position:relative;
+}
+nav.tabs button svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+nav.tabs button.on{color:var(--sage)}
+nav.tabs button.on svg{stroke-width:2.1}
+nav.tabs .dot{position:absolute;top:5px;right:calc(50% - 17px);width:6px;height:6px;border-radius:50%;background:var(--terra);display:none}
+nav.tabs .dot.show{display:block}
+
+/* ---------- HOY: HERO RING ---------- */
+.hero{
+  background:linear-gradient(158deg, var(--sage) 0%, #2E4736 100%);
+  border-radius:20px;padding:18px;color:#F2F7F2;position:relative;
+  /* clip, no hidden: un contenedor overflow:hidden sigue siendo desplazable por
+     programa, y al enfocar un botón del daynav el navegador corría el contenido. */
+  overflow:hidden;overflow:clip;
+  box-shadow:var(--shadow-lift);
+}
+:root[data-theme="dark"] .hero, :root:not([data-theme="light"]) .hero{background:linear-gradient(158deg,#2C4433 0%,#1A261D 100%)}
+@media (prefers-color-scheme: light){:root:not([data-theme="dark"]) .hero{background:linear-gradient(158deg, var(--sage) 0%, #2E4736 100%)}}
+/* El círculo se desplaza con transform, que no suma al scrollWidth del hero. */
+.hero:after{content:"";position:absolute;right:0;top:0;width:190px;height:190px;border-radius:50%;background:rgba(255,255,255,.055);transform:translate(48px,-48px);pointer-events:none}
+.hero-top{display:flex;align-items:flex-start;gap:14px;position:relative;z-index:1}
+.hero-txt{flex:1;min-width:0}
+.hero-kicker{font-family:var(--fm);font-size:11px;letter-spacing:.14em;text-transform:uppercase;opacity:.72}
+.hero h2{font-size:25px;margin:3px 0 2px;color:#F2F7F2}
+.hero-sub{font-size:13.5px;opacity:.82;line-height:1.4}
+.ring{position:relative;width:78px;height:78px;flex:none}
+.ring svg{transform:rotate(-90deg)}
+.ring .val{position:absolute;inset:0;display:grid;place-items:center;font-family:var(--fm);font-size:19px;font-weight:600;letter-spacing:-.02em}
+.ring .val small{font-size:10px;opacity:.7;font-weight:400}
+.hero-bar{margin-top:14px;position:relative;z-index:1}
+.hero-bar .lbl{display:flex;justify-content:space-between;font-size:11.5px;opacity:.78;margin-bottom:5px;font-family:var(--fm)}
+.track{height:7px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
+.track span{display:block;height:100%;border-radius:99px;background:#EBD9A8;transition:width .5s cubic-bezier(.2,.8,.3,1)}
+.daynav{display:flex;gap:6px;margin-top:14px;position:relative;z-index:1}
+.daynav button{
+  flex:1;padding:7px 0;border-radius:9px;background:rgba(255,255,255,.1);
+  font-family:var(--fm);font-size:12px;font-weight:600;color:rgba(255,255,255,.66);
+}
+.daynav button.on{background:#F2F7F2;color:#2E4736}
+.daynav button.done:not(.on){color:#CFE3D4}
+.daynav button.done:not(.on):after{content:"·";margin-left:2px}
+
+/* ---------- MEAL CARDS ---------- */
+.meal{
+  background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r);
+  margin-bottom:10px;overflow:hidden;overflow:clip;box-shadow:var(--shadow);transition:border-color .2s;
+}
+.meal.done{border-color:var(--sage-soft);background:color-mix(in srgb, var(--sage-soft) 30%, var(--surface))}
+.meal-head{display:flex;align-items:flex-start;gap:12px;padding:13px 14px}
+.chk{
+  width:26px;height:26px;border-radius:9px;border:2px solid var(--line);flex:none;margin-top:1px;
+  display:grid;place-items:center;transition:.16s;background:var(--surface);
+}
+.chk svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:3.2;stroke-linecap:round;stroke-linejoin:round;opacity:0;transform:scale(.5);transition:.18s}
+.chk.on{background:var(--sage);border-color:var(--sage)}
+.chk.on svg{opacity:1;transform:none}
+.meal-body{flex:1;min-width:0}
+.meal-when{font-family:var(--fm);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.meal-when b{color:var(--sage);font-weight:600}
+.meal-name{font-family:var(--fd);font-size:17px;font-weight:600;margin:2px 0 4px;line-height:1.25}
+.meal.done .meal-name{text-decoration:line-through;text-decoration-color:var(--muted);text-decoration-thickness:1.5px;opacity:.6}
+.meal-items{font-size:13.5px;color:var(--text-2);line-height:1.48}
+.meal-items i{font-style:normal;color:var(--muted)}
+.pills{display:flex;gap:5px;flex-wrap:wrap;margin-top:7px}
+.pill{font-size:11px;font-weight:700;padding:3px 8px;border-radius:99px;background:var(--surface-2);color:var(--text-2);letter-spacing:.01em}
+.pill.prep{background:var(--sky-soft);color:var(--sky)}
+.pill.fast{background:var(--gold-soft);color:var(--gold)}
+.pill.rec{background:var(--terra-soft);color:var(--terra)}
+.meal-foot{border-top:1px solid var(--line-soft);padding:9px 14px;display:flex;gap:8px;align-items:center}
+.linkbtn{font-size:13px;font-weight:700;color:var(--sage);display:inline-flex;align-items:center;gap:5px}
+.linkbtn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+
+/* ---------- HABIT ROWS ---------- */
+.habits{padding:4px 0}
+.hrow{display:flex;align-items:center;gap:12px;padding:11px 14px;border-bottom:1px solid var(--line-soft)}
+.hrow:last-child{border-bottom:none}
+.hrow .ico{width:30px;height:30px;border-radius:9px;display:grid;place-items:center;font-size:15px;flex:none}
+.hrow .txt{flex:1;min-width:0}
+.hrow .txt b{display:block;font-size:14.5px;font-weight:600}
+.hrow .txt span{font-size:12px;color:var(--muted);line-height:1.35;display:block}
+.water{display:flex;gap:5px}
+.water button{width:19px;height:25px;border-radius:5px 5px 7px 7px;border:1.7px solid var(--line);background:var(--surface);transition:.15s}
+.water button.on{background:var(--sky);border-color:var(--sky)}
+
+/* ---------- SHEET / MODAL ---------- */
+.scrim{position:fixed;inset:0;background:rgba(20,28,22,.5);backdrop-filter:blur(3px);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
+.scrim.open{opacity:1;pointer-events:auto}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:61;background:var(--bg);
+  border-radius:22px 22px 0 0;max-height:92vh;display:flex;flex-direction:column;
+  transform:translateY(102%);transition:transform .3s cubic-bezier(.2,.9,.3,1);
+  box-shadow:0 -10px 50px -12px rgba(0,0,0,.45);
+}
+.sheet.open{transform:none}
+.sheet-grab{padding:9px 0 3px;display:grid;place-items:center;flex:none}
+.sheet-grab i{width:38px;height:4px;border-radius:99px;background:var(--line);display:block}
+.sheet-head{padding:4px 18px 12px;border-bottom:1px solid var(--line-soft);flex:none;display:flex;align-items:flex-start;gap:12px}
+.sheet-head h3{font-size:21px;flex:1;line-height:1.2}
+.sheet-head .x{width:30px;height:30px;border-radius:50%;background:var(--surface-2);display:grid;place-items:center;font-size:15px;color:var(--muted);flex:none}
+.sheet-body{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 18px calc(28px + env(safe-area-inset-bottom));flex:1}
+.metarow{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:14px}
+.rsect{font-family:var(--fm);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--sage);font-weight:600;margin:18px 0 8px}
+.rsect:first-child{margin-top:0}
+.ing{list-style:none;padding:0;margin:0}
+.ing li{display:flex;gap:10px;padding:7px 0;border-bottom:1px dashed var(--line-soft);font-size:14.5px;align-items:baseline}
+.ing li:last-child{border-bottom:none}
+.ing li b{font-family:var(--fm);font-size:13px;color:var(--sage);font-weight:600;flex:none;min-width:58px}
+.steps{list-style:none;counter-reset:s;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:0 0 14px 34px;font-size:14.5px;line-height:1.52}
+.steps li:before{
+  content:counter(s);position:absolute;left:0;top:-1px;width:23px;height:23px;border-radius:50%;
+  background:var(--sage-soft);color:var(--sage);display:grid;place-items:center;
+  font-family:var(--fm);font-size:12px;font-weight:600;
+}
+.steps li:after{content:"";position:absolute;left:11px;top:25px;bottom:3px;width:1.5px;background:var(--line-soft)}
+.steps li:last-child{padding-bottom:0}
+.steps li:last-child:after{display:none}
+.note{background:var(--gold-soft);border-radius:var(--r-sm);padding:11px 13px;font-size:13.5px;line-height:1.5;color:var(--text-2);margin-top:14px}
+.note b{color:var(--gold)}
+.note.sage{background:var(--sage-soft)} .note.sage b{color:var(--sage)}
+.note.terra{background:var(--terra-soft)} .note.terra b{color:var(--terra)}
+
+/* ---------- MERCADO ---------- */
+.mgroup{margin-bottom:12px}
+.mghead{display:flex;align-items:center;gap:9px;padding:11px 14px;background:var(--surface-2);border-radius:var(--r-sm);margin-bottom:2px}
+.mghead .e{font-size:16px}
+.mghead b{flex:1;font-size:14.5px;font-weight:700}
+.mghead span{font-family:var(--fm);font-size:11.5px;color:var(--muted)}
+.mitem{display:flex;align-items:center;gap:11px;padding:10px 14px;border-bottom:1px solid var(--line-soft)}
+.mitem:last-child{border-bottom:none}
+.mitem .n{flex:1;font-size:14.5px;line-height:1.35}
+.mitem .n small{display:block;font-size:11.5px;color:var(--muted)}
+.mitem .q{font-family:var(--fm);font-size:13px;color:var(--sage);font-weight:600;flex:none}
+.mitem.on .n{text-decoration:line-through;color:var(--muted)}
+.mitem.on .q{color:var(--muted)}
+.chk.sm{width:22px;height:22px;border-radius:7px;margin-top:0}
+.chk.sm svg{width:12px;height:12px}
+
+/* ---------- PREP ---------- */
+.prepcard{padding:16px;margin-bottom:12px}
+.prepcard h3{font-size:19px;margin-bottom:3px}
+.prepcard .when{font-family:var(--fm);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--terra);font-weight:600}
+.prepcard .covers{font-size:13px;color:var(--muted);margin:6px 0 14px;line-height:1.45}
+.ptask{display:flex;gap:11px;padding:11px 0;border-bottom:1px solid var(--line-soft);align-items:flex-start}
+.ptask:last-child{border-bottom:none;padding-bottom:0}
+.ptask .body{flex:1;min-width:0}
+.ptask .body b{display:block;font-size:14.5px;font-weight:600;line-height:1.3}
+.ptask .body span{font-size:12.5px;color:var(--muted);display:block;margin-top:2px;line-height:1.45}
+.ptask .t{font-family:var(--fm);font-size:11px;color:var(--sky);background:var(--sky-soft);padding:2px 7px;border-radius:99px;flex:none;font-weight:600}
+.ptask.on .body b{text-decoration:line-through;color:var(--muted)}
+
+/* ---------- YO ---------- */
+.statgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:14px}
+.stat{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r-sm);padding:13px 11px;text-align:center;box-shadow:var(--shadow)}
+.stat b{display:block;font-family:var(--fm);font-size:24px;font-weight:600;letter-spacing:-.03em;line-height:1.1;color:var(--sage)}
+.stat span{font-size:11px;color:var(--muted);letter-spacing:.02em;display:block;margin-top:3px;line-height:1.25}
+.badges{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:9px}
+.badge{background:var(--surface);border:1px solid var(--line-soft);border-radius:var(--r-sm);padding:13px 7px;text-align:center;opacity:.34;filter:grayscale(1);transition:.3s;box-shadow:var(--shadow)}
+.badge.got{opacity:1;filter:none;border-color:var(--gold);background:linear-gradient(170deg,var(--gold-soft),var(--surface) 62%)}
+.badge .e{font-size:25px;display:block;line-height:1}
+.badge b{display:block;font-size:11px;font-weight:700;margin-top:6px;line-height:1.25}
+.badge span{display:block;font-size:10px;color:var(--muted);margin-top:2px;line-height:1.25}
+.symrow{display:flex;align-items:center;gap:10px;padding:10px 14px;border-bottom:1px solid var(--line-soft)}
+.symrow:last-child{border-bottom:none}
+.symrow .n{flex:1;font-size:14px}
+.symrow .n small{display:block;font-size:11px;color:var(--muted)}
+.faces{display:flex;gap:4px}
+.faces button{width:30px;height:30px;border-radius:9px;background:var(--surface-2);font-size:14px;display:grid;place-items:center;transition:.15s;border:1.5px solid transparent}
+.faces button.on{background:var(--sage-soft);border-color:var(--sage);transform:scale(1.08)}
+.chartwrap{padding:14px}
+.chartwrap svg{width:100%;height:120px;display:block;overflow:visible}
+.legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:11.5px;color:var(--muted)}
+.legend i{width:9px;height:9px;border-radius:3px;display:inline-block;margin-right:4px;vertical-align:-1px}
+.infoblock{padding:15px}
+.infoblock p{margin:0 0 11px;font-size:14px;line-height:1.55;color:var(--text-2)}
+.infoblock p:last-child{margin-bottom:0}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lst{list-style:none;padding:0;margin:0}
+.lst li{font-size:13px;padding:5px 0;padding-left:17px;position:relative;line-height:1.4;color:var(--text-2)}
+.lst li:before{position:absolute;left:0;top:5px;font-size:11px}
+.lst.no li:before{content:"✕";color:var(--terra)}
+.lst.yes li:before{content:"✓";color:var(--ok)}
+.btn{display:block;width:100%;text-align:center;padding:13px;border-radius:var(--r-sm);background:var(--sage);color:#fff;font-weight:700;font-size:14.5px;margin-top:10px}
+.btn.ghost{background:var(--surface-2);color:var(--text-2)}
+.btn.danger{background:var(--terra-soft);color:var(--terra)}
+input.txt{width:100%;padding:12px 13px;border-radius:var(--r-sm);border:1.5px solid var(--line);background:var(--surface);font-size:15px;font-family:var(--fb);color:var(--text)}
+input.txt:focus{outline:none;border-color:var(--sage)}
+label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;margin:14px 0 6px}
+
+/* ---------- TOAST ---------- */
+.toast{
+  position:fixed;left:50%;bottom:calc(var(--navh) + 14px);transform:translate(-50%,16px);
+  background:var(--text);color:var(--bg);padding:11px 17px;border-radius:99px;font-size:13.5px;font-weight:600;
+  z-index:70;opacity:0;pointer-events:none;transition:.28s cubic-bezier(.2,.9,.3,1);white-space:nowrap;
+  box-shadow:var(--shadow-lift);max-width:92vw;overflow:hidden;text-overflow:ellipsis;
+}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+@media (prefers-reduced-motion: reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
+</style>
+</head>
+<body>
+
+<header class="appbar" id="appbar">
+  <div class="appbar-row">
+    <div class="brand">Liviana<em>Mente</em></div>
+    <div class="lvlchip" id="lvlchip"><span id="lvlEmoji">🌱</span><span id="lvlName">Semilla</span><span class="xp" id="lvlXp">0</span></div>
+    <button class="iconbtn" id="themeBtn" aria-label="Cambiar tema">◐</button>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ HOY ============ -->
+<section class="view active" id="v-hoy">
+  <div class="hero">
+    <div class="hero-top">
+      <div class="hero-txt">
+        <div class="hero-kicker" id="heroKicker">Día 1 · Fase eliminación</div>
+        <h2 id="heroTitle">Hoy</h2>
+        <div class="hero-sub" id="heroSub">Arranquemos suave.</div>
+      </div>
+      <div class="ring">
+        <svg viewBox="0 0 78 78" width="78" height="78">
+          <circle cx="39" cy="39" r="33" fill="none" stroke="rgba(255,255,255,.18)" stroke-width="7"/>
+          <circle id="ringArc" cx="39" cy="39" r="33" fill="none" stroke="#EBD9A8" stroke-width="7"
+                  stroke-linecap="round" stroke-dasharray="207.3" stroke-dashoffset="207.3"
+                  style="transition:stroke-dashoffset .6s cubic-bezier(.2,.8,.3,1)"/>
+        </svg>
+        <div class="val"><span id="ringVal">0</span><small>/100</small></div>
+      </div>
+    </div>
+    <div class="hero-bar">
+      <div class="lbl"><span>Progreso del protocolo</span><span id="protoLbl">0 / 21 días</span></div>
+      <div class="track"><span id="protoBar" style="width:0%"></span></div>
+    </div>
+    <div class="daynav" id="daynav"></div>
+  </div>
+
+  <div class="sect"><h2>Comidas</h2><span class="cnt" id="mealsCnt">0/4</span></div>
+  <div id="mealList"></div>
+
+  <div class="sect"><h2>Los no negociables</h2></div>
+  <div class="card habits" id="habitList"></div>
+
+  <div class="sect"><h2>¿Cómo te sentiste?</h2><span class="cnt tiny muted">esto es lo que le sirve a tu nutrióloga</span></div>
+  <div class="card" id="symList"></div>
+</section>
+
+<!-- ============ PLAN ============ -->
+<section class="view" id="v-plan">
+  <div class="sect"><h2>Los 7 días</h2><span class="cnt">toca una comida</span></div>
+  <div class="note sage" style="margin-bottom:14px">
+    <b>Tu nutrióloga dice:</b> «No es necesario cumplir las recetas por días estrictamente, puedes jugar con los días y comidas según tus antojos.» Si un día no te provoca, cámbialo por otro. Nada se rompe.
+  </div>
+  <div id="planList"></div>
+
+  <div class="sect"><h2>Recetario</h2><span class="cnt" id="recCnt"></span></div>
+  <div id="recList"></div>
+</section>
+
+<!-- ============ MERCADO ============ -->
+<section class="view" id="v-mercado">
+  <div class="sect"><h2>Mercado de la semana</h2><span class="act" id="clearMkt">Reiniciar</span></div>
+  <div class="hero" style="padding:15px;margin-bottom:16px">
+    <div class="hero-bar" style="margin-top:0">
+      <div class="lbl"><span>Carrito</span><span id="mktLbl">0 / 0</span></div>
+      <div class="track"><span id="mktBar" style="width:0%"></span></div>
+    </div>
+  </div>
+  <div id="mktList"></div>
+  <div class="note terra">
+    <b>Ojo con las etiquetas.</b> El protocolo dice que hay azúcar y gluten escondidos en muchísimos productos. Revisa el pan sin gluten, la leche de almendras (que diga «sin azúcar») y la mantequilla de almendras (que el único ingrediente sea almendra).
+  </div>
+</section>
+
+<!-- ============ PREP ============ -->
+<section class="view" id="v-prep">
+  <div class="sect"><h2>Meal prep</h2><span class="cnt">2 sesiones, 7 días resueltos</span></div>
+  <div class="note sage" style="margin-bottom:14px">
+    <b>La idea:</b> cocinas dos veces en la semana y el resto son 10 minutos de ensamblar. Los almuerzos salen del tupper directo al trabajo; las cenas son sartén o airfryer y nada más.
+  </div>
+  <div id="prepList"></div>
+</section>
+
+<!-- ============ YO ============ -->
+<section class="view" id="v-yo">
+  <div class="sect"><h2>Tu progreso</h2></div>
+  <div class="statgrid">
+    <div class="stat"><b id="stDays">0</b><span>días<br>completos</span></div>
+    <div class="stat"><b id="stXp">0</b><span>puntos<br>ganados</span></div>
+    <div class="stat"><b id="stPct">0%</b><span>del<br>protocolo</span></div>
+  </div>
+
+  <div class="sect"><h2>Cómo te has sentido</h2></div>
+  <div class="card chartwrap">
+    <svg id="symChart" viewBox="0 0 320 120" preserveAspectRatio="none" aria-label="Evolución de síntomas"></svg>
+    <div class="legend" id="symLegend"></div>
+    <div class="tiny muted" style="margin-top:9px;line-height:1.45">Más alto es mejor. Los primeros días pueden bajar — el protocolo avisa que hay reacciones de abstinencia y detox al principio, y que se resuelven.</div>
+  </div>
+
+  <div class="sect"><h2>Logros</h2><span class="cnt" id="bdgCnt"></span></div>
+  <div class="badges" id="badgeList"></div>
+
+  <div class="sect"><h2>El plan, en corto</h2></div>
+  <div class="card infoblock" id="infoBlock"></div>
+
+  <div class="sect"><h2>Ajustes</h2></div>
+  <div class="card infoblock">
+    <label class="fl">Tu nombre</label>
+    <input class="txt" id="inName" placeholder="¿Cómo te llamas?" autocomplete="off">
+    <label class="fl">Día en que arrancaste</label>
+    <input class="txt" id="inStart" type="date">
+    <button class="btn ghost" id="btnExport">Exportar mi registro para la nutrióloga</button>
+    <button class="btn danger" id="btnReset">Borrar todo y empezar de cero</button>
+    <p class="tiny muted" style="margin-top:12px">Todo lo que marcas se guarda solo en este teléfono. No sale a ningún servidor.</p>
+  </div>
+</section>
+
+</main>
+
+<nav class="tabs" id="tabs">
+  <button data-v="hoy" class="on"><svg viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5.5 9.5V20h13V9.5"/><path d="M9.5 20v-6h5v6"/></svg>Hoy</button>
+  <button data-v="plan"><svg viewBox="0 0 24 24"><rect x="3.5" y="4.5" width="17" height="16" rx="2.5"/><path d="M3.5 9.5h17M8.5 2.5v4M15.5 2.5v4"/><path d="M8 13.5h3M8 17h6"/></svg>Plan</button>
+  <button data-v="mercado"><svg viewBox="0 0 24 24"><path d="M4 7h16l-1.4 11.2A2 2 0 0 1 16.6 20H7.4a2 2 0 0 1-2-1.8L4 7Z"/><path d="M8.5 7V5.5a3.5 3.5 0 0 1 7 0V7"/></svg><span class="dot" id="mktDot"></span>Mercado</button>
+  <button data-v="prep"><svg viewBox="0 0 24 24"><path d="M6 3v7a3 3 0 0 0 6 0V3"/><path d="M9 10v11"/><path d="M17.5 3c-1.4 1.6-2 3.4-2 5.5 0 1.6.6 2.6 2 3V21"/></svg>Prep</button>
+  <button data-v="yo"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.6"/><path d="M4.8 20a7.4 7.4 0 0 1 14.4 0"/></svg>Yo</button>
+</nav>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet">
+  <div class="sheet-grab"><i></i></div>
+  <div class="sheet-head"><h3 id="sheetTitle"></h3><button class="x" id="sheetX">✕</button></div>
+  <div class="sheet-body" id="sheetBody"></div>
+</div>
+<div class="toast" id="toast"></div>
+
+<script>
+/* =========================================================
+   LIVIANA — Semana 1 del protocolo antiinflamatorio
+   Menú diseñado por María Luisa sobre el plan Mod1.
+   Protocolo: LivianaMente (Be Light) · Fórmula médica · Recetario Práctico.
+   Reglas personales: huevo solo revuelto u omelette (jamás frito),
+   pepino solo en jugo verde, sin brócoli, sin lácteos, sin soya.
+   ========================================================= */
+
+const R = {
+
+/* ====================== DESAYUNOS ====================== */
+pancakes:{n:"Pancakes de avena",min:12,rinde:"1 porción · 3–4 pancakes",
+  ing:[["70 g","avena en hojuelas"],["2","huevos"],["2","claras"],["1","banano pequeño, no muy maduro"],["150 g","fresas"],["15 g","mantequilla de almendras"]],
+  pasos:["Licúa la avena, los huevos, las claras y el banano hasta que quede una masa lisa.",
+    "Deja reposar 3 minutos: la avena absorbe líquido y los pancakes quedan firmes en vez de aguados.",
+    "Sartén antiadherente a fuego medio-bajo. Vierte 3–4 pancakes pequeños.",
+    "Voltea cuando veas burbujas en la superficie y los bordes secos, 2–3 minutos por lado.",
+    "Sirve con las fresas y la mantequilla de almendras."],
+  nota:"Haz doble tanda y congela con papel entre cada uno. Salen del congelador a la tostadora y quedan como recién hechos: es tu desayuno de rescate."},
+
+pancakestrop:{n:"Pancakes tropicales de avena",min:12,rinde:"1 porción",
+  ing:[["70 g","avena en hojuelas"],["2","huevos"],["2","claras"],["1","banano pequeño"],["150 g","mango"],["","canela"],["","ralladura de limón (opcional)"]],
+  pasos:["Misma masa de siempre: licúa avena, huevos, claras, banano y canela.",
+    "Cocina los pancakes 2–3 minutos por lado en sartén antiadherente.",
+    "Corta el mango en cubos y saltéalo 2 minutos en el mismo sartén, sin nada de grasa, hasta que caramelice en los bordes.",
+    "Monta el mango tibio encima y ralla limón por encima."],
+  nota:"El mango salteado es el truco: el calor le saca el azúcar natural y sabe a postre sin agregarle nada."},
+
+omelette:{n:"Omelette verde con papa criolla",min:14,rinde:"1 porción",
+  ing:[["2","huevos"],["2","claras"],["50 g","espinaca"],["80 g","tomate"],["50–70 g","aguacate"],["150 g","papa criolla"],["1 cdta","aceite de oliva"],["","sal y pimienta"]],
+  pasos:["Lava las papas criollas y ponlas enteras en el airfryer con la cucharadita de aceite y sal, 200 °C por 18–20 minutos.",
+    "Mientras tanto, bate los huevos con las claras, sal y pimienta hasta que hagan burbujas.",
+    "Saltea la espinaca y el tomate 1–2 minutos en el sartén.",
+    "Vierte el huevo encima, baja el fuego y tapa 3–4 minutos.",
+    "Dobla por la mitad y sirve con el aguacate en tajadas y las papas criollas."],
+  nota:"Nada de huevo frito. Aquí queda tipo omelette, hecho pero jugoso — retíralo cuando todavía se vea brillante, se termina de cocinar en el plato."},
+
+avenafresa:{n:"Avena cremosa de fresa",min:8,rinde:"1 porción",
+  ing:[["60 g","avena en hojuelas"],["200 ml","leche de almendras sin azúcar"],["150 g","fresas"],["15 g","mantequilla de almendras"],["","canela"],["1 pizca","sal"]],
+  pasos:["Cocina la avena con la leche de almendras, la canela y la sal, 5–7 minutos a fuego medio, revolviendo.",
+    "Machaca la mitad de las fresas y agrégalas en el último minuto: tiñen la avena de rosado y la vuelven cremosa.",
+    "Sirve con el resto de las fresas en trozos y la mantequilla de almendras encima."],
+  nota:"Versión de afán: deja la avena con la leche en un frasco en la nevera desde la noche anterior. Al otro día la comes fría o 40 segundos al microondas."},
+
+arepahogao:{n:"Arepa de yuca con hogao y omelette",min:20,rinde:"1 porción",
+  ing:[["120 g","arepa de yuca (del prep)"],["2","huevos"],["2","claras"],["70 g","aguacate"],["80 g","tomate"],["40 g","cebolla"],["1 cdta","aceite de oliva"],["","limón, sal y pimienta"]],
+  pasos:["Hogao rápido: pica el tomate y la cebolla muy finos. Sofríelos con el aceite 6–8 minutos a fuego medio, hasta que el tomate se deshaga y quede una salsa espesa. Sal al gusto.",
+    "Calienta la arepa de yuca en el airfryer, 4 minutos a 180 °C.",
+    "Haz el omelette con los huevos y las claras, bien hecho pero sin dorar de más.",
+    "Sirve el hogao sobre el omelette, con la arepa y el aguacate al lado. Limón encima."],
+  nota:"El hogao es lo que reemplaza el queso aquí, y lo hace mejor: sabor de verdad en vez de un sustituto ultraprocesado."},
+
+brunch:{n:"Brunch de sábado",min:22,rinde:"1 porción",
+  ing:[["150 g","papa criolla"],["2","huevos"],["2","claras"],["70 g","aguacate"],["100 g","fresas"],["1 cdta","aceite de oliva"],["","sal, pimienta, cilantro"]],
+  pasos:["Papas criollas al airfryer con aceite y sal, 200 °C por 18–20 minutos, sacudiendo a la mitad. Deben quedar doradas y reventadas.",
+    "Omelette sencillo con los huevos y las claras.",
+    "Monta el plato con calma: el omelette, las papas, el aguacate en abanico, las fresas al lado.",
+    "Cilantro y pimienta encima."],
+  nota:"Es el mismo desayuno de siempre, pero emplatado como si fuera un restaurante. El sábado te lo mereces y no cuesta ni un ingrediente más."},
+
+/* ====================== ALMUERZOS ====================== */
+bowlmex:{n:"Bowl mexicano de pollo",min:18,rinde:"1 porción",
+  ing:[["120 g","pechuga de pollo"],["200 g","arroz cocido"],["70 g","aguacate"],["100 g","tomate"],["40 g","cebolla"],["","cilantro y limón"],["","paprika, comino, sal y pimienta"],["5 g","aceite de oliva"]],
+  pasos:["Corta el pollo en cubos y sazónalo con paprika, comino, sal y pimienta.",
+    "Sartén bien caliente con el aceite. Echa el pollo y NO LO MUEVAS 3 minutos, para que dore de verdad.",
+    "Revuelve y cocina 3–4 minutos más.",
+    "Monta el bowl sobre el arroz: el pollo, el aguacate, el tomate y la cebolla picados, cilantro generoso.",
+    "Exprime medio limón encima justo antes de comer."],
+  nota:"Para el tupper: lleva el arroz y el pollo juntos, y el aguacate y el limón aparte. El aguacate cortado desde la mañana llega negro al mediodía."},
+
+hamburguesa:{n:"Hamburguesa de carne magra con papas a la francesa",min:35,rinde:"1 porción",
+  ing:[["120 g","carne molida magra"],["250 g","papa"],["70 g","aguacate"],["","tomate y lechuga"],["1 cdta","aceite de oliva (papas)"],["","ajo, paprika, pimienta y sal"]],
+  pasos:["Papas primero: corta en bastones parejos y déjalos 20–30 minutos en agua fría. Este paso les saca el almidón.",
+    "SÉCALOS MUY BIEN con un paño. Papa mojada = papa blanda, siempre.",
+    "Mezcla con el aceite, la paprika, el ajo en polvo y la sal. Airfryer a 200 °C, 15–20 minutos, sacudiendo la canasta a la mitad.",
+    "Mientras tanto, sazona la carne con ajo, paprika, sal y pimienta. Forma la hamburguesa y hazle un hueco con el pulgar en el centro para que no se infle.",
+    "Cocínala en sartén o airfryer, 4–5 minutos por lado.",
+    "Monta con la lechuga, el tomate y el aguacate machacado como guacamole."],
+  nota:"Sin pan. La lechuga hace de base y funciona mejor de lo que suena — y así no tienes que pelear con etiquetas de pan sin gluten."},
+
+salmonjengibre:{n:"Salmón al jengibre y limón",min:16,rinde:"1 porción",
+  ing:[["120 g","salmón"],["200 g","arroz cocido"],["30–50 g","aguacate"],["200 g","piña"],["","jugo de 1 limón"],["1 trocito","jengibre rallado"],["1 diente","ajo rallado"],["5 g","aceite de oliva"],["","sal y pimienta"]],
+  pasos:["Mezcla el jugo de limón, el jengibre rallado, el ajo y el aceite de oliva. Esa es la salsa.",
+    "Pinta el salmón con la mitad de la salsa y deja 10 minutos.",
+    "Airfryer a 190 °C, 8–12 minutos según el grosor. En el centro debe quedar apenas rosado.",
+    "Sirve sobre el arroz, con el aguacate y la piña en cubos.",
+    "Baña con el resto de la salsa al servir."],
+  nota:"Esto NO es teriyaki, aunque se le parezca. El teriyaki lleva salsa de soya y azúcar, y la soja está en la lista de eliminación del protocolo. Esta versión da el mismo golpe de sabor sin romper nada."},
+
+tilapia:{n:"Tilapia crocante con papas y mango",min:24,rinde:"1 porción",
+  ing:[["120 g","filete de tilapia"],["200 g","papa en cubos"],["150 g","mango"],["","ensalada de hojas y tomate"],["5 g","aceite de oliva"],["","paprika, ajo en polvo, limón y sal"]],
+  pasos:["Papa en cubos con aceite, paprika y sal. Airfryer a 200 °C, 18–22 minutos.",
+    "Seca muy bien la tilapia con papel de cocina — es lo que la deja crocante y no aguada.",
+    "Sazónala con paprika, ajo, limón y sal.",
+    "Airfryer a 190 °C, 8–10 minutos. No hay que voltearla.",
+    "Sirve con la ensalada de hojas y tomate, y el mango en cubos al lado."],
+  nota:"El pescado está listo cuando se desmenuza fácil con un tenedor. Si dudas, sácalo: se sigue cocinando con su propio calor."},
+
+loadedpotato:{n:"Loaded potato de pollo",min:20,rinde:"1 porción",
+  ing:[["120 g","pollo desmechado (del prep)"],["280 g","papa"],["70 g","aguacate"],["100 g","tomate"],["40 g","cebolla"],["","cilantro y limón"],["","sal y pimienta"]],
+  pasos:["Cocina la papa entera con cáscara, en olla o en el airfryer a 200 °C por 35–40 minutos, hasta que esté muy suave por dentro.",
+    "Calienta el pollo desmechado con un poco de caldo para que no quede seco.",
+    "Abre la papa por la mitad sin separarla del todo y afloja la pulpa con un tenedor.",
+    "Rellena con el pollo caliente, el aguacate y el pico de gallo (tomate, cebolla, cilantro y limón).",
+    "Sal, pimienta y más cilantro encima."],
+  nota:"Esto se va a sentir MUCHO menos como dieta. Si dejas la papa cocida desde el prep, son 10 minutos totales."},
+
+bowlmedi:{n:"Bowl mediterráneo de pollo",min:25,rinde:"1 porción",
+  ing:[["120 g","pechuga de pollo"],["214 g","quinoa cocida"],["30 g","aguacate"],["150–200 g","verduras asadas (calabacín, pimentón, berenjena, cebolla)"],["5 g","aceite de oliva"],["","limón, orégano y perejil"],["","sal y pimienta"]],
+  pasos:["Corta las verduras en trozos parejos, mézclalas con la mitad del aceite, orégano y sal.",
+    "Airfryer a 190 °C, 15–18 minutos, sacudiendo a la mitad.",
+    "Sazona el pollo con orégano, sal y pimienta y cocínalo a la plancha, 5 minutos por lado. Déjalo reposar 3 minutos antes de cortar.",
+    "Monta sobre la quinoa: las verduras, el pollo en tiras, el aguacate.",
+    "Termina con el resto del aceite, mucho limón y perejil fresco."],
+  nota:"Las verduras asadas del sábado se hacen en el prep del jueves y aguantan perfecto."},
+
+carnepapas:{n:"Carne molida con papas y guacamole",min:30,rinde:"1 porción",
+  ing:[["120 g","carne molida magra"],["250 g","papa"],["70 g","aguacate"],["100 g","tomate"],["40 g","cebolla"],["","cilantro y limón"],["","ajo, paprika, comino, sal y pimienta"],["1 cdta","aceite de oliva"]],
+  pasos:["Papas en bastones, 20 minutos en agua fría, secar muy bien, aceite y especias, airfryer a 200 °C por 15–20 minutos.",
+    "Sofríe la cebolla 3 minutos, agrega el ajo 30 segundos.",
+    "Sube el fuego, echa la carne y déjala quieta 2 minutos antes de desbaratarla: así dora en vez de hervir.",
+    "Agrega paprika y comino y cocina 5–6 minutos. Si suelta líquido, deja que se evapore.",
+    "Sirve con las papas, el guacamole (aguacate machacado con limón y sal) y el pico de gallo."]},
+
+/* ====================== LAS 5 SOPAS ====================== */
+sopatomate:{n:"Sopa de tomate rostizado con pollo",min:35,rinde:"2 porciones",soup:1,
+  ing:[["500 g","tomate"],["100 g","cebolla"],["80 g","zanahoria"],["10 g","aceite de oliva"],["250 ml","caldo casero"],["6–8 hojas","albahaca fresca"],["½ cdta","orégano"],["240 g","pollo cocido desmechado"],["","limón, sal y pimienta"]],
+  pasos:["Corta el tomate en mitades, la cebolla en gajos y la zanahoria en rodajas gruesas.",
+    "Mézclalos con el aceite, sal, pimienta y orégano y rostízalos a 190 °C durante 15–18 minutos. El rostizado es lo que hace la diferencia: concentra el azúcar del tomate.",
+    "Pásalos a una olla con el caldo y cocina 5 minutos.",
+    "Licúa con la albahaca fresca — agrégala fuera del fuego para que no pierda el aroma.",
+    "Ajusta sal y termina con un chorrito de limón.",
+    "Sirve cada plato con 120 g de pollo desmechado encima."],
+  nota:"Mediterránea. Rinde dos cenas: una para el lunes y otra para el sábado. Guarda la segunda en la nevera o congélala."},
+
+sopazanahoria:{n:"Crema de zanahoria, jengibre y cúrcuma",min:30,rinde:"2 porciones",soup:1,
+  ing:[["400 g","zanahoria"],["80 g","cebolla"],["10 g","jengibre"],["½ cdta","cúrcuma"],["500 ml","caldo"],["10 g","aceite de oliva"],["240 g","pollo cocido"],["","jugo de ½ limón"],["","sal y pimienta"]],
+  pasos:["Sofríe la cebolla y el jengibre rallado con el aceite, 4 minutos.",
+    "Agrega la zanahoria en rodajas, la cúrcuma y el caldo.",
+    "Cocina 18–20 minutos, hasta que la zanahoria se deshaga con la cuchara.",
+    "Licúa hasta que quede completamente lisa.",
+    "Termina con el limón: es lo que la despierta y evita que sepa plana."],
+  nota:"Especiada. El truco que la sube de nivel: desmecha el pollo, ponle un poquito de aceite y llévalo al airfryer 5–6 minutos hasta que quede crispy. Encima de la crema es otra cosa. Y la pimienta negra multiplica la absorción de la cúrcuma — no la olvides."},
+
+sopapapa:{n:"Crema de papa y puerro con pollo crispy",min:35,rinde:"2 porciones",soup:1,
+  ing:[["400 g","papa"],["150 g","puerro"],["70 g","cebolla"],["600 ml","caldo"],["10 g","aceite de oliva"],["240 g","pollo cocido"],["","tomillo"],["","sal y pimienta"]],
+  pasos:["Lava muy bien el puerro: entre las capas se esconde tierra. Córtalo en rodajas solo la parte blanca y clara.",
+    "Sofríe la cebolla y el puerro con el aceite, 6 minutos a fuego medio, sin dorar.",
+    "Agrega la papa en cubos y el caldo. Cocina 20 minutos.",
+    "Licúa hasta obtener una crema lisa. Si queda muy espesa, agrega caldo caliente.",
+    "Pollo crispy: desmecha, mezcla con tomillo y un poquito de aceite, airfryer a 200 °C por 6–8 minutos.",
+    "Sirve la crema y coloca el pollo crujiente en el centro."],
+  nota:"Cremosa + crispy. Es el contraste de texturas lo que la hace sentir de restaurante."},
+
+sopaahuyama:{n:"Crema de ahuyama, coco y jengibre",min:35,rinde:"2 porciones",soup:1,
+  ing:[["500 g","ahuyama"],["80 g","cebolla"],["8 g","jengibre"],["½ cdta","cúrcuma"],["100 ml","leche de coco sin azúcar"],["350 ml","caldo"],["10 g","aceite de oliva"],["","jugo de ½ limón"],["","sal y pimienta"]],
+  pasos:["Corta la ahuyama en trozos y rostízala a 190 °C durante 18–20 minutos.",
+    "Sofríe la cebolla y el jengibre con el aceite, 4 minutos.",
+    "Agrega la ahuyama rostizada, la cúrcuma y el caldo. Cocina 5 minutos.",
+    "Licúa con la leche de coco.",
+    "Termina con limón, sal y pimienta."],
+  nota:"La más sofisticada de las cinco. La leche de coco entra al final y sin hervir, para que no se corte. Revisa que la lata no tenga azúcar añadida."},
+
+sopapollo:{n:"Sopa de pollo, arroz y verduras",min:40,rinde:"2 porciones",soup:1,
+  ing:[["250 g","pechuga de pollo"],["100 g","arroz blanco crudo"],["120 g","zanahoria"],["100 g","apio"],["80 g","cebolla"],["1 litro","agua o caldo"],["½ cdta","cúrcuma"],["","tomillo y laurel"],["10 g","aceite de oliva"],["10 g","cilantro"],["","limón, sal y pimienta"]],
+  pasos:["Pon el pollo, la zanahoria, el apio, la cebolla, el tomillo, el laurel y la cúrcuma en el caldo. Cocina 20–25 minutos.",
+    "Retira el pollo y desméchalo. Saca también el laurel.",
+    "Agrega el arroz al caldo y cocina 12–15 minutos, hasta que esté blando.",
+    "Devuelve el pollo a la olla.",
+    "Termina con cilantro picado, limón y el aceite de oliva en crudo."],
+  nota:"Reconfortante y completa: es la única sopa que ya trae su propio carbohidrato, no necesita nada al lado. Si la vas a guardar, cocina el arroz aparte — si no, se bebe todo el caldo."},
+
+/* ====================== BASES DEL PREP ====================== */
+caldo:{n:"Caldo casero",min:75,rinde:"2,5 litros",prep:1,
+  ing:[["1","carcasa de pollo o 500 g de alas/huesos"],["1","cebolla en cuartos"],["2","zanahorias en trozos"],["2 tallos","apio"],["2 dientes","ajo"],["","tomillo, laurel, pimienta en grano"],["3 litros","agua fría"],["","sal al final"]],
+  pasos:["Pon todo en la olla con AGUA FRÍA y lleva a hervor lentamente. El agua fría extrae más sabor que la caliente.",
+    "Cuando rompa hervor, baja al mínimo y retira la espuma de la superficie con una cuchara.",
+    "Cocina destapado a fuego muy bajo 60–75 minutos. No debe burbujear fuerte, solo temblar.",
+    "Cuela, deja enfriar y sala al final.",
+    "Refrigera. Al día siguiente retira la grasa solidificada de la superficie si quieres."],
+  nota:"Es la base de las cinco sopas y lo que separa una crema casera de una de cubito. Mientras se hace, cocinas todo lo demás. Congela en porciones de 500 ml."},
+
+pollobase:{n:"Pollo cocido para toda la semana",min:30,rinde:"~1,1 kg cocido",prep:1,
+  ing:[["1,5 kg","pechuga de pollo"],["1","cebolla"],["2 dientes","ajo"],["1","hoja de laurel"],["","sal, pimienta, cúrcuma"],["","agua que cubra"]],
+  pasos:["Pon el pollo con la cebolla, el ajo, el laurel, la sal y la cúrcuma. Cubre con agua.",
+    "Lleva a hervor, baja a fuego lento y cocina 20 minutos tapado.",
+    "Apaga y DEJA EL POLLO EN SU CALDO 10 minutos. Aquí es donde absorbe humedad y no queda fibroso.",
+    "Saca y divide: dos terceras partes desmechadas, una tercera parte en trozos para el crispy.",
+    "Guarda en tuppers con un par de cucharadas de su caldo encima para que no se seque.",
+    "El agua de cocción es caldo: no la botes."],
+  nota:"El corazón del meal prep. De aquí salen las cinco sopas, el loaded potato del viernes y el pollo crispy."},
+
+arepayuca:{n:"Arepas de yuca",min:25,rinde:"4 arepas",prep:1,
+  ing:[["1 taza","yuca pelada (≈250 g)"],["1 cdta","linaza"],["1 cdta","ajonjolí"],["1 cdta","aceite de coco u oliva"],["","sal"]],
+  pasos:["Cocina la yuca en agua hirviendo 15 minutos o hasta que esté muy blanda.",
+    "Deja enfriar y RETIRA LA VENA del centro. Si la dejas, la arepa queda con hilos.",
+    "Tritura con tenedor hasta formar una masa. Agrega sal, linaza, ajonjolí y el aceite. Si está seca, un poco de agua.",
+    "Forma las arepas y cocínalas en airfryer o sartén, 15 minutos."],
+  nota:"Del Recetario Práctico. Duran 4 días en la nevera y se recalientan en el airfryer en 4 minutos."},
+
+arroz:{n:"Arroz blanco",min:22,rinde:"4 porciones de 200 g",prep:1,
+  ing:[["1½ tazas","arroz blanco crudo"],["3 tazas","agua"],["1 cdta","aceite de oliva"],["","sal"]],
+  pasos:["Enjuaga el arroz hasta que el agua salga casi clara.",
+    "Ponlo con el agua, la sal y el aceite. Lleva a hervor destapado.",
+    "Cuando se vea la superficie del arroz, baja al mínimo y tapa 15 minutos. NO destapes.",
+    "Apaga y deja reposar tapado 5 minutos. Suelta con tenedor."]},
+
+quinoa:{n:"Quinoa cocida",min:20,rinde:"3 porciones",prep:1,
+  ing:[["1 taza","quinoa cruda"],["2 tazas","agua o caldo"],["","sal"]],
+  pasos:["ENJUÁGALA muy bien en un colador fino, frotándola con las manos. Tiene saponina y amarga.",
+    "Tuéstala 2 minutos en la olla seca hasta que huela a nuez. Este paso opcional le cambia el sabor por completo.",
+    "Agrega el agua y la sal, lleva a hervor, tapa y cocina 15 minutos a fuego bajo.",
+    "Deja reposar 5 minutos tapada. Suelta con tenedor: debe verse el germencito enroscado."]},
+
+picogallo:{n:"Pico de gallo",min:10,rinde:"3–4 porciones",prep:1,
+  ing:[["3","tomates"],["½","cebolla morada"],["3 cdas","cilantro picado"],["","jugo de 1 limón"],["1 cdta","aceite de oliva"],["","sal"]],
+  pasos:["Corta el tomate en cubos pequeños y quítale la mayoría de las semillas para que no quede aguado.",
+    "Pica la cebolla muy fina y déjala 5 minutos en el jugo de limón: le baja el picor.",
+    "Mezcla todo con el cilantro, el aceite y la sal.",
+    "Deja reposar 10 minutos antes de comer."],
+  nota:"Dura 2 días. Sirve para el loaded potato del viernes, la carne del domingo y el bowl mexicano del lunes."},
+
+verdurasasadas:{n:"Verduras asadas",min:20,rinde:"2 porciones",prep:1,
+  ing:[["1","calabacín"],["1","pimentón rojo"],["½","berenjena"],["1","cebolla"],["1 cda","aceite de oliva"],["","orégano, sal y pimienta"]],
+  pasos:["Corta todo en trozos parejos de unos 2 cm.",
+    "Mezcla con el aceite, el orégano y la sal.",
+    "Airfryer a 190 °C, 15–18 minutos, sacudiendo la canasta a la mitad.",
+    "No llenes la canasta: si se amontonan se cocinan al vapor y quedan blandas en vez de asadas."],
+  nota:"Sin brócoli. Aguantan 4 días y sirven para el bowl mediterráneo del sábado o para acompañar cualquier proteína."},
+
+/* ====================== EXTRAS Y SNACKS ====================== */
+jugoverde:{n:"Jugo verde",min:6,rinde:"1 vaso grande",extra:1,
+  ing:[["1","pepino"],["2 tallos","apio"],["1 puñado","espinaca"],["1","manzana verde"],["","jugo de 1 limón"],["1 trocito","jengibre"],["150 ml","agua"]],
+  pasos:["Lava todo muy bien.",
+    "Licúa el pepino, el apio, la espinaca, la manzana, el jengibre y el agua.",
+    "Cuela si lo prefieres más líquido; sin colar conservas la fibra.",
+    "Exprime el limón al final y tómalo de inmediato."],
+  nota:"El único lugar de todo el plan donde vas a ver pepino. Es un extra, no reemplaza ninguna comida."},
+
+muffins:{n:"Muffins de huevo para emergencias",min:25,rinde:"6 muffins",extra:1,
+  ing:[["4","huevos"],["½ cdta","aceite de coco, ghee o AOVE"],["¼ taza","cebolla picada"],["1 diente","ajo triturado"],["½ taza","espinaca en julianas"],["½ taza","champiñones"],["½ taza","tomate picado"],["","sal y pimienta"]],
+  pasos:["Horno a 180 °C. Engrasa ligeramente un molde de muffins.",
+    "Saltea los vegetales hasta que estén suaves y SIN exceso de líquido. Si sueltan agua, los muffins quedan aguados.",
+    "Deja enfriar un poco.",
+    "Bate los huevos con sal y pimienta e incorpora los vegetales.",
+    "Hornea 12–15 minutos hasta que estén firmes. Deja reposar y desmolda."],
+  nota:"Del Recetario Práctico. Duran 4 días y se comen fríos. Para el día que te quedaste dormida: dos muffins y fruta, y saliste."},
+
+chia:{n:"Pudín de chía",min:5,rinde:"1 porción · +4 h de nevera",extra:1,
+  ing:[["2 cdas","chía (20 g)"],["200 ml","leche de almendras sin azúcar"],["3 cdas","yogurt de coco sin azúcar"],["","fruta para servir"]],
+  pasos:["Mezcla la chía, la leche y el yogurt de coco. Revuelve MUY bien y vuelve a revolver a los 5 minutos para que no se apelmace.",
+    "Refrigera 4 horas o toda la noche.",
+    "Sirve con fruta."],
+  nota:"El Recetario original lleva yogurt griego; lo cambié por yogurt de coco porque los lácteos están eliminados. Es snack, no desayuno completo."},
+
+hamburguesaspollo:{n:"Hamburguesas de pollo",min:18,rinde:"2 hamburguesas",extra:1,
+  ing:[["250 g","pollo molido"],["1","huevo"],["3 cdas","harina de almendras"],["¼","cebolla rallada"],["1 cda","perejil picado"],["1 cdta","ajo en polvo"],["1 cdta","aceite de oliva"],["","sal y pimienta"]],
+  pasos:["Combina el pollo, el huevo, la harina de almendras, la cebolla, el perejil, el ajo, sal y pimienta.",
+    "Divide en 2 y forma las hamburguesas. Hueco con el pulgar en el centro para que no se inflen.",
+    "Dora en sartén con el aceite, 5–6 minutos por lado."],
+  nota:"Del Recetario Práctico. Crudas y separadas con papel se congelan perfecto: reemplazan cualquier proteína de almuerzo."},
+
+pizza:{n:"Pizza funcional",min:20,rinde:"1 pizza",extra:1,
+  ing:[["1 taza","harina de almendra (≈100 g)"],["½ taza","yogur de coco"],["1 pizca","sal"],["1 cdta","albahaca seca"],["1 cda","aceite de oliva"],["60–80 g","queso vegano rallado"],["½ taza","tomate en rodajas"],["50 g","champiñones"],["60 g","pollo cocido"],["","rúgula al servir"]],
+  pasos:["Mezcla la harina de almendra, el yogur de coco, la sal y la albahaca hasta formar una masa.",
+    "Extiéndela en círculo delgado, de 4–5 mm.",
+    "Dora la base en sartén con el aceite, 3–4 minutos.",
+    "Voltea y añade los toppings.",
+    "Tapa y cocina 4–6 minutos a fuego bajo.",
+    "Finaliza con rúgula y un hilo de aceite."],
+  nota:"Tu antojo del fin de semana, dentro del protocolo. El original ofrece yogur de coco o griego y queso vegano o mozzarella: quédate con las versiones veganas."}
+};
+
+/* ====================== LOS 7 DÍAS ====================== */
+const DIAS = [
+ {dia:"Lunes", lema:"Arrancamos suave y con todo listo.",
+  m:[{k:"d",r:"pancakes",sub:"fresas + mantequilla de almendras",min:12},
+     {k:"a",r:"bowlmex",sub:"arroz, aguacate, pico de gallo, cilantro y limón",min:18,prep:1},
+     {k:"c",r:"sopatomate",sub:"con pollo desmechado encima",min:5,prep:1,soup:"🍅"}]},
+
+ {dia:"Martes", lema:"Hoy hay hamburguesa. Esto no es una dieta triste.",
+  m:[{k:"d",r:"omelette",sub:"espinaca, tomate, aguacate y papa criolla",min:14},
+     {k:"a",r:"hamburguesa",sub:"papas a la francesa al airfryer + guacamole",min:35},
+     {k:"c",r:"sopazanahoria",sub:"con pollo crispy encima",min:8,prep:1,soup:"🥕"}]},
+
+ {dia:"Miércoles", lema:"Mitad de semana: salmón y omega 3 puro.",
+  m:[{k:"d",r:"avenafresa",sub:"mantequilla de almendras",min:8},
+     {k:"a",r:"salmonjengibre",sub:"arroz, aguacate y piña",min:16,prep:1},
+     {k:"c",r:"sopapapa",sub:"con pollo crispy en el centro",min:10,prep:1,soup:"🥔"}]},
+
+ {dia:"Jueves", lema:"Noche de prep corto: dejas listo el fin de semana.",
+  m:[{k:"d",r:"arepahogao",sub:"omelette, aguacate y hogao casero",min:20,prep:1},
+     {k:"a",r:"tilapia",sub:"papas al airfryer, ensalada y mango",min:24},
+     {k:"c",r:"sopaahuyama",sub:"la más sofisticada de las cinco",min:5,prep:1,soup:"🎃"}]},
+
+ {dia:"Viernes", lema:"Loaded potato. Te lo ganaste.",
+  m:[{k:"d",r:"pancakestrop",sub:"mango salteado y canela",min:12},
+     {k:"a",r:"loadedpotato",sub:"aguacate y pico de gallo",min:20,prep:1},
+     {k:"c",r:"sopapollo",sub:"reconfortante y completa",min:5,prep:1,soup:"🍗"}]},
+
+ {dia:"Sábado", lema:"Brunch sin afán. Hoy desayunas como en restaurante.",
+  m:[{k:"d",r:"brunch",sub:"papa criolla, omelette, aguacate y fresas",min:22},
+     {k:"a",r:"bowlmedi",sub:"quinoa y verduras asadas",min:25,prep:1},
+     {k:"c",r:"sopatomate",sub:"la segunda porción del domingo pasado",min:5,prep:1,soup:"🍅"}]},
+
+ {dia:"Domingo", lema:"Cierras la semana 1. Mañana ajustamos lo que no funcionó.",
+  m:[{k:"d",r:"pancakes",sub:"fresas + mantequilla de almendras",min:12},
+     {k:"a",r:"carnepapas",sub:"papas a la francesa, guacamole y pico de gallo",min:30},
+     {k:"c",r:"sopazanahoria",sub:"la segunda porción",min:5,prep:1,soup:"🥕"}]}
+];
+const KN = {d:"Desayuno", a:"Almuerzo", c:"Cena"};
+
+/* ====================== NO NEGOCIABLES ====================== */
+const HABITS = [
+ {id:"glutamina", e:"🥄", bg:"var(--gold-soft)", n:"Glutamina en ayunas",
+  s:"5 g + 1 cda de vinagre de manzana + canela + cúrcuma", pts:4},
+ {id:"probiotico", e:"💊", bg:"var(--sage-soft)", n:"Probiótico",
+  s:"1 cápsula de Kyodophilus con el desayuno", pts:4},
+ {id:"omega", e:"🐟", bg:"var(--sky-soft)", n:"Omega 3",
+  s:"según la farmacéutica que hayas elegido", pts:4},
+ {id:"post", e:"💪", bg:"var(--terra-soft)", n:"Postentreno",
+  s:"Thorne Plant Protein, los días que entrenas", pts:6},
+ {id:"mov", e:"🏃‍♀️", bg:"var(--berry-soft)", n:"Movimiento",
+  s:"el plan pide mínimo 3 veces por semana, así sea corto o ligero", pts:10},
+ {id:"agua", e:"💧", bg:"var(--sky-soft)", n:"2 litros de agua",
+  s:"8 vasos. Toca cada vaso que te tomes", pts:3, water:8}
+];
+
+/* ====================== SÍNTOMAS ====================== */
+const SINT = [
+ {id:"energia",  n:"Energía",    s:"¿cómo estuvo tu batería hoy?",        c:"var(--gold)"},
+ {id:"digest",   n:"Digestión",  s:"hinchazón, gases, pesadez",           c:"var(--sage)"},
+ {id:"piel",     n:"Piel",       s:"brotes, rojeces, textura",            c:"var(--terra)"},
+ {id:"animo",    n:"Ánimo",      s:"ansiedad, claridad mental",           c:"var(--berry)"},
+ {id:"sueno",    n:"Sueño",      s:"¿dormiste de corrido?",               c:"var(--sky)"}
+];
+const CARAS = ["😖","🙁","😐","🙂","😄"];
+
+/* ====================== MERCADO ====================== */
+const MERCADO = [
+ {g:"Proteína", e:"🍗", it:[
+   ["Pechuga de pollo","2 kg","el motor de la semana: sopas, bowls y loaded potato"],
+   ["Carcasa o alas de pollo","500 g","para el caldo casero del prep"],
+   ["Carne molida magra","250 g","martes y domingo"],
+   ["Salmón","120 g","miércoles"],
+   ["Tilapia","1 filete de 120 g","jueves"],
+   ["Huevos","30 unidades","6 desayunos de 2 huevos + 2 claras"]]},
+
+ {g:"Carbohidratos", e:"🥔", it:[
+   ["Papa","1,5 kg","francesas, loaded potato y la crema de puerro"],
+   ["Papa criolla","400 g","martes y sábado al airfryer"],
+   ["Arroz blanco","500 g","bowls y sopa de pollo"],
+   ["Quinoa","250 g","bowl mediterráneo del sábado"],
+   ["Avena en hojuelas","500 g","pancakes y avena cremosa"],
+   ["Yuca","1 mediana","arepas del jueves"]]},
+
+ {g:"Frutas", e:"🍓", it:[
+   ["Fresas","700 g","lunes, miércoles, sábado y domingo"],
+   ["Mango","3 unidades","jueves y viernes"],
+   ["Piña","1 unidad","miércoles"],
+   ["Banano pequeño","4 unidades","que NO estén muy maduros, para los pancakes"],
+   ["Manzana verde","2 unidades","jugo verde"],
+   ["Aguacate","5 unidades","aparece casi todos los días"]]},
+
+ {g:"Verduras", e:"🥕", it:[
+   ["Tomate","1,5 kg","la sopa de tomate sola se lleva 500 g"],
+   ["Zanahoria","1 kg","crema de zanahoria, sopa de pollo y caldo"],
+   ["Cebolla blanca","6 unidades",""],
+   ["Cebolla morada","3 unidades","pico de gallo y bowls"],
+   ["Puerro","150 g","crema de papa y puerro"],
+   ["Ahuyama","500 g","crema de ahuyama y coco"],
+   ["Apio","1 manojo","sopa de pollo, caldo y jugo verde"],
+   ["Espinaca","300 g","omelettes y jugo verde"],
+   ["Lechuga y hojas verdes","1 bolsa + 1 lechuga","ensalada del jueves y la hamburguesa"],
+   ["Calabacín","2 unidades","verduras asadas"],
+   ["Pimentón rojo","2 unidades","verduras asadas"],
+   ["Berenjena","1 unidad","verduras asadas"],
+   ["Pepino","2 unidades","SOLO para el jugo verde"],
+   ["Jengibre","1 trozo grande","dos sopas y el salmón"],
+   ["Ajo","2 cabezas",""],
+   ["Cilantro","2 manojos","se acaba rapidísimo"],
+   ["Albahaca fresca","1 manojo","va fuera del fuego en la sopa de tomate"],
+   ["Perejil","1 manojo","bowl mediterráneo"],
+   ["Limón","12 unidades","en serio, 12"]]},
+
+ {g:"Grasas y frutos secos", e:"🫒", it:[
+   ["Aceite de oliva extra virgen","1 botella",""],
+   ["Mantequilla de almendras","1 frasco","que el único ingrediente sea almendra"],
+   ["Almendras","200 g","snacks"],
+   ["Leche de almendras sin azúcar","1 litro","revisa que diga SIN AZÚCAR"],
+   ["Leche de coco sin azúcar","1 lata","crema de ahuyama"],
+   ["Ghee","1 frasco","para sofreír, junto con el aceite de oliva"]]},
+
+ {g:"Despensa y especias", e:"🧂", it:[
+   ["Cúrcuma","","antiinflamatoria de verdad"],
+   ["Pimienta negra","","multiplica la absorción de la cúrcuma"],
+   ["Paprika, comino, orégano","","bowls, papas y carnes"],
+   ["Tomillo y laurel","","caldo y crema de puerro"],
+   ["Ajo y cebolla en polvo","",""],
+   ["Canela","","avena y pancakes"],
+   ["Sal marina","",""],
+   ["Vinagre de manzana","1 botella","va con la glutamina en ayunas"],
+   ["Linaza y ajonjolí","","arepas de yuca"],
+   ["Chía","200 g","snack de pudín"],
+   ["Harina de almendras","250 g","recetas extra"],
+   ["Yogurt de coco sin azúcar","1 envase","reemplaza el yogurt griego del recetario"],
+   ["Infusiones de hierbas sin cafeína","","manzanilla, jamaica, menta, rooibos"]]},
+
+ {g:"Suplementos", e:"💊", it:[
+   ["Glutamina","5 g diarios","MuscleTech, Enteroplex o Nutricost"],
+   ["Probiótico Kyodophilus","","1 cápsula con el desayuno"],
+   ["Omega 3","","Omegaessens, Carlson o Thorne"],
+   ["Proteína Thorne Plant","","postentreno"]]}
+];
+
+/* ====================== MEAL PREP ====================== */
+const PREPS = [
+ {id:"p1", when:"Domingo · antes de arrancar", t:"Prep grande", dur:"≈ 90 min",
+  covers:"Deja resueltos lunes, martes y miércoles: tres cenas de sopa, el pollo de toda la semana y el caldo que es la base de todo.",
+  tasks:[
+   ["0 min","Pon el caldo al fuego","Carcasa, cebolla, zanahoria, apio, ajo, tomillo y laurel en AGUA FRÍA. Hervor suave y lo olvidas 75 minutos mientras haces el resto."],
+   ["5 min","Horno a 190 °C · rostiza para la sopa de tomate","500 g de tomate, 100 g de cebolla y 80 g de zanahoria con aceite, sal y orégano. 15–18 minutos."],
+   ["10 min","Cocina los 2 kg de pollo","Con cebolla, ajo, laurel y cúrcuma. 20 minutos y lo dejas 10 más reposando en su propio caldo."],
+   ["30 min","Desmecha y porciona el pollo","Dos terceras partes desmechado, una tercera en trozos para el crispy. Un par de cucharadas de caldo en cada tupper para que no se seque."],
+   ["40 min","🍅 Sopa de tomate rostizado","Licúa el rostizado con caldo y la albahaca FUERA del fuego. Salen 2 porciones: lunes y sábado."],
+   ["50 min","🥕 Crema de zanahoria, jengibre y cúrcuma","Sofríe cebolla y jengibre, agrega zanahoria, cúrcuma y caldo, 18–20 min, licúa. Salen 2 porciones: martes y domingo."],
+   ["70 min","🥔 Crema de papa y puerro","Lava bien el puerro, sofríe con cebolla, agrega papa y caldo, 20 min, licúa. Salen 2 porciones: miércoles y una de repuesto."],
+   ["75 min","Cuela el caldo y guárdalo","En frascos de 500 ml. Lo que no uses esta semana, al congelador."],
+   ["80 min","Arroz","1½ tazas. Porciona en tuppers de 200 g: lunes y miércoles."],
+   ["85 min","Pico de gallo","Dura 2 días. Lo vuelves a hacer el jueves."],
+   ["88 min","Lava y seca las hojas","Guárdalas en un tupper con papel de cocina abajo: aguantan 4 días crujientes."],
+   ["90 min","Deja las papas listas","Criollas lavadas. Las de bastón, cortadas y sumergidas en agua fría en la nevera."]]},
+
+ {id:"p2", when:"Jueves por la noche", t:"Prep corto", dur:"≈ 60 min",
+  covers:"Cierra la semana: las dos sopas que faltan, las arepas del viernes y todo lo del fin de semana.",
+  tasks:[
+   ["0 min","Rostiza la ahuyama","500 g a 190 °C por 18–20 minutos."],
+   ["5 min","🍗 Sopa de pollo, arroz y verduras","Pollo, zanahoria, apio, cebolla, tomillo y laurel en el caldo, 20–25 min. Desmechas, agregas el arroz 12–15 min. Cocina el arroz APARTE si la vas a guardar: si no, se bebe todo el caldo."],
+   ["25 min","🎃 Crema de ahuyama, coco y jengibre","Sofríe cebolla y jengibre, agrega la ahuyama rostizada, cúrcuma y caldo, licúa con la leche de coco. Sin hervir después del coco."],
+   ["35 min","Arepas de yuca","Cocina la yuca, retira la vena, tritura y forma. 15 minutos al airfryer. Son el desayuno del jueves y sobran para el fin de semana."],
+   ["45 min","Quinoa","Enjuágala frotándola. Tuéstala 2 minutos antes de cocinarla y cambia por completo. Para el bowl del sábado."],
+   ["52 min","Verduras asadas al airfryer","Calabacín, pimentón, berenjena y cebolla, 190 °C por 15–18 min. Sin brócoli."],
+   ["58 min","Renueva el pico de gallo","El del domingo ya cumplió. Este alcanza para viernes y domingo."]]}
+];
+
+/* ====================== GAMIFICACIÓN ====================== */
+const NIVELES = [
+ {min:0,    e:"🌱", n:"Semilla"},
+ {min:300,  e:"🌿", n:"Brote"},
+ {min:800,  e:"🪴", n:"Raíz"},
+ {min:1500, e:"🌸", n:"Flor"},
+ {min:2400, e:"✨", n:"Liviana"}
+];
+
+const LOGROS = [
+ {id:"arranque",  e:"🌱", n:"Arrancaste",     s:"día 1 completo",      f:s=>s.diasBuenos>=1},
+ {id:"agua",      e:"💧", n:"2 litros",       s:"8 vasos en un día",   f:s=>s.aguaFull>=1},
+ {id:"prep",      e:"🔪", n:"Meal prep",      s:"un prep completo",    f:s=>s.prepsHechos>=1},
+ {id:"tres",      e:"🔥", n:"Tres seguidos",  s:"3 días buenos",       f:s=>s.diasBuenos>=3},
+ {id:"perfecto",  e:"⭐", n:"Día perfecto",   s:"100 puntos",          f:s=>s.diasPerfectos>=1},
+ {id:"diario",    e:"📝", n:"Te escuchaste",  s:"5 días de registro",  f:s=>s.diasSintomas>=5},
+ {id:"mov",       e:"🏃", n:"Movimiento ×3",  s:"lo que pide el plan", f:s=>s.movDias>=3},
+ {id:"supl",      e:"💊", n:"Constante",      s:"5 días de suplementos",f:s=>s.suplDias>=5},
+ {id:"semana",    e:"✅", n:"Semana 1",       s:"7 días completos",    f:s=>s.diasBuenos>=7},
+ {id:"mitad",     e:"🌿", n:"Mitad",          s:"día 11 de 21",        f:s=>s.diasBuenos>=11},
+ {id:"veintiuno", e:"🌸", n:"21 días",        s:"la meta mínima",      f:s=>s.diasBuenos>=21},
+ {id:"liviana",   e:"✨", n:"Liviana",        s:"28 días · completo",  f:s=>s.diasBuenos>=28}
+];
+
+/* =========================================================
+   ESTADO
+   ========================================================= */
+const KEY = "liviana.v1";
+const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:""});
+let S = DEF();
+try{ const raw = localStorage.getItem(KEY); if(raw) S = Object.assign(DEF(), JSON.parse(raw)); }catch(e){}
+const save = () => { try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} };
+
+const TOTAL = 28, META = 21;
+const day = n => (S.d[n] = S.d[n] || {m:{}, h:{}, agua:0, sint:{}});
+const pad = n => String(n).padStart(2,"0");
+const todayISO = () => { const t=new Date(); return t.getFullYear()+"-"+pad(t.getMonth()+1)+"-"+pad(t.getDate()); };
+if(!S.start){ S.start = todayISO(); save(); }
+
+function hoyNum(){
+  const a = new Date(S.start+"T00:00:00"), b = new Date(todayISO()+"T00:00:00");
+  const n = Math.floor((b-a)/86400000) + 1;
+  return Math.min(Math.max(n,1), TOTAL);
+}
+let cur = hoyNum();
+
+function fechaObj(n){ const d = new Date(S.start+"T00:00:00"); d.setDate(d.getDate()+n-1); return d; }
+function fechaDe(n){ return fechaObj(n).toLocaleDateString("es-CO",{weekday:"long", day:"numeric", month:"long"}); }
+function fechaCorta(n){ return fechaObj(n).toLocaleDateString("es-CO",{day:"numeric", month:"short"}); }
+/* El menú está construido por días de la semana, así que se engancha al día real:
+   si arrancas un sábado, el sábado ves el brunch, no el lunes. */
+const menuDe = n => DIAS[(fechaObj(n).getDay() + 6) % 7];
+
+/* ---------- puntos ---------- */
+function ptsDia(n){
+  const D = S.d[n]; if(!D) return 0;
+  let p = 0;
+  ["d","a","c"].forEach(k => { if(D.m[k]) p += 16; });
+  HABITS.forEach(h => { if(h.water) p += Math.min(D.agua||0, h.water) * h.pts; else if(D.h[h.id]) p += h.pts; });
+  return Math.min(p, 100);
+}
+function stats(){
+  const st = {xp:0, diasBuenos:0, diasPerfectos:0, aguaFull:0, movDias:0, suplDias:0, diasSintomas:0, prepsHechos:0};
+  Object.keys(S.d).forEach(n => {
+    const D = S.d[n], p = ptsDia(n);
+    st.xp += p;
+    if(p >= 60) st.diasBuenos++;
+    if(p >= 100) st.diasPerfectos++;
+    if((D.agua||0) >= 8) st.aguaFull++;
+    if(D.h.mov) st.movDias++;
+    if(D.h.glutamina && D.h.probiotico && D.h.omega) st.suplDias++;
+    if(Object.keys(D.sint||{}).length >= 3) st.diasSintomas++;
+  });
+  PREPS.forEach(P => {
+    const done = Object.keys(S.prep[P.id]||{}).filter(k => S.prep[P.id][k]).length;
+    if(done >= P.tasks.length) st.prepsHechos++;
+  });
+  return st;
+}
+const nivelDe = xp => NIVELES.slice().reverse().find(l => xp >= l.min) || NIVELES[0];
+
+/* =========================================================
+   UI HELPERS
+   ========================================================= */
+const $ = s => document.querySelector(s);
+const el = (t,c,h) => { const e = document.createElement(t); if(c) e.className = c; if(h != null) e.innerHTML = h; return e; };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const TICK = '<svg viewBox="0 0 24 24"><path d="M4 12.5 9.5 18 20 6.5"/></svg>';
+let tT;
+function toast(msg){
+  const t = $("#toast"); t.textContent = msg; t.classList.add("show");
+  clearTimeout(tT); tT = setTimeout(() => t.classList.remove("show"), 2300);
+}
+function buzz(ms){ try{ navigator.vibrate && navigator.vibrate(ms||12); }catch(e){} }
+
+function chk(on){ const b = el("button", "chk" + (on ? " on" : ""), TICK); b.setAttribute("aria-pressed", on?"true":"false"); return b; }
+
+/* ---------- sheet ---------- */
+function openSheet(title, node){
+  $("#sheetTitle").textContent = title;
+  const b = $("#sheetBody"); b.innerHTML = ""; b.appendChild(node); b.scrollTop = 0;
+  $("#scrim").classList.add("open"); $("#sheet").classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeSheet(){
+  $("#scrim").classList.remove("open"); $("#sheet").classList.remove("open");
+  document.body.style.overflow = "";
+}
+$("#scrim").onclick = closeSheet; $("#sheetX").onclick = closeSheet;
+
+function recetaNode(key){
+  const r = R[key]; const w = el("div");
+  const meta = el("div","metarow");
+  meta.appendChild(el("span","pill fast","⏱ " + r.min + " min"));
+  meta.appendChild(el("span","pill", r.rinde));
+  if(r.soup) meta.appendChild(el("span","pill rec","rinde 2 cenas"));
+  w.appendChild(meta);
+  w.appendChild(el("div","rsect","Ingredientes"));
+  const ul = el("ul","ing");
+  r.ing.forEach(([q,n]) => { const li = el("li"); li.appendChild(el("b",null,esc(q||"—"))); li.appendChild(el("span",null,esc(n))); ul.appendChild(li); });
+  w.appendChild(ul);
+  w.appendChild(el("div","rsect","Preparación"));
+  const ol = el("ol","steps"); r.pasos.forEach(p => ol.appendChild(el("li",null,esc(p)))); w.appendChild(ol);
+  if(r.nota) w.appendChild(el("div","note","<b>Tip.</b> " + esc(r.nota)));
+  return w;
+}
+const verReceta = k => openSheet(R[k].n, recetaNode(k));
+
+/* =========================================================
+   VISTA · HOY
+   ========================================================= */
+function renderHoy(){
+  const D = day(cur), men = menuDe(cur), p = ptsDia(cur), st = stats();
+
+  $("#heroKicker").textContent = "Día " + cur + " de " + TOTAL + " · " + fechaCorta(cur);
+  $("#heroTitle").textContent = (cur === hoyNum() ? "Hoy · " : "") + men.dia;
+  $("#heroSub").textContent = men.lema;
+  $("#ringVal").textContent = p;
+  $("#ringArc").style.strokeDashoffset = (207.3 * (1 - p/100)).toFixed(1);
+  $("#protoLbl").textContent = st.diasBuenos + " / " + META + " días";
+  $("#protoBar").style.width = Math.min(100, st.diasBuenos/META*100) + "%";
+
+  const semana = Math.ceil(cur/7), base = (semana-1)*7;
+  const nav = $("#daynav"); nav.innerHTML = "";
+  for(let i=1; i<=7; i++){
+    const n = base + i; if(n > TOTAL) break;
+    const b = el("button", (n===cur?"on ":"") + (ptsDia(n)>=60?"done":""), "D" + n);
+    b.onclick = () => { cur = n; renderHoy(); buzz(); };
+    nav.appendChild(b);
+  }
+
+  const done = ["d","a","c"].filter(k => D.m[k]).length;
+  $("#mealsCnt").textContent = done + "/3";
+
+  const list = $("#mealList"); list.innerHTML = "";
+  men.m.forEach(meal => {
+    const r = R[meal.r], on = !!D.m[meal.k];
+    const card = el("div", "meal" + (on ? " done" : ""));
+    const head = el("div","meal-head");
+    const c = chk(on);
+    c.onclick = () => {
+      D.m[meal.k] = !D.m[meal.k]; save(); buzz(18);
+      if(D.m[meal.k]){
+        const np = ptsDia(cur);
+        toast(np >= 100 ? "¡Día perfecto! 100 puntos ⭐" : "+16 puntos · " + np + "/100");
+      }
+      renderHoy(); checkLogros();
+    };
+    head.appendChild(c);
+    const body = el("div","meal-body");
+    const when = el("div","meal-when");
+    when.innerHTML = "<b>" + KN[meal.k] + "</b> · " + (meal.soup ? meal.soup + " " : "") + meal.min + " min";
+    body.appendChild(when);
+    body.appendChild(el("div","meal-name", esc(r.n)));
+    body.appendChild(el("div","meal-items", esc(meal.sub)));
+    const pills = el("div","pills");
+    if(meal.prep) pills.appendChild(el("span","pill prep","sale del prep"));
+    if(meal.min <= 12) pills.appendChild(el("span","pill fast","rápido"));
+    if(pills.children.length) body.appendChild(pills);
+    head.appendChild(body);
+    card.appendChild(head);
+    const foot = el("div","meal-foot");
+    const lk = el("button","linkbtn",'<svg viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Ver receta');
+    lk.onclick = () => verReceta(meal.r);
+    foot.appendChild(lk);
+    card.appendChild(foot);
+    list.appendChild(card);
+  });
+
+  const hl = $("#habitList"); hl.innerHTML = "";
+  HABITS.forEach(h => {
+    const row = el("div","hrow");
+    const ico = el("div","ico", h.e); ico.style.background = h.bg; row.appendChild(ico);
+    const t = el("div","txt"); t.appendChild(el("b",null,esc(h.n))); t.appendChild(el("span",null,esc(h.s))); row.appendChild(t);
+    if(h.water){
+      const w = el("div","water");
+      for(let i=1; i<=h.water; i++){
+        const b = el("button", (D.agua||0) >= i ? "on" : "");
+        b.setAttribute("aria-label","Vaso " + i);
+        b.onclick = () => {
+          D.agua = ((D.agua||0) >= i) ? i-1 : i; save(); buzz();
+          if(D.agua >= 8) toast("2 litros completos 💧");
+          renderHoy(); checkLogros();
+        };
+        w.appendChild(b);
+      }
+      row.appendChild(w);
+    } else {
+      const c = chk(!!D.h[h.id]);
+      c.onclick = () => { D.h[h.id] = !D.h[h.id]; save(); buzz(18); renderHoy(); checkLogros(); };
+      row.appendChild(c);
+    }
+    hl.appendChild(row);
+  });
+
+  const sl = $("#symList"); sl.innerHTML = "";
+  SINT.forEach(s => {
+    const row = el("div","symrow");
+    const n = el("div","n","<b style='font-weight:600'>" + esc(s.n) + "</b>"); n.appendChild(el("small",null,esc(s.s))); row.appendChild(n);
+    const f = el("div","faces");
+    for(let i=1; i<=5; i++){
+      const b = el("button", (D.sint||{})[s.id] === i ? "on" : "", CARAS[i-1]);
+      b.setAttribute("aria-label", s.n + " " + i + " de 5");
+      b.onclick = () => { D.sint = D.sint || {}; D.sint[s.id] = (D.sint[s.id]===i ? 0 : i); save(); buzz(); renderHoy(); checkLogros(); };
+      f.appendChild(b);
+    }
+    row.appendChild(f);
+    sl.appendChild(row);
+  });
+
+  const lv = nivelDe(st.xp);
+  $("#lvlEmoji").textContent = lv.e; $("#lvlName").textContent = lv.n; $("#lvlXp").textContent = st.xp;
+}
+
+/* =========================================================
+   VISTA · PLAN
+   ========================================================= */
+function renderPlan(){
+  const list = $("#planList"); list.innerHTML = "";
+  DIAS.forEach((men, i) => {
+    const card = el("div","card"); card.style.marginBottom = "10px";
+    const hd = el("div"); hd.style.cssText = "padding:13px 15px 9px;border-bottom:1px solid var(--line-soft)";
+    hd.appendChild(el("div","meal-when","<b>" + men.dia + "</b>"));
+    const h3 = el("h3", null, esc(men.lema)); h3.style.cssText = "font-size:16px;margin-top:3px;font-weight:600"; hd.appendChild(h3);
+    card.appendChild(hd);
+    men.m.forEach(meal => {
+      const r = R[meal.r];
+      const row = el("div","hrow"); row.style.cursor = "pointer";
+      const ico = el("div","ico", meal.k === "d" ? "🌅" : meal.k === "a" ? "☀️" : (meal.soup || "🌙"));
+      ico.style.background = meal.k === "d" ? "var(--gold-soft)" : meal.k === "a" ? "var(--sage-soft)" : "var(--sky-soft)";
+      row.appendChild(ico);
+      const t = el("div","txt");
+      t.appendChild(el("b", null, esc(r.n)));
+      t.appendChild(el("span", null, KN[meal.k] + " · " + esc(meal.sub)));
+      row.appendChild(t);
+      const ar = el("div","linkbtn",'<svg viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>'); ar.style.color = "var(--muted)";
+      row.appendChild(ar);
+      row.onclick = () => verReceta(meal.r);
+      card.appendChild(row);
+    });
+    list.appendChild(card);
+  });
+
+  const usados = new Set(); DIAS.forEach(d => d.m.forEach(m => usados.add(m.r)));
+  const extras = Object.keys(R).filter(k => !usados.has(k));
+  $("#recCnt").textContent = Object.keys(R).length + " recetas";
+  const rl = $("#recList"); rl.innerHTML = "";
+  const card = el("div","card");
+  extras.forEach(k => {
+    const r = R[k];
+    const row = el("div","hrow"); row.style.cursor = "pointer";
+    const ico = el("div","ico", r.prep ? "🔪" : "✨"); ico.style.background = r.prep ? "var(--sky-soft)" : "var(--berry-soft)";
+    row.appendChild(ico);
+    const t = el("div","txt");
+    t.appendChild(el("b", null, esc(r.n)));
+    t.appendChild(el("span", null, (r.prep ? "Base del prep" : "Extra") + " · " + r.min + " min · " + esc(r.rinde)));
+    row.appendChild(t);
+    row.onclick = () => verReceta(k);
+    card.appendChild(row);
+  });
+  rl.appendChild(card);
+}
+
+/* =========================================================
+   VISTA · MERCADO
+   ========================================================= */
+function renderMercado(){
+  let tot = 0, got = 0;
+  const list = $("#mktList"); list.innerHTML = "";
+  MERCADO.forEach((g, gi) => {
+    const wrap = el("div","mgroup");
+    const gTot = g.it.length;
+    const gGot = g.it.filter((_, ii) => S.mkt[gi + "-" + ii]).length;
+    tot += gTot; got += gGot;
+    const hd = el("div","mghead");
+    hd.appendChild(el("span","e", g.e));
+    hd.appendChild(el("b", null, esc(g.g)));
+    hd.appendChild(el("span", null, gGot + "/" + gTot));
+    wrap.appendChild(hd);
+    const card = el("div","card");
+    g.it.forEach((it, ii) => {
+      const id = gi + "-" + ii, on = !!S.mkt[id];
+      const row = el("div","mitem" + (on ? " on" : ""));
+      const c = chk(on); c.classList.add("sm");
+      c.onclick = () => { S.mkt[id] = !S.mkt[id]; save(); buzz(); renderMercado(); };
+      row.appendChild(c);
+      const n = el("div","n", esc(it[0]));
+      if(it[2]) n.appendChild(el("small", null, esc(it[2])));
+      row.appendChild(n);
+      if(it[1]) row.appendChild(el("div","q", esc(it[1])));
+      row.onclick = e => { if(e.target.closest(".chk")) return; c.onclick(); };
+      card.appendChild(row);
+    });
+    wrap.appendChild(card);
+    list.appendChild(wrap);
+  });
+  $("#mktLbl").textContent = got + " / " + tot;
+  $("#mktBar").style.width = (tot ? got/tot*100 : 0) + "%";
+  $("#mktDot").classList.toggle("show", got > 0 && got < tot);
+}
+$("#clearMkt").onclick = () => { S.mkt = {}; save(); renderMercado(); toast("Lista reiniciada"); };
+
+/* =========================================================
+   VISTA · PREP
+   ========================================================= */
+function renderPrep(){
+  const list = $("#prepList"); list.innerHTML = "";
+  PREPS.forEach(P => {
+    S.prep[P.id] = S.prep[P.id] || {};
+    const st = S.prep[P.id];
+    const done = P.tasks.filter((_, i) => st[i]).length;
+    const card = el("div","card prepcard");
+    card.appendChild(el("div","when", P.when + " · " + P.dur));
+    const h = el("h3", null, esc(P.t) + "  "); 
+    const cnt = el("span", null, done + "/" + P.tasks.length);
+    cnt.style.cssText = "font-family:var(--fm);font-size:13px;color:var(--muted);font-weight:400";
+    h.appendChild(cnt); card.appendChild(h);
+    card.appendChild(el("div","covers", esc(P.covers)));
+    const tr = el("div","track"); tr.style.cssText = "background:var(--surface-3);margin-bottom:6px";
+    tr.appendChild(el("span", null, "")); tr.firstChild.style.cssText = "background:var(--sage);width:" + (done/P.tasks.length*100) + "%";
+    card.appendChild(tr);
+    P.tasks.forEach(([t, b, s], i) => {
+      const row = el("div","ptask" + (st[i] ? " on" : ""));
+      const c = chk(!!st[i]); c.classList.add("sm");
+      c.onclick = () => {
+        st[i] = !st[i]; save(); buzz(18);
+        if(P.tasks.every((_, j) => st[j])) toast("Prep completo 🔪 ¡Listo!");
+        renderPrep(); checkLogros();
+      };
+      row.appendChild(c);
+      const bd = el("div","body");
+      bd.appendChild(el("b", null, esc(b)));
+      bd.appendChild(el("span", null, esc(s)));
+      row.appendChild(bd);
+      row.appendChild(el("div","t", t));
+      row.onclick = e => { if(e.target.closest(".chk")) return; c.onclick(); };
+      card.appendChild(row);
+    });
+    list.appendChild(card);
+  });
+}
+
+/* =========================================================
+   VISTA · YO
+   ========================================================= */
+function renderYo(){
+  const st = stats();
+  $("#stDays").textContent = st.diasBuenos;
+  $("#stXp").textContent = st.xp;
+  $("#stPct").textContent = Math.round(Math.min(100, st.diasBuenos/META*100)) + "%";
+
+  /* --- gráfica de síntomas --- */
+  const dias = Object.keys(S.d).map(Number).filter(n => Object.keys(S.d[n].sint||{}).length).sort((a,b)=>a-b);
+  const svg = $("#symChart"), W = 320, H = 120;
+  svg.innerHTML = "";
+  const ns = "http://www.w3.org/2000/svg";
+  const mk = (t,a) => { const e = document.createElementNS(ns,t); for(const k in a) e.setAttribute(k,a[k]); return e; };
+  [1,3,5].forEach(v => {
+    const y = H - ((v-1)/4)*(H-14) - 7;
+    svg.appendChild(mk("line",{x1:0,y1:y,x2:W,y2:y,stroke:"var(--line-soft)","stroke-width":1}));
+  });
+  if(dias.length < 2){
+    svg.appendChild(mk("text",{x:W/2,y:H/2+4,"text-anchor":"middle",fill:"var(--muted)","font-size":"12","font-family":"Karla, sans-serif"})).textContent =
+      dias.length ? "Registra un día más y aparece la curva" : "Aún no has registrado cómo te sientes";
+  } else {
+    const x = i => dias.length===1 ? W/2 : (i/(dias.length-1))*(W-8)+4;
+    const y = v => H - ((v-1)/4)*(H-14) - 7;
+    SINT.forEach(s => {
+      const pts = dias.map((n,i) => { const v = (S.d[n].sint||{})[s.id]; return v ? [x(i), y(v)] : null; }).filter(Boolean);
+      if(pts.length < 2) return;
+      svg.appendChild(mk("polyline",{points:pts.map(p=>p.join(",")).join(" "),fill:"none",stroke:s.c,"stroke-width":2,"stroke-linecap":"round","stroke-linejoin":"round","opacity":.85}));
+      pts.forEach(p => svg.appendChild(mk("circle",{cx:p[0],cy:p[1],r:2.6,fill:s.c})));
+    });
+  }
+  const lg = $("#symLegend"); lg.innerHTML = "";
+  SINT.forEach(s => { const i = el("span", null, '<i style="background:'+s.c+'"></i>' + s.n); lg.appendChild(i); });
+
+  /* --- logros --- */
+  const got = LOGROS.filter(l => l.f(st)).length;
+  $("#bdgCnt").textContent = got + "/" + LOGROS.length;
+  const bl = $("#badgeList"); bl.innerHTML = "";
+  LOGROS.forEach(l => {
+    const b = el("div","badge" + (l.f(st) ? " got" : ""));
+    b.appendChild(el("span","e", l.e));
+    b.appendChild(el("b", null, esc(l.n)));
+    b.appendChild(el("span", null, esc(l.s)));
+    bl.appendChild(b);
+  });
+
+  /* --- el plan en corto --- */
+  $("#infoBlock").innerHTML =
+   '<p><b>Qué es esto.</b> Una dieta de eliminación, no una dieta para bajar de peso. El protocolo LivianaMente lo dice textual: <i>«NO BUSCA RESTRICCIÓN CALÓRICA»</i>. Dura mínimo 21 días, idealmente 28.</p>'
+  +'<p><b>Para qué.</b> Las sensibilidades alimentarias aparecen horas o días después de comer, y por eso son casi imposibles de identificar en el día a día. Apagas todo durante 3–4 semanas, y después vuelves a prender de a un alimento. Sales con un mapa personal de qué te cae mal <i>a ti</i>. Ese es el premio, no los 28 días.</p>'
+  +'<p><b>Si los primeros días te sientes peor, es normal.</b> El documento advierte que puede haber abstinencia y reacciones de detox al principio, y que se resuelven con los días. No significa que no esté funcionando.</p>'
+  +'<p><b>Después viene la reintroducción.</b> Un alimento a la vez, 2–3 porciones al día por 2–3 días, evaluando síntomas. Simple, no combinado: pasta y no pizza, leche y no helado, café y no mocca.</p>'
+  +'<div class="twocol" style="margin-top:14px">'
+  +'<div><div class="rsect" style="margin:0 0 5px">Fuera</div><ul class="lst no">'
+  +'<li>Alcohol</li><li>Cerdo y embutidos</li><li>Mariscos</li><li>Maní y soja</li><li>Maíz</li><li>Lácteos</li>'
+  +'<li>Gluten (trigo, cebada, centeno)</li><li>Azúcares</li><li>Chocolate</li><li>Café</li>'
+  +'<li>Gaseosas y energizantes</li><li>Té verde, negro, rojo, azul y blanco</li><li>Edulcorantes artificiales</li></ul></div>'
+  +'<div><div class="rsect" style="margin:0 0 5px">Dentro</div><ul class="lst yes">'
+  +'<li>Pollo, pavo, res, cordero, pescados</li><li>Frutas y verduras</li><li>Leches de almendra, coco, linaza</li>'
+  +'<li>Avena, quinoa, arroz, trigo sarraceno</li><li>Aceite de oliva, aguacate, coco</li>'
+  +'<li>Infusiones sin cafeína</li><li>Lentejas, fríjoles, garbanzo</li><li>Semillas</li>'
+  +'<li>Cúrcuma, jengibre, vinagres</li></ul></div></div>'
+  +'<div class="note terra" style="margin-top:16px"><b>Dos cosas para preguntarle a la nutrióloga.</b> Primero, el <b>matcha</b>: el Mod1 lo lista como bebida permitida, pero LivianaMente elimina el té verde — y el matcha es té verde. Segundo, el <b>recetario tiene lácteos</b> (yogurt griego, parmesano, queso rallado) y los lácteos están eliminados: en esta app todas las recetas están en su versión sin lácteos.</div>'
+  +'<div class="note sage" style="margin-top:10px"><b>Las reglas de la casa.</b> Come todos los días a las mismas horas. Ejercicio mínimo 3 veces por semana, así sea corto. Todo cocido, al vapor, al horno o al airfryer; si sofríes, con aceite de oliva o ghee. Evita el exceso de sal, azúcar y panela. Mastica por lo menos 30 veces cada bocado. Y si te da hambre entre comidas, fruta o vegetales con grasa o proteína — nunca aguantes hambre.</div>';
+}
+
+/* =========================================================
+   LOGROS
+   ========================================================= */
+function checkLogros(){
+  const st = stats();
+  LOGROS.forEach(l => {
+    if(l.f(st) && !S.seen.includes(l.id)){
+      S.seen.push(l.id); save();
+      setTimeout(() => toast("Logro desbloqueado " + l.e + " " + l.n), 500);
+      buzz([14,60,14]);
+    }
+  });
+  const lv = nivelDe(st.xp);
+  $("#lvlEmoji").textContent = lv.e; $("#lvlName").textContent = lv.n; $("#lvlXp").textContent = st.xp;
+}
+
+/* =========================================================
+   NAVEGACIÓN
+   ========================================================= */
+const RENDER = {hoy:renderHoy, plan:renderPlan, mercado:renderMercado, prep:renderPrep, yo:renderYo};
+function go(v){
+  document.querySelectorAll(".view").forEach(s => s.classList.toggle("active", s.id === "v-" + v));
+  document.querySelectorAll("nav.tabs button").forEach(b => b.classList.toggle("on", b.dataset.v === v));
+  RENDER[v] && RENDER[v]();
+  window.scrollTo({top:0});
+}
+document.querySelectorAll("nav.tabs button").forEach(b => b.onclick = () => { go(b.dataset.v); buzz(); });
+
+/* ---------- tema ---------- */
+function applyTheme(){ if(S.theme) document.documentElement.setAttribute("data-theme", S.theme); else document.documentElement.removeAttribute("data-theme"); }
+$("#themeBtn").onclick = () => {
+  const now = document.documentElement.getAttribute("data-theme")
+    || (matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
+  S.theme = now === "dark" ? "light" : "dark"; save(); applyTheme(); buzz();
+};
+applyTheme();
+
+addEventListener("scroll", () => $("#appbar").classList.toggle("scrolled", scrollY > 6), {passive:true});
+
+/* ---------- ajustes ---------- */
+$("#inName").value = S.name || "";
+$("#inName").oninput = e => { S.name = e.target.value; save(); };
+$("#inStart").value = S.start;
+$("#inStart").onchange = e => {
+  if(!e.target.value) return;
+  S.start = e.target.value; save(); cur = hoyNum(); renderHoy();
+  toast("Día 1 = " + fechaDe(1));
+};
+
+$("#btnExport").onclick = () => {
+  const st = stats();
+  let t = "PROTOCOLO ANTIINFLAMATORIO · REGISTRO\n";
+  if(S.name) t += S.name + "\n";
+  t += "Día 1: " + fechaDe(1) + "\n";
+  t += "Días completos: " + st.diasBuenos + " de " + META + "\n\n";
+  Object.keys(S.d).map(Number).sort((a,b)=>a-b).forEach(n => {
+    const D = S.d[n], p = ptsDia(n);
+    const sn = SINT.filter(s => (D.sint||{})[s.id]).map(s => s.n + " " + D.sint[s.id] + "/5");
+    t += "Día " + n + " (" + fechaDe(n) + ") · " + p + "/100\n";
+    const com = ["d","a","c"].filter(k => D.m[k]).map(k => KN[k]);
+    t += "  Comidas: " + (com.length ? com.join(", ") : "ninguna");
+    t += "\n  Agua: " + (D.agua||0) + "/8 vasos\n";
+    t += "  Suplementos: " + (D.h.glutamina&&D.h.probiotico&&D.h.omega ? "completos" : "incompletos") + "\n";
+    if(sn.length) t += "  Síntomas: " + sn.join(" · ") + "\n";
+    t += "\n";
+  });
+  if(navigator.share){ navigator.share({title:"Mi registro", text:t}).catch(()=>{}); return; }
+  navigator.clipboard ? navigator.clipboard.writeText(t).then(() => toast("Registro copiado ✓")).catch(() => alert(t)) : alert(t);
+};
+
+$("#btnReset").onclick = () => {
+  if(!confirm("Esto borra todos tus checks, tu registro de síntomas y tus logros. ¿Seguro?")) return;
+  const keep = S.theme;
+  S = DEF(); S.theme = keep; S.start = todayISO(); save();
+  cur = 1; $("#inName").value = ""; $("#inStart").value = S.start;
+  go("hoy"); toast("Todo limpio. Cuando quieras empezamos.");
+};
+
+/* ---------- arranque ---------- */
+renderHoy();
+if("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+</script>
+</body>
+</html>
