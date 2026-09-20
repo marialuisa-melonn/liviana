@@ -205,9 +205,17 @@ nav.tabs .dot.show{display:block}
 .hrow .txt{flex:1;min-width:0}
 .hrow .txt b{display:block;font-size:14.5px;font-weight:600}
 .hrow .txt span{font-size:12px;color:var(--muted);line-height:1.35;display:block}
-.water{display:flex;gap:5px}
-.water button{width:19px;height:25px;border-radius:5px 5px 7px 7px;border:1.7px solid var(--line);background:var(--surface);transition:.15s}
+.water{display:flex;gap:7px}
+.water button{
+  width:26px;height:36px;border-radius:7px 7px 9px 9px;border:1.9px solid var(--line);
+  background:var(--surface);transition:.18s;position:relative;
+}
+.water button:before{ /* la tapa del termo */
+  content:"";position:absolute;left:50%;top:-5px;transform:translateX(-50%);
+  width:12px;height:5px;border-radius:3px 3px 1px 1px;background:var(--line);transition:.18s;
+}
 .water button.on{background:var(--sky);border-color:var(--sky)}
+.water button.on:before{background:var(--sky)}
 
 /* ---------- SHEET / MODAL ---------- */
 .scrim{position:fixed;inset:0;background:rgba(20,28,22,.5);backdrop-filter:blur(3px);z-index:60;opacity:0;pointer-events:none;transition:opacity .25s}
@@ -786,8 +794,9 @@ const HABITS = [
   s:"Thorne Plant Protein, los días que entrenas", pts:6},
  {id:"mov", e:"🏃‍♀️", bg:"var(--berry-soft)", n:"Movimiento",
   s:"el plan pide mínimo 3 veces por semana, así sea corto o ligero", pts:10},
- {id:"agua", e:"💧", bg:"var(--sky-soft)", n:"2 litros de agua",
-  s:"8 vasos. Toca cada vaso que te tomes", pts:3, water:8}
+ /* El Yeti de 26 oz son 769 ml, así que 3 llenadas = 2,3 L y cubre los 2 L del plan. */
+ {id:"agua", e:"💧", bg:"var(--sky-soft)", n:"Agua · 3 termos",
+  s:"toca cada vez que te acabes el Yeti", pts:8, water:3}
 ];
 
 /* ====================== SÍNTOMAS ====================== */
@@ -918,7 +927,7 @@ const NIVELES = [
 
 const LOGROS = [
  {id:"arranque",  e:"🌱", n:"Arrancaste",     s:"día 1 completo",      f:s=>s.diasBuenos>=1},
- {id:"agua",      e:"💧", n:"2 litros",       s:"8 vasos en un día",   f:s=>s.aguaFull>=1},
+ {id:"agua",      e:"💧", n:"2,3 litros",     s:"los 3 termos",        f:s=>s.aguaFull>=1},
  {id:"prep",      e:"🔪", n:"Meal prep",      s:"un prep completo",    f:s=>s.prepsHechos>=1},
  {id:"tres",      e:"🔥", n:"Tres seguidos",  s:"3 días buenos",       f:s=>s.diasBuenos>=3},
  {id:"perfecto",  e:"⭐", n:"Día perfecto",   s:"100 puntos",          f:s=>s.diasPerfectos>=1},
@@ -935,12 +944,22 @@ const LOGROS = [
    ESTADO
    ========================================================= */
 const KEY = "liviana.v1";
-const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:""});
+const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", aguaV2:1});
 let S = DEF();
 try{ const raw = localStorage.getItem(KEY); if(raw) S = Object.assign(DEF(), JSON.parse(raw)); }catch(e){}
+/* El agua se contaba en vasos de 250 ml; ahora se cuenta en llenadas del termo. */
+if(!S.aguaV2){
+  Object.keys(S.d||{}).forEach(n => {
+    const D = S.d[n];
+    if(D && D.agua > 3) D.agua = Math.min(3, Math.round(D.agua * 250 / 769));
+  });
+  S.aguaV2 = 1;
+}
 const save = () => { try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} };
 
 const TOTAL = 28, META = 21;
+const TERMO_ML = 769;   // Yeti Rambler de 26 oz
+const TERMOS = 3;       // 2.307 ml — cubre los 2 L que pide el plan
 const day = n => (S.d[n] = S.d[n] || {m:{}, h:{}, agua:0, sint:{}});
 const pad = n => String(n).padStart(2,"0");
 const todayISO = () => { const t=new Date(); return t.getFullYear()+"-"+pad(t.getMonth()+1)+"-"+pad(t.getDate()); };
@@ -960,6 +979,14 @@ function fechaCorta(n){ return fechaObj(n).toLocaleDateString("es-CO",{day:"nume
    si arrancas un sábado, el sábado ves el brunch, no el lunes. */
 const menuDe = n => DIAS[(fechaObj(n).getDay() + 6) % 7];
 
+/* Texto vivo del agua: cuánto llevas y cuánto falta, en litros. */
+function aguaSub(n){
+  const litros = x => (x/1000).toFixed(2).replace(".", ",") + " L";
+  if(n >= TERMOS) return "2,3 L completos · meta cumplida";
+  const falta = TERMOS * TERMO_ML - n * TERMO_ML;
+  return (n ? litros(n * TERMO_ML) + " · te falta " + litros(falta) : "el Yeti de 26 oz son 769 ml · faltan " + litros(falta));
+}
+
 /* ---------- puntos ---------- */
 function ptsDia(n){
   const D = S.d[n]; if(!D) return 0;
@@ -975,7 +1002,7 @@ function stats(){
     st.xp += p;
     if(p >= 60) st.diasBuenos++;
     if(p >= 100) st.diasPerfectos++;
-    if((D.agua||0) >= 8) st.aguaFull++;
+    if((D.agua||0) >= TERMOS) st.aguaFull++;
     if(D.h.mov) st.movDias++;
     if(D.h.glutamina && D.h.probiotico && D.h.omega) st.suplDias++;
     if(Object.keys(D.sint||{}).length >= 3) st.diasSintomas++;
@@ -1100,7 +1127,9 @@ function renderHoy(){
   HABITS.forEach(h => {
     const row = el("div","hrow");
     const ico = el("div","ico", h.e); ico.style.background = h.bg; row.appendChild(ico);
-    const t = el("div","txt"); t.appendChild(el("b",null,esc(h.n))); t.appendChild(el("span",null,esc(h.s))); row.appendChild(t);
+    const t = el("div","txt"); t.appendChild(el("b",null,esc(h.n)));
+    t.appendChild(el("span", null, h.water ? aguaSub(D.agua||0) : esc(h.s)));
+    row.appendChild(t);
     if(h.water){
       const w = el("div","water");
       for(let i=1; i<=h.water; i++){
@@ -1108,7 +1137,7 @@ function renderHoy(){
         b.setAttribute("aria-label","Vaso " + i);
         b.onclick = () => {
           D.agua = ((D.agua||0) >= i) ? i-1 : i; save(); buzz();
-          if(D.agua >= 8) toast("2 litros completos 💧");
+          if(D.agua >= TERMOS) toast("2,3 litros. Meta cumplida 💧");
           renderHoy(); checkLogros();
         };
         w.appendChild(b);
@@ -1397,7 +1426,7 @@ $("#btnExport").onclick = () => {
     t += "Día " + n + " (" + fechaDe(n) + ") · " + p + "/100\n";
     const com = ["d","a","c"].filter(k => D.m[k]).map(k => KN[k]);
     t += "  Comidas: " + (com.length ? com.join(", ") : "ninguna");
-    t += "\n  Agua: " + (D.agua||0) + "/8 vasos\n";
+    t += "\n  Agua: " + (((D.agua||0) * TERMO_ML)/1000).toFixed(2).replace(".",",") + " L (" + (D.agua||0) + "/" + TERMOS + " termos)\n";
     t += "  Suplementos: " + (D.h.glutamina&&D.h.probiotico&&D.h.omega ? "completos" : "incompletos") + "\n";
     if(sn.length) t += "  Síntomas: " + sn.join(" · ") + "\n";
     t += "\n";
