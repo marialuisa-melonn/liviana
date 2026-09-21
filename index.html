@@ -371,6 +371,8 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
     <div class="daynav" id="daynav"></div>
   </div>
 
+  <div id="startFix"></div>
+
   <div class="sect"><h2>Comidas</h2><span class="cnt" id="mealsCnt">0/4</span></div>
   <div id="mealList"></div>
 
@@ -922,7 +924,7 @@ const MERCADO = [
 
 /* ====================== MEAL PREP ====================== */
 const PREPS = [
- {id:"p1", when:"Domingo · antes de arrancar", t:"Prep grande", dur:"≈ 90 min",
+ {id:"p1", cuando:"antes de arrancar", dow:0, t:"Prep grande", dur:"≈ 90 min",
   covers:"Deja resueltos lunes, martes y miércoles: tres cenas de sopa, el pollo de toda la semana y el caldo que es la base de todo.",
   tasks:[
    ["0 min","Pon el caldo al fuego","Carcasa, cebolla, zanahoria, apio, ajo, tomillo y laurel en AGUA FRÍA. Hervor suave y lo olvidas 75 minutos mientras haces el resto."],
@@ -939,7 +941,7 @@ const PREPS = [
    ["88 min","Lava y seca las hojas","Guárdalas en un tupper con papel de cocina abajo: aguantan 4 días crujientes."],
    ["92 min","Deja las papas listas","Cortadas en bastón y sumergidas en agua fría en la nevera. Así el martes solo las secas y van al airfryer."]]},
 
- {id:"p2", when:"Jueves por la noche", t:"Prep corto", dur:"≈ 60 min",
+ {id:"p2", cuando:"por la noche", dow:4, t:"Prep corto", dur:"≈ 60 min",
   covers:"Cierra la semana: las dos sopas que faltan y todo lo del fin de semana. Los desayunos ya no necesitan prep — salen del paquete.",
   tasks:[
    ["0 min","Rostiza la ahuyama","500 g a 190 °C por 18–20 minutos."],
@@ -977,7 +979,7 @@ const LOGROS = [
 /* =========================================================
    ESTADO
    ========================================================= */
-const APP_VERSION = "2026-09-20 · 4";
+const APP_VERSION = "2026-09-21 · 5";
 const KEY = "liviana.v1";
 const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", aguaV2:1});
 let S = DEF();
@@ -1013,6 +1015,20 @@ function fechaCorta(n){ return fechaObj(n).toLocaleDateString("es-CO",{day:"nume
 /* El menú está construido por días de la semana, así que se engancha al día real:
    si arrancas un sábado, el sábado ves el brunch, no el lunes. */
 const menuDe = n => DIAS[(fechaObj(n).getDay() + 6) % 7];
+
+/* Cada prep cae en un día real, calculado desde tu fecha de arranque:
+   el grande es la víspera del Día 1; el corto, el primer jueves. */
+function fechaPrep(P){
+  if(P.id === "p1") return fechaObj(0);
+  for(let n = 1; n <= 7; n++){ if(fechaObj(n).getDay() === P.dow) return fechaObj(n); }
+  return fechaObj(4);
+}
+function prepLbl(P){
+  const d = fechaPrep(P);
+  const txt = d.toLocaleDateString("es-CO", {weekday:"long", day:"numeric", month:"short"});
+  return txt.charAt(0).toUpperCase() + txt.slice(1) + " · " + P.cuando;
+}
+const yaPaso = d => d < new Date(todayISO() + "T00:00:00");
 
 /* Texto vivo del agua: cuánto llevas y cuánto falta, en litros. */
 function aguaSub(n){
@@ -1118,6 +1134,23 @@ function renderHoy(){
     const b = el("button", (n===cur?"on ":"") + (ptsDia(n)>=60?"done":""), "D" + n);
     b.onclick = () => { cur = n; renderHoy(); buzz(); };
     nav.appendChild(b);
+  }
+
+  /* Si la fecha guardada no es la de hoy y todavía no has marcado nada,
+     lo más probable es que hoy sea tu Día 1 de verdad. Un toque lo arregla. */
+  const fix = $("#startFix"); fix.innerHTML = "";
+  if(S.start !== todayISO() && st.xp === 0){
+    const n = el("div","note terra");
+    n.innerHTML = "<b>¿Hoy es tu Día 1?</b> Tienes guardado que arrancaste el " + fechaDe(1) + ", pero no has marcado nada todavía.";
+    const b = el("button","btn","Sí, arranqué hoy");
+    b.style.marginTop = "10px";
+    b.onclick = () => {
+      S.start = todayISO(); save(); cur = 1;
+      $("#inStart").value = S.start;
+      renderHoy(); toast("Listo. Día 1 = hoy.");
+    };
+    n.appendChild(b);
+    fix.appendChild(n);
   }
 
   const done = ["d","a","c"].filter(k => D.m[k]).length;
@@ -1303,12 +1336,18 @@ function renderPrep(){
     const st = S.prep[P.id];
     const done = P.tasks.filter((_, i) => st[i]).length;
     const card = el("div","card prepcard");
-    card.appendChild(el("div","when", P.when + " · " + P.dur));
+    card.appendChild(el("div","when", prepLbl(P) + " · " + P.dur));
     const h = el("h3", null, esc(P.t) + "  "); 
     const cnt = el("span", null, done + "/" + P.tasks.length);
     cnt.style.cssText = "font-family:var(--fm);font-size:13px;color:var(--muted);font-weight:400";
     h.appendChild(cnt); card.appendChild(h);
     card.appendChild(el("div","covers", esc(P.covers)));
+    if(yaPaso(fechaPrep(P)) && done < P.tasks.length){
+      card.appendChild(el("div","note terra",
+        P.id === "p1"
+          ? "<b>Este prep era la víspera y arrancaste sin él.</b> No pasa nada: hazlo <b>esta noche</b>. Lo bueno es que el prep <i>es</i> tu cena — a los 40 minutos ya tienes lista la sopa de tomate y te sientas a comer. Para hoy al mediodía, cámbiale el almuerzo: la hamburguesa con papas a la francesa del martes no necesita nada del prep."
+          : "<b>Este prep ya pasó de fecha.</b> Hazlo apenas puedas, o cocina esas dos sopas el día que las necesites."));
+    }
     const tr = el("div","track"); tr.style.cssText = "background:var(--surface-3);margin-bottom:6px";
     tr.appendChild(el("span", null, "")); tr.firstChild.style.cssText = "background:var(--sage);width:" + (done/P.tasks.length*100) + "%";
     card.appendChild(tr);
