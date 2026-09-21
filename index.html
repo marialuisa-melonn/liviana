@@ -411,6 +411,9 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
   <div class="note">
     <b>Y las de siempre.</b> Leche de almendras: que diga «sin azúcar». Mantequilla de almendras: que el único ingrediente sea almendra. Leche de coco: sin azúcar añadida.
   </div>
+  <div class="note sage">
+    <b>Lo de la avena.</b> La avena no tiene gluten por naturaleza, pero casi siempre se cosecha y se procesa con trigo, cebada y centeno, así que la avena corriente llega contaminada. Por eso tiene que decir <b>«sin gluten»</b> en el empaque — si no lo dice, estás comiendo gluten sin saberlo, que es justo lo que el protocolo está eliminando.
+  </div>
 </section>
 
 <!-- ============ PREP ============ -->
@@ -857,7 +860,7 @@ const MERCADO = [
    ["Papa criolla","300 g","el almuerzo del jueves · entera al airfryer"],
    ["Arroz blanco","500 g","bowls y sopa de pollo"],
    ["Quinoa","250 g","bowl mediterráneo del sábado"],
-   ["Avena en hojuelas","500 g","pancakes y avena cremosa"],
+   ["Avena en hojuelas CERTIFICADA SIN GLUTEN","500 g","que el empaque lo diga · la avena normal viene contaminada con trigo"],
    ["Pan de arroz tajado · Spiga","1 bolsa","domingo · revisa que no traiga almidón de maíz"],
    ["Tortillas de harina de coco · Bodai","1 bolsa × 5","martes y sábado · te sobran 3"],
    ["Arepa de arroz skinny · La Mary","1 bolsa × 5","jueves · te sobran 4"]]},
@@ -979,7 +982,7 @@ const LOGROS = [
 /* =========================================================
    ESTADO
    ========================================================= */
-const APP_VERSION = "2026-09-21 · 5";
+const APP_VERSION = "2026-09-21 · 6";
 const KEY = "liviana.v1";
 const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", aguaV2:1});
 let S = DEF();
