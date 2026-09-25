@@ -394,7 +394,7 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
       </div>
     </div>
     <div class="hero-bar">
-      <div class="lbl"><span>Progreso del protocolo</span><span id="protoLbl">0 / 21 días</span></div>
+      <div class="lbl"><span>Progreso del protocolo</span><span id="protoLbl">día 1 de 21</span></div>
       <div class="track"><span id="protoBar" style="width:0%"></span></div>
     </div>
     <div class="daynav" id="daynav"></div>
@@ -1046,7 +1046,7 @@ const LOGROS = [
 /* =========================================================
    ESTADO
    ========================================================= */
-const APP_VERSION = "2026-09-25 · 10";
+const APP_VERSION = "2026-09-25 · 11";
 const KEY = "liviana.v1";
 const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", aguaV2:1, peso:[]});
 let S = DEF();
@@ -1824,7 +1824,7 @@ function forzarRecarga(){
 }
 if("serviceWorker" in navigator){
   navigator.serviceWorker.addEventListener("controllerchange", forzarRecarga);
-  navigator.serviceWorker.register("sw.js").then(reg => {
+  navigator.serviceWorker.register("sw.js?v=" + encodeURIComponent(APP_VERSION)).then(reg => {
     reg.update().catch(()=>{});
     reg.addEventListener("updatefound", () => {
       const nuevo = reg.installing;
