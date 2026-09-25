@@ -468,9 +468,9 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
 <section class="view" id="v-yo">
   <div class="sect"><h2>Tu progreso</h2></div>
   <div class="statgrid">
-    <div class="stat"><b id="stDays">0</b><span>días<br>completos</span></div>
+    <div class="stat"><b id="stDays">0</b><span>días que<br>cumpliste</span></div>
     <div class="stat"><b id="stXp">0</b><span>puntos<br>ganados</span></div>
-    <div class="stat"><b id="stPct">0%</b><span>del<br>protocolo</span></div>
+    <div class="stat"><b id="stPct">0%</b><span>del calendario<br>recorrido</span></div>
   </div>
 
   <div class="sect"><h2>Tu peso</h2><span class="cnt tiny muted">una vez por semana</span></div>
@@ -1046,7 +1046,7 @@ const LOGROS = [
 /* =========================================================
    ESTADO
    ========================================================= */
-const APP_VERSION = "2026-09-24 · 9";
+const APP_VERSION = "2026-09-25 · 10";
 const KEY = "liviana.v1";
 const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", aguaV2:1, peso:[]});
 let S = DEF();
@@ -1118,7 +1118,9 @@ function stats(){
   Object.keys(S.d).forEach(n => {
     const D = S.d[n], p = ptsDia(n);
     st.xp += p;
-    if(p >= 60) st.diasBuenos++;
+    /* 45 y no 60: las 3 comidas dan 48 puntos. Cumplir el plan tiene que contar
+       aunque se te olvide marcar el agua o los suplementos. */
+    if(p >= 45) st.diasBuenos++;
     if(p >= 100) st.diasPerfectos++;
     if((D.agua||0) >= TERMOS) st.aguaFull++;
     if(D.h.mov) st.movDias++;
@@ -1191,8 +1193,12 @@ function renderHoy(){
   $("#heroSub").textContent = men.lema;
   $("#ringVal").textContent = p;
   $("#ringArc").style.strokeDashoffset = (207.3 * (1 - p/100)).toFixed(1);
-  $("#protoLbl").textContent = st.diasBuenos + " / " + META + " días";
-  $("#protoBar").style.width = Math.min(100, st.diasBuenos/META*100) + "%";
+  /* Esta barra mide el CALENDARIO, no el puntaje: avanza sola todos los días.
+     Antes mostraba "días con 60+ puntos" bajo una etiqueta que prometía otra cosa,
+     y parecía congelada. Los días bien hechos se cuentan en la pestaña Yo. */
+  const diaHoy = hoyNum();
+  $("#protoLbl").textContent = "día " + Math.min(diaHoy, META) + " de " + META;
+  $("#protoBar").style.width = Math.min(100, diaHoy/META*100) + "%";
 
   const semana = Math.ceil(cur/7), base = (semana-1)*7;
   const nav = $("#daynav"); nav.innerHTML = "";
@@ -1578,7 +1584,7 @@ function renderYo(){
   const st = stats();
   $("#stDays").textContent = st.diasBuenos;
   $("#stXp").textContent = st.xp;
-  $("#stPct").textContent = Math.round(Math.min(100, st.diasBuenos/META*100)) + "%";
+  $("#stPct").textContent = Math.round(Math.min(100, hoyNum()/META*100)) + "%";
 
   renderPeso();
 
