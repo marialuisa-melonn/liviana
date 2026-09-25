@@ -302,6 +302,16 @@ nav.tabs .dot.show{display:block}
 .faces{display:flex;gap:4px}
 .faces button{width:30px;height:30px;border-radius:9px;background:var(--surface-2);font-size:14px;display:grid;place-items:center;transition:.15s;border:1.5px solid transparent}
 .faces button.on{background:var(--sage-soft);border-color:var(--sage);transform:scale(1.08)}
+.pesorow{display:flex;gap:9px;align-items:flex-end;padding:14px;border-bottom:1px solid var(--line-soft)}
+.pesorow .f{flex:1}
+.pesorow .btn{margin-top:0;width:auto;padding:12px 18px;flex:none}
+.pesolist{padding:4px 0}
+.pesoitem{display:flex;align-items:center;gap:10px;padding:9px 14px;border-bottom:1px solid var(--line-soft);font-size:14px}
+.pesoitem:last-child{border-bottom:none}
+.pesoitem .fch{flex:1;color:var(--text-2)}
+.pesoitem .kg{font-family:var(--fm);font-weight:600}
+.pesoitem .dif{font-family:var(--fm);font-size:12px;min-width:52px;text-align:right}
+.pesoitem .x{color:var(--muted);font-size:15px;padding:0 2px}
 .chartwrap{padding:14px}
 .chartwrap svg{width:100%;height:120px;display:block;overflow:visible}
 .legend{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;font-size:11.5px;color:var(--muted)}
@@ -391,6 +401,9 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
   </div>
   <div id="planList"></div>
 
+  <div class="sect"><h2>Comer fuera sin romper el plan</h2></div>
+  <div class="card infoblock" id="fueraBox"></div>
+
   <div class="sect"><h2>Recetario</h2><span class="cnt" id="recCnt"></span></div>
   <div id="recList"></div>
 </section>
@@ -433,6 +446,9 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
     <div class="stat"><b id="stXp">0</b><span>puntos<br>ganados</span></div>
     <div class="stat"><b id="stPct">0%</b><span>del<br>protocolo</span></div>
   </div>
+
+  <div class="sect"><h2>Tu peso</h2><span class="cnt tiny muted">una vez por semana</span></div>
+  <div class="card" id="pesoBox"></div>
 
   <div class="sect"><h2>Cómo te has sentido</h2></div>
   <div class="card chartwrap">
@@ -623,22 +639,24 @@ carnepapas:{n:"Carne molida con papas y guacamole",min:30,rinde:"1 porción",
 
 /* ====================== LAS 5 SOPAS ====================== */
 sopatomate:{n:"Sopa de tomate rostizado con pollo",min:35,rinde:"2 porciones",soup:1,
-  ing:[["500 g","tomate"],["100 g","cebolla"],["80 g","zanahoria"],["10 g","aceite de oliva"],["250 ml","caldo casero"],["6–8 hojas","albahaca fresca"],["½ cdta","orégano"],["240 g","pollo cocido desmechado"],["","limón, sal y pimienta"]],
+  ing:[["200 g","papa cocida del prep, AL LADO"],["500 g","tomate"],["100 g","cebolla"],["80 g","zanahoria"],["10 g","aceite de oliva"],["250 ml","caldo casero"],["6–8 hojas","albahaca fresca"],["½ cdta","orégano"],["240 g","pollo cocido desmechado"],["","limón, sal y pimienta"]],
   pasos:["Corta el tomate en mitades, la cebolla en gajos y la zanahoria en rodajas gruesas.",
     "Mézclalos con el aceite, sal, pimienta y orégano y rostízalos a 190 °C durante 15–18 minutos. El rostizado es lo que hace la diferencia: concentra el azúcar del tomate.",
     "Pásalos a una olla con el caldo y cocina 5 minutos.",
     "Licúa con la albahaca fresca — agrégala fuera del fuego para que no pierda el aroma.",
     "Ajusta sal y termina con un chorrito de limón.",
-    "Sirve cada plato con 120 g de pollo desmechado encima."],
-  nota:"Mediterránea. Rinde dos cenas: una para el lunes y otra para el sábado. Guarda la segunda en la nevera o congélala."},
+    "Sirve cada plato con 120 g de pollo desmechado encima.",
+    "Y la papa cocida al lado, tibia. NO es opcional: todas las cenas del Mod1 llevan carbohidrato."],
+  nota:"Mediterránea. Rinde dos cenas: lunes y sábado. La papa al lado son los ~190 kcal que la sopa sola no alcanza a dar — sin ella, la cena se queda corta frente a lo que te recetaron."},
 
 sopazanahoria:{n:"Crema de zanahoria, jengibre y cúrcuma",min:30,rinde:"2 porciones",soup:1,
-  ing:[["400 g","zanahoria"],["80 g","cebolla"],["10 g","jengibre"],["½ cdta","cúrcuma"],["500 ml","caldo"],["10 g","aceite de oliva"],["240 g","pollo cocido"],["","jugo de ½ limón"],["","sal y pimienta"]],
+  ing:[["200 g","papa cocida del prep, AL LADO"],["30 g","aguacate"],["400 g","zanahoria"],["80 g","cebolla"],["10 g","jengibre"],["½ cdta","cúrcuma"],["500 ml","caldo"],["10 g","aceite de oliva"],["240 g","pollo cocido"],["","jugo de ½ limón"],["","sal y pimienta"]],
   pasos:["Sofríe la cebolla y el jengibre rallado con el aceite, 4 minutos.",
     "Agrega la zanahoria en rodajas, la cúrcuma y el caldo.",
     "Cocina 18–20 minutos, hasta que la zanahoria se deshaga con la cuchara.",
     "Licúa hasta que quede completamente lisa.",
-    "Termina con el limón: es lo que la despierta y evita que sepa plana."],
+    "Termina con el limón: es lo que la despierta y evita que sepa plana.",
+    "Sirve con la papa cocida y el aguacate al lado. Esa es la parte que te sostiene hasta el otro día."],
   nota:"Especiada. El truco que la sube de nivel: desmecha el pollo, ponle un poquito de aceite y llévalo al airfryer 5–6 minutos hasta que quede crispy. Encima de la crema es otra cosa. Y la pimienta negra multiplica la absorción de la cúrcuma — no la olvides."},
 
 sopapapa:{n:"Crema de papa y puerro con pollo crispy",min:35,rinde:"2 porciones",soup:1,
@@ -652,13 +670,14 @@ sopapapa:{n:"Crema de papa y puerro con pollo crispy",min:35,rinde:"2 porciones"
   nota:"Cremosa + crispy. Es el contraste de texturas lo que la hace sentir de restaurante."},
 
 sopaahuyama:{n:"Crema de ahuyama, coco y jengibre",min:35,rinde:"2 porciones",soup:1,
-  ing:[["500 g","ahuyama"],["80 g","cebolla"],["8 g","jengibre"],["½ cdta","cúrcuma"],["100 ml","leche de coco sin azúcar"],["350 ml","caldo"],["10 g","aceite de oliva"],["","jugo de ½ limón"],["","sal y pimienta"]],
+  ing:[["240 g","pollo cocido"],["1","arepa de arroz o 200 g de papa cocida, AL LADO"],["500 g","ahuyama"],["80 g","cebolla"],["8 g","jengibre"],["½ cdta","cúrcuma"],["100 ml","leche de coco sin azúcar"],["350 ml","caldo"],["10 g","aceite de oliva"],["","jugo de ½ limón"],["","sal y pimienta"]],
   pasos:["Corta la ahuyama en trozos y rostízala a 190 °C durante 18–20 minutos.",
     "Sofríe la cebolla y el jengibre con el aceite, 4 minutos.",
     "Agrega la ahuyama rostizada, la cúrcuma y el caldo. Cocina 5 minutos.",
     "Licúa con la leche de coco.",
-    "Termina con limón, sal y pimienta."],
-  nota:"La más sofisticada de las cinco. La leche de coco entra al final y sin hervir, para que no se corte. Revisa que la lata no tenga azúcar añadida."},
+    "Termina con limón, sal y pimienta.",
+    "Sirve con 120 g de pollo desmechado encima y la arepa o la papa al lado."],
+  nota:"La más sofisticada de las cinco. La leche de coco entra al final y sin hervir, para que no se corte. Revisa que la lata no tenga azúcar añadida. OJO: en la versión original esta sopa no llevaba proteína — se la agregué, porque una cena de solo ahuyama te deja en la mitad de lo que necesitas."},
 
 sopapollo:{n:"Sopa de pollo, arroz y verduras",min:40,rinde:"2 porciones",soup:1,
   ing:[["250 g","pechuga de pollo"],["100 g","arroz blanco crudo"],["120 g","zanahoria"],["100 g","apio"],["80 g","cebolla"],["1 litro","agua o caldo"],["½ cdta","cúrcuma"],["","tomillo y laurel"],["10 g","aceite de oliva"],["10 g","cilantro"],["","limón, sal y pimienta"]],
@@ -784,12 +803,12 @@ const DIAS = [
  {dia:"Lunes", lema:"Arrancamos suave y con todo listo.",
   m:[{k:"d",r:"pancakes",sub:"fresas + mantequilla de almendras",min:12},
      {k:"a",r:"bowlmex",sub:"arroz, aguacate, pico de gallo, cilantro y limón",min:18,prep:1},
-     {k:"c",r:"sopatomate",sub:"con pollo desmechado encima",min:5,prep:1,soup:"🍅"}]},
+     {k:"c",r:"sopatomate",sub:"con pollo y papa cocida al lado",min:5,prep:1,soup:"🍅"}]},
 
  {dia:"Martes", lema:"Hoy hay hamburguesa. Esto no es una dieta triste.",
   m:[{k:"d",r:"wrapcoco",sub:"huevo, queso vegano, espinaca y aguacate",min:6},
      {k:"a",r:"hamburguesa",sub:"papas a la francesa al airfryer + guacamole",min:35},
-     {k:"c",r:"sopazanahoria",sub:"con pollo crispy encima",min:8,prep:1,soup:"🥕"}]},
+     {k:"c",r:"sopazanahoria",sub:"pollo crispy, papa y aguacate al lado",min:8,prep:1,soup:"🥕"}]},
 
  {dia:"Miércoles", lema:"Mitad de semana: salmón y omega 3 puro.",
   m:[{k:"d",r:"avenafresa",sub:"mantequilla de almendras",min:8},
@@ -799,7 +818,7 @@ const DIAS = [
  {dia:"Jueves", lema:"Noche de prep corto: dejas listo el fin de semana.",
   m:[{k:"d",r:"arepaarroz",sub:"huevo, hogao del prep y aguacate",min:8,prep:1},
      {k:"a",r:"tilapia",sub:"papa criolla al airfryer, ensalada y mango",min:24},
-     {k:"c",r:"sopaahuyama",sub:"la más sofisticada de las cinco",min:5,prep:1,soup:"🎃"}]},
+     {k:"c",r:"sopaahuyama",sub:"con pollo y arepa de arroz al lado",min:5,prep:1,soup:"🎃"}]},
 
  {dia:"Viernes", lema:"Loaded potato. Te lo ganaste.",
   m:[{k:"d",r:"pancakestrop",sub:"mango salteado y canela",min:12},
@@ -809,12 +828,12 @@ const DIAS = [
  {dia:"Sábado", lema:"Brunch sin afán. Hoy desayunas como en restaurante.",
   m:[{k:"d",r:"quesadilla",sub:"tomate, aguacate y fresas al lado",min:12},
      {k:"a",r:"bowlmedi",sub:"quinoa y verduras asadas",min:25,prep:1},
-     {k:"c",r:"sopatomate",sub:"la segunda porción del domingo pasado",min:5,prep:1,soup:"🍅"}]},
+     {k:"c",r:"sopatomate",sub:"la segunda porción, con papa al lado",min:5,prep:1,soup:"🍅"}]},
 
  {dia:"Domingo", lema:"Cierras la semana 1. Mañana ajustamos lo que no funcionó.",
   m:[{k:"d",r:"tostadas",sub:"huevo revuelto, aguacate y tomate",min:6},
      {k:"a",r:"carnepapas",sub:"papas a la francesa, guacamole y pico de gallo",min:30},
-     {k:"c",r:"sopazanahoria",sub:"la segunda porción",min:5,prep:1,soup:"🥕"}]}
+     {k:"c",r:"sopazanahoria",sub:"la segunda porción, con papa y aguacate",min:5,prep:1,soup:"🥕"}]}
 ];
 const KN = {d:"Desayuno", a:"Almuerzo", c:"Cena"};
 
@@ -856,7 +875,7 @@ const MERCADO = [
    ["Huevos","30 unidades","6 desayunos de 2 huevos + 2 claras"]]},
 
  {g:"Carbohidratos", e:"🥔", it:[
-   ["Papa","1,5 kg","francesas, loaded potato y la crema de puerro"],
+   ["Papa","2,5 kg","francesas, loaded potato, crema de puerro Y la guarnición de las cenas"],
    ["Papa criolla","300 g","el almuerzo del jueves · entera al airfryer"],
    ["Arroz blanco","500 g","bowls y sopa de pollo"],
    ["Quinoa","250 g","bowl mediterráneo del sábado"],
@@ -942,7 +961,8 @@ const PREPS = [
    ["85 min","Pico de gallo","Dura 2 días. Lo vuelves a hacer el jueves."],
    ["88 min","Hogao","Tomate y cebolla muy finos, 10 minutos al sartén. Dura 5 días, así que te alcanza para la arepa del jueves."],
    ["88 min","Lava y seca las hojas","Guárdalas en un tupper con papel de cocina abajo: aguantan 4 días crujientes."],
-   ["92 min","Deja las papas listas","Cortadas en bastón y sumergidas en agua fría en la nevera. Así el martes solo las secas y van al airfryer."]]},
+   ["92 min","Deja las papas listas","Cortadas en bastón y sumergidas en agua fría en la nevera. Así el martes solo las secas y van al airfryer."],
+   ["95 min","Cocina 1 kg de papa para las cenas","Enteras con cáscara, 20 minutos. Son la guarnición de las cinco sopas — sin ellas la cena se queda corta. Porciona en tuppers de 200 g."]]},
 
  {id:"p2", cuando:"por la noche", dow:4, t:"Prep corto", dur:"≈ 60 min",
   covers:"Cierra la semana: las dos sopas que faltan y todo lo del fin de semana. Los desayunos ya no necesitan prep — salen del paquete.",
@@ -982,9 +1002,9 @@ const LOGROS = [
 /* =========================================================
    ESTADO
    ========================================================= */
-const APP_VERSION = "2026-09-21 · 6";
+const APP_VERSION = "2026-09-24 · 7";
 const KEY = "liviana.v1";
-const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", aguaV2:1});
+const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", aguaV2:1, peso:[]});
 let S = DEF();
 try{ const raw = localStorage.getItem(KEY); if(raw) S = Object.assign(DEF(), JSON.parse(raw)); }catch(e){}
 /* El agua se contaba en vasos de 250 ml; ahora se cuenta en llenadas del termo. */
@@ -1142,7 +1162,9 @@ function renderHoy(){
   /* Si la fecha guardada no es la de hoy y todavía no has marcado nada,
      lo más probable es que hoy sea tu Día 1 de verdad. Un toque lo arregla. */
   const fix = $("#startFix"); fix.innerHTML = "";
-  if(S.start !== todayISO() && st.xp === 0){
+  /* Solo en los 2 primeros días: más allá de eso, una fecha de arranque en el pasado
+     es intencional y ofrecer "reiniciar a hoy" le borraría los días que lleva. */
+  if(S.start !== todayISO() && st.xp === 0 && hoyNum() <= 2){
     const n = el("div","note terra");
     n.innerHTML = "<b>¿Hoy es tu Día 1?</b> Tienes guardado que arrancaste el " + fechaDe(1) + ", pero no has marcado nada todavía.";
     const b = el("button","btn","Sí, arranqué hoy");
@@ -1154,6 +1176,15 @@ function renderHoy(){
     };
     n.appendChild(b);
     fix.appendChild(n);
+  }
+
+  /* Los primeros 9 días son la ventana de abstinencia de cafeína.
+     Verlo escrito el día que te sientes mal cambia cómo lo interpretas. */
+  if(cur <= 9){
+    const w = el("div","note terra");
+    w.innerHTML = "<b>Día " + cur + ": estás en la ventana de abstinencia.</b> Dejar el café produce dolor de cabeza, fatiga, irritabilidad y ánimo bajo. Empieza a las 12–24 h, hace pico entre las 20 y 51 h, y dura <b>de 2 a 9 días</b> (Johns Hopkins, 66 estudios). No es que el plan no esté funcionando, y no es falta de voluntad — es farmacología, y se acaba."
+      + (cur >= 3 ? " <b>Ya pasaste el pico.</b>" : "");
+    fix.appendChild(w);
   }
 
   const done = ["d","a","c"].filter(k => D.m[k]).length;
@@ -1270,6 +1301,27 @@ function renderPlan(){
     list.appendChild(card);
   });
 
+  $("#fueraBox").innerHTML =
+   '<p><b>Tu propio protocolo te lo permite.</b> LivianaMente dice: <i>«Evitar comidas por fuera: NO quiere decir, evitar todos los planes con amigos, pero intenta estar en ambientes que te ayuden a cumplir tu plan.»</i> Encerrarte 21 días no está en el plan y es la razón n.º 1 por la que la gente lo abandona.</p>'
+  +'<div class="rsect">Lo que casi siempre puedes pedir</div>'
+  +'<ul class="lst yes">'
+  +'<li><b>Carne, pollo o pescado a la plancha</b> — la opción más segura de cualquier carta</li>'
+  +'<li><b>Con papa, arroz blanco o patacón</b> · pide el arroz blanco, no el que viene con salsa</li>'
+  +'<li><b>Ensalada con aceite de oliva y limón aparte</b> · los aderezos de la casa casi siempre llevan lácteo, azúcar o soya</li>'
+  +'<li><b>Aguacate, guacamole, pico de gallo</b></li>'
+  +'<li><b>Sopas de verduras sin crema</b></li>'
+  +'<li><b>De tomar:</b> agua, agua con limón, soda, infusión de hierbas</li></ul>'
+  +'<div class="rsect">Lo que parece seguro y no lo es</div>'
+  +'<ul class="lst no">'
+  +'<li><b>Salsa de soya y teriyaki</b> — soja y casi siempre gluten</li>'
+  +'<li><b>Arepa y envueltos</b> — son de maíz</li>'
+  +'<li><b>Apanados y tempura</b> — harina de trigo</li>'
+  +'<li><b>Papa o yuca fritas del restaurante</b> — aceite compartido con apanados</li>'
+  +'<li><b>Aderezos «de la casa»</b> — el césar lleva lácteo, el de la casa casi siempre azúcar</li>'
+  +'<li><b>Sopas cremosas</b> — llevan leche o crema de leche</li></ul>'
+  +'<div class="note sage"><b>La frase que resuelve todo.</b> «Estoy en un plan médico: sin gluten, sin lácteos y sin salsas. ¿Me lo pueden hacer a la plancha con sal y aceite de oliva, y la ensalada con limón aparte?» Dicho así nadie discute, y no tienes que dar explicaciones toda la comida.</div>'
+  +'<div class="note"><b>Y si se rompe, se rompió.</b> Un plato fuera del plan no borra los días que llevas — solo significa que ese alimento entra a la lista de sospechosos y lo pruebas con calma en la reintroducción. Anótalo en el registro del día y sigue. Rendirte por una comida sí borra todo.</div>';
+
   const usados = new Set(); DIAS.forEach(d => d.m.forEach(m => usados.add(m.r)));
   const extras = Object.keys(R).filter(k => !usados.has(k));
   $("#recCnt").textContent = Object.keys(R).length + " recetas";
@@ -1384,6 +1436,8 @@ function renderYo(){
   $("#stXp").textContent = st.xp;
   $("#stPct").textContent = Math.round(Math.min(100, st.diasBuenos/META*100)) + "%";
 
+  renderPeso();
+
   /* --- gráfica de síntomas --- */
   const dias = Object.keys(S.d).map(Number).filter(n => Object.keys(S.d[n].sint||{}).length).sort((a,b)=>a-b);
   const svg = $("#symChart"), W = 320, H = 120;
@@ -1443,6 +1497,83 @@ function renderYo(){
 }
 
 /* =========================================================
+   PESO — el protocolo NO busca que bajes de peso.
+   Esto existe para vigilar que no pase, no para perseguir un número.
+   ========================================================= */
+function renderPeso(){
+  const box = $("#pesoBox"); box.innerHTML = "";
+  const L = (S.peso || []).slice().sort((a,b) => a.d < b.d ? -1 : 1);
+
+  const row = el("div","pesorow");
+  const f = el("div","f");
+  f.appendChild(el("label","fl","Peso de hoy (kg)"));
+  const inp = el("input","txt"); inp.type = "number"; inp.step = "0.1"; inp.min = "20"; inp.max = "200";
+  inp.placeholder = L.length ? String(L[L.length-1].kg) : "51.0";
+  inp.setAttribute("inputmode","decimal");
+  f.appendChild(inp); row.appendChild(f);
+  const add = el("button","btn","Guardar");
+  add.onclick = () => {
+    const v = parseFloat(String(inp.value).replace(",","."));
+    if(!(v > 20 && v < 200)){ toast("Escribe un peso válido"); return; }
+    S.peso = (S.peso || []).filter(x => x.d !== todayISO());
+    S.peso.push({d: todayISO(), kg: Math.round(v*10)/10});
+    save(); inp.value = ""; buzz(18); renderPeso(); toast("Anotado");
+  };
+  row.appendChild(add);
+  box.appendChild(row);
+
+  if(!L.length){
+    box.appendChild(el("div","infoblock",
+      "<p class='tiny'>Pésate <b>una vez por semana</b>, en ayunas y en las mismas condiciones. No todos los días: el peso oscila hasta un kilo por agua y no significa nada.</p>"
+      + "<p class='tiny'>Anota el primero hoy. Así, si algo se mueve, lo ves a tiempo y con números — no con susto.</p>"));
+    return;
+  }
+
+  const ini = L[0], act = L[L.length-1];
+  const dif = Math.round((act.kg - ini.kg) * 10) / 10;
+  const pct = ini.kg ? (dif / ini.kg) * 100 : 0;
+
+  const res = el("div","statgrid"); res.style.cssText = "padding:14px;margin:0";
+  [["Inicial", ini.kg.toFixed(1)], ["Hoy", act.kg.toFixed(1)],
+   ["Cambio", (dif > 0 ? "+" : "") + dif.toFixed(1)]].forEach(([lbl,v],i) => {
+    const st = el("div","stat");
+    const b = el("b", null, v); 
+    if(i === 2) b.style.color = dif <= -1 ? "var(--terra)" : dif >= 0 ? "var(--ok)" : "var(--gold)";
+    st.appendChild(b); st.appendChild(el("span", null, lbl + (i < 2 ? "<br>kg" : "<br>kg")));
+    res.appendChild(st);
+  });
+  box.appendChild(res);
+
+  if(pct <= -3){
+    box.appendChild(el("div","note terra",
+      "<b>Bajaste " + Math.abs(dif).toFixed(1) + " kg (" + Math.abs(pct).toFixed(1) + "%).</b> Esto <b>no</b> es lo que el plan busca — LivianaMente dice textual que no persigue restricción calórica. Escríbele hoy a la nutrióloga y cuéntale. Mientras tanto, súbele la guarnición a las cenas y no te saltes el postentreno."));
+  } else if(pct <= -1.5){
+    box.appendChild(el("div","note",
+      "<b>Vas " + Math.abs(dif).toFixed(1) + " kg abajo.</b> Todavía está dentro de lo que oscila un cuerpo normal, pero vale la pena vigilarlo. Asegúrate de que las cenas lleven su papa y de comerte los snacks si te da hambre."));
+  } else if(L.length > 1){
+    box.appendChild(el("div","note sage",
+      "<b>Tu peso está estable.</b> Que es exactamente lo que queremos: el objetivo del protocolo es bajar inflamación e identificar sensibilidades, no bajar de peso."));
+  }
+
+  const list = el("div","pesolist");
+  L.slice().reverse().forEach(x => {
+    const it = el("div","pesoitem");
+    const d = new Date(x.d + "T00:00:00");
+    it.appendChild(el("div","fch", d.toLocaleDateString("es-CO",{weekday:"short", day:"numeric", month:"short"})));
+    it.appendChild(el("div","kg", x.kg.toFixed(1) + " kg"));
+    const dd = Math.round((x.kg - ini.kg) * 10) / 10;
+    const tag = el("div","dif", x === ini ? "—" : (dd > 0 ? "+" : "") + dd.toFixed(1));
+    tag.style.color = dd <= -1 ? "var(--terra)" : dd >= 0 ? "var(--ok)" : "var(--muted)";
+    it.appendChild(tag);
+    const x2 = el("button","x","✕");
+    x2.onclick = () => { S.peso = S.peso.filter(y => y.d !== x.d); save(); renderPeso(); };
+    it.appendChild(x2);
+    list.appendChild(it);
+  });
+  box.appendChild(list);
+}
+
+/* =========================================================
    LOGROS
    ========================================================= */
 function checkLogros(){
@@ -1496,7 +1627,18 @@ $("#btnExport").onclick = () => {
   let t = "PROTOCOLO ANTIINFLAMATORIO · REGISTRO\n";
   if(S.name) t += S.name + "\n";
   t += "Día 1: " + fechaDe(1) + "\n";
-  t += "Días completos: " + st.diasBuenos + " de " + META + "\n\n";
+  t += "Días completos: " + st.diasBuenos + " de " + META + "\n";
+  const PL = (S.peso || []).slice().sort((a,b) => a.d < b.d ? -1 : 1);
+  if(PL.length){
+    t += "PESO: inicial " + PL[0].kg.toFixed(1) + " kg (" + PL[0].d + ")";
+    if(PL.length > 1){
+      const dd = PL[PL.length-1].kg - PL[0].kg;
+      t += " · actual " + PL[PL.length-1].kg.toFixed(1) + " kg (" + PL[PL.length-1].d + ")"
+         + " · cambio " + (dd > 0 ? "+" : "") + dd.toFixed(1) + " kg";
+    }
+    t += "\n";
+  }
+  t += "\n";
   Object.keys(S.d).map(Number).sort((a,b)=>a-b).forEach(n => {
     const D = S.d[n], p = ptsDia(n);
     const sn = SINT.filter(s => (D.sint||{})[s.id]).map(s => s.n + " " + D.sint[s.id] + "/5");
