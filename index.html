@@ -302,6 +302,13 @@ nav.tabs .dot.show{display:block}
 .faces{display:flex;gap:4px}
 .faces button{width:30px;height:30px;border-radius:9px;background:var(--surface-2);font-size:14px;display:grid;place-items:center;transition:.15s;border:1.5px solid transparent}
 .faces button.on{background:var(--sage-soft);border-color:var(--sage);transform:scale(1.08)}
+.fib{display:flex;align-items:center;gap:10px;padding:7px 0}
+.fib .d{font-size:13px;width:78px;flex:none;color:var(--text-2)}
+.fib .bar{flex:1;height:9px;border-radius:99px;background:var(--surface-3);overflow:hidden}
+.fib .bar i{display:block;height:100%;border-radius:99px;background:var(--sage)}
+.fib.low .bar i{background:var(--terra)}
+.fib .g{font-family:var(--fm);font-size:12px;width:44px;text-align:right;flex:none;font-weight:600}
+.fib.low .g{color:var(--terra)}
 .rein{display:flex;align-items:flex-start;gap:11px;padding:12px 14px;border-bottom:1px solid var(--line-soft)}
 .rein:last-child{border-bottom:none}
 .rein .e{font-size:20px;width:26px;flex:none;text-align:center;line-height:1.3}
@@ -412,6 +419,9 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
     <b>Tu nutrióloga dice:</b> «No es necesario cumplir las recetas por días estrictamente, puedes jugar con los días y comidas según tus antojos.» Si un día no te provoca, cámbialo por otro. Nada se rompe.
   </div>
   <div id="planList"></div>
+
+  <div class="sect"><h2>Fibra</h2><span class="cnt" id="fibCnt"></span></div>
+  <div class="card infoblock" id="fibBox"></div>
 
   <div class="sect"><h2>Fase 2 · Reintroducción</h2><span class="cnt" id="reinCnt"></span></div>
   <div class="card infoblock" id="reinInfo"></div>
@@ -587,7 +597,7 @@ avenafresa:{n:"Avena cremosa de fresa",min:8,rinde:"1 porción",
   pasos:["Cocina la avena con la leche de almendras, la canela y la sal, 5–7 minutos a fuego medio, revolviendo.",
     "Machaca la mitad de las fresas y agrégalas en el último minuto: tiñen la avena de rosado y la vuelven cremosa.",
     "Sirve con el resto de las fresas en trozos y la mantequilla de almendras encima."],
-  nota:"Versión de afán: deja la avena con la leche en un frasco en la nevera desde la noche anterior. Al otro día la comes fría o 40 segundos al microondas."},
+  nota:"Versión de afán: deja la avena con la leche en un frasco en la nevera desde la noche anterior. Al otro día la comes fría o 40 segundos al microondas. FIBRA: échale 1 cucharada de chía al cocinarla — son 4 g más de fibra, no cambia el sabor y el miércoles es uno de tus dos días flojos."},
 
 /* ====================== ALMUERZOS ====================== */
 bowlmex:{n:"Bowl mexicano de pollo",min:18,rinde:"1 porción",
@@ -1036,7 +1046,7 @@ const LOGROS = [
 /* =========================================================
    ESTADO
    ========================================================= */
-const APP_VERSION = "2026-09-24 · 8";
+const APP_VERSION = "2026-09-24 · 9";
 const KEY = "liviana.v1";
 const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", aguaV2:1, peso:[]});
 let S = DEF();
@@ -1335,6 +1345,7 @@ function renderPlan(){
     list.appendChild(card);
   });
 
+  renderFibra();
   renderReintro();
 
   $("#fueraBox").innerHTML =
@@ -1376,6 +1387,63 @@ function renderPlan(){
     card.appendChild(row);
   });
   rl.appendChild(card);
+}
+
+/* Fibra estimada por día del menú actual. Meta: 25 g/día para mujeres. */
+const FIBRA = [["Lunes",31.0],["Martes",31.1],["Miércoles",23.9],["Jueves",19.7],
+               ["Viernes",28.4],["Sábado",30.9],["Domingo",31.9]];
+const META_FIBRA = 25;
+
+function renderFibra(){
+  const prom = FIBRA.reduce((a,x) => a + x[1], 0) / FIBRA.length;
+  $("#fibCnt").textContent = prom.toFixed(0) + " g promedio";
+  const box = $("#fibBox"); box.innerHTML = "";
+
+  box.appendChild(el("p", null,
+    "<b>Vas bien.</b> Tu promedio es <b>" + prom.toFixed(0) + " g al día</b> y la meta para mujeres es 25 g. "
+    + "La fibra aquí no es un consejo genérico: es el mecanismo. Tus bacterias la fermentan y producen "
+    + "<b>butirato</b>, que es el combustible de las células del intestino y lo que sella las uniones de la pared. "
+    + "Es literalmente lo que repara lo que estás tratando de reparar."));
+
+  const wrap = el("div"); wrap.style.margin = "14px 0 4px";
+  FIBRA.forEach(([d,v]) => {
+    const r = el("div","fib" + (v < META_FIBRA ? " low" : ""));
+    r.appendChild(el("div","d", d));
+    const bar = el("div","bar"); const i = el("i"); i.style.width = Math.min(100, v/35*100) + "%";
+    bar.appendChild(i); r.appendChild(bar);
+    r.appendChild(el("div","g", v.toFixed(0) + " g"));
+    wrap.appendChild(r);
+  });
+  box.appendChild(wrap);
+
+  box.appendChild(el("div","note",
+    "<b>Miércoles y jueves se quedan cortos.</b> El jueves es el más flojo: la ahuyama tiene poca fibra "
+    + "y ese día llevas dos arepas de arroz, que casi no aportan."));
+
+  box.appendChild(el("div","rsect","Tres arreglos sin riesgo"));
+  const ul = el("ul","lst yes");
+  [["1 cda de chía en la avena del miércoles","+4 g · ya la tienes en la despensa, no cambia el sabor"],
+   ["1 cda de linaza molida sobre el huevo o la sopa","+3 g · también la tienes, para las arepas de yuca"],
+   ["La papa SIEMPRE con cáscara","la fibra de la papa está casi toda ahí, y la pelas por costumbre"]
+  ].forEach(([a,b2]) => ul.appendChild(el("li", null, "<b>" + a + "</b><br><span style='color:var(--muted)'>" + b2 + "</span>")));
+  box.appendChild(ul);
+
+  box.appendChild(el("div","rsect","Dos que hay que preguntar primero"));
+  const ul2 = el("ul","lst");
+  ul2.style.cssText = "padding-left:0";
+  [["Lentejas, garbanzo o fríjol","El protocolo los permite y son la fibra más potente que existe: una taza de lentejas son +14 g. Pero producen gas, y en plena eliminación podrías confundir esa hinchazón con «el plan no funciona»."],
+   ["Arroz integral en vez de blanco","Sube +2,8 g por porción. Pero tu Mod1 dice «arroz blanco» a propósito: el blanco es más fácil de digerir mientras el intestino está irritado. No lo cambies por tu cuenta."]
+  ].forEach(([a,b2]) => {
+    const li = el("li"); li.style.cssText = "padding-left:17px;position:relative;font-size:13px;padding-top:6px;padding-bottom:6px;line-height:1.45";
+    li.innerHTML = "<span style='position:absolute;left:0;top:7px;color:var(--gold)'>?</span><b>" + a + "</b><br><span style='color:var(--muted)'>" + b2 + "</span>";
+    ul2.appendChild(li);
+  });
+  box.appendChild(ul2);
+
+  box.appendChild(el("div","note terra",
+    "<b>Y sube despacio.</b> Lo recomendado es <b>3 a 5 g cada dos o tres días</b>, no de golpe, y con agua. "
+    + "Si la subes rápido te da gas e hinchazón — justo los síntomas que estás tratando de medir. "
+    + "En estas tres semanas más fibra NO es automáticamente mejor: lo que buscas es un fondo silencioso."));
 }
 
 function renderReintro(){
