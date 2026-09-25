@@ -302,6 +302,13 @@ nav.tabs .dot.show{display:block}
 .faces{display:flex;gap:4px}
 .faces button{width:30px;height:30px;border-radius:9px;background:var(--surface-2);font-size:14px;display:grid;place-items:center;transition:.15s;border:1.5px solid transparent}
 .faces button.on{background:var(--sage-soft);border-color:var(--sage);transform:scale(1.08)}
+.semsel{display:flex;gap:6px;margin-bottom:12px}
+.semsel button{
+  flex:1;padding:9px 4px;border-radius:11px;background:var(--surface-2);border:1.5px solid transparent;
+  font-size:12.5px;font-weight:700;color:var(--muted);line-height:1.25;
+}
+.semsel button.on{background:var(--sage-soft);border-color:var(--sage);color:var(--sage)}
+.semsel button small{display:block;font-size:10px;font-weight:500;opacity:.85;margin-top:1px}
 .fib{display:flex;align-items:center;gap:10px;padding:7px 0}
 .fib .d{font-size:13px;width:78px;flex:none;color:var(--text-2)}
 .fib .bar{flex:1;height:9px;border-radius:99px;background:var(--surface-3);overflow:hidden}
@@ -414,7 +421,7 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
 
 <!-- ============ PLAN ============ -->
 <section class="view" id="v-plan">
-  <div class="sect"><h2>Los 7 días</h2><span class="cnt">toca una comida</span></div>
+  <div class="sect"><h2>Los 21 días</h2><span class="cnt">toca una comida</span></div>
   <div class="note sage" style="margin-bottom:14px">
     <b>Tu nutrióloga dice:</b> «No es necesario cumplir las recetas por días estrictamente, puedes jugar con los días y comidas según tus antojos.» Si un día no te provoca, cámbialo por otro. Nada se rompe.
   </div>
@@ -436,7 +443,7 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
 
 <!-- ============ MERCADO ============ -->
 <section class="view" id="v-mercado">
-  <div class="sect"><h2>Mercado de la semana</h2><span class="act" id="clearMkt">Reiniciar</span></div>
+  <div class="sect"><h2>Mercado</h2><span class="act" id="clearMkt">Reiniciar</span></div>
   <div class="hero" style="padding:15px;margin-bottom:16px">
     <div class="hero-bar" style="margin-top:0">
       <div class="lbl"><span>Carrito</span><span id="mktLbl">0 / 0</span></div>
@@ -457,7 +464,7 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
 
 <!-- ============ PREP ============ -->
 <section class="view" id="v-prep">
-  <div class="sect"><h2>Meal prep</h2><span class="cnt">2 sesiones, 7 días resueltos</span></div>
+  <div class="sect"><h2>Meal prep</h2><span class="cnt">2 sesiones por semana</span></div>
   <div class="note sage" style="margin-bottom:14px">
     <b>La idea:</b> cocinas dos veces en la semana y el resto son 10 minutos de ensamblar. Los almuerzos salen del tupper directo al trabajo; las cenas son sartén o airfryer y nada más.
   </div>
@@ -584,7 +591,7 @@ tostadas:{n:"Tostadas de pan de arroz",min:6,rinde:"1 porción",
     "Encima el huevo y el tomate en rodajas. Pimienta y ya."],
   nota:"Esto es literalmente el desayuno n.º 2 del Mod1: «2 huevos revueltos + 2 claras + 3 tajadas de pan de arroz o de quinoa sin gluten». Tu nutrióloga ya lo tenía escrito."},
 
-omelette:{n:"Omelette verde",min:9,rinde:"1 porción",extra:1,
+omelette:{n:"Omelette verde",min:9,rinde:"1 porción",
   ing:[["2","huevos"],["2","claras"],["50 g","espinaca"],["80 g","tomate"],["50–70 g","aguacate"],["1 cdta","aceite de oliva"],["","sal y pimienta"]],
   pasos:["Bate los huevos con las claras, sal y pimienta hasta que hagan burbujas.",
     "Saltea la espinaca y el tomate 1–2 minutos en el sartén.",
@@ -799,14 +806,14 @@ muffins:{n:"Muffins de huevo para emergencias",min:25,rinde:"6 muffins",extra:1,
     "Hornea 12–15 minutos hasta que estén firmes. Deja reposar y desmolda."],
   nota:"Del Recetario Práctico. Duran 4 días y se comen fríos. Para el día que te quedaste dormida: dos muffins y fruta, y saliste."},
 
-chia:{n:"Pudín de chía",min:5,rinde:"1 porción · +4 h de nevera",extra:1,
+chia:{n:"Pudín de chía",min:5,rinde:"1 porción · +4 h de nevera",
   ing:[["2 cdas","chía (20 g)"],["200 ml","leche de almendras sin azúcar"],["3 cdas","yogurt de coco sin azúcar"],["","fruta para servir"]],
   pasos:["Mezcla la chía, la leche y el yogurt de coco. Revuelve MUY bien y vuelve a revolver a los 5 minutos para que no se apelmace.",
     "Refrigera 4 horas o toda la noche.",
     "Sirve con fruta."],
   nota:"El Recetario original lleva yogurt griego; lo cambié por yogurt de coco porque los lácteos están eliminados. Es snack, no desayuno completo."},
 
-hamburguesaspollo:{n:"Hamburguesas de pollo",min:18,rinde:"2 hamburguesas",extra:1,
+hamburguesaspollo:{n:"Hamburguesas de pollo",min:18,rinde:"2 hamburguesas",
   ing:[["250 g","pollo molido"],["1","huevo"],["3 cdas","harina de almendras"],["¼","cebolla rallada"],["1 cda","perejil picado"],["1 cdta","ajo en polvo"],["1 cdta","aceite de oliva"],["","sal y pimienta"]],
   pasos:["Combina el pollo, el huevo, la harina de almendras, la cebolla, el perejil, el ajo, sal y pimienta.",
     "Divide en 2 y forma las hamburguesas. Hueco con el pulgar en el centro para que no se inflen.",
@@ -821,11 +828,254 @@ pizza:{n:"Pizza funcional",min:20,rinde:"1 pizza",extra:1,
     "Voltea y añade los toppings.",
     "Tapa y cocina 4–6 minutos a fuego bajo.",
     "Finaliza con rúgula y un hilo de aceite."],
-  nota:"Tu antojo del fin de semana, dentro del protocolo. El original ofrece yogur de coco o griego y queso vegano o mozzarella: quédate con las versiones veganas."}
+  nota:"Tu antojo del fin de semana, dentro del protocolo. El original ofrece yogur de coco o griego y queso vegano o mozzarella: quédate con las versiones veganas."},
+
+
+/* ========== SEMANA 2 · DESAYUNOS ========== */
+avenaarandanos:{n:"Avena con arándanos y chía",min:8,rinde:"1 porción",
+  ing:[["60 g","avena certificada sin gluten"],["200 ml","leche de almendras sin azúcar"],["1 cda","chía"],["90 g","arándanos"],["15 g","mantequilla de almendras"],["","canela y 1 pizca de sal"]],
+  pasos:["Cocina la avena con la leche, la chía, la canela y la sal, 5–7 minutos revolviendo.",
+    "La chía espesa al final: si queda muy densa, un chorrito más de leche.",
+    "Sirve con los arándanos encima y la mantequilla de almendras."],
+  nota:"La cucharada de chía son 4 g más de fibra sin cambiar el sabor. Se puede dejar lista la noche anterior en un frasco."},
+
+wrapchampinon:{n:"Wrap de huevo y champiñones",min:7,rinde:"1 porción",
+  ing:[["1","tortilla de harina de coco"],["2","huevos"],["2","claras"],["60 g","champiñones en láminas"],["1 puñado","espinaca"],["50 g","aguacate"],["1 cdta","ghee"],["","sal, pimienta y tomillo"]],
+  pasos:["Saltea los champiñones a fuego alto 3 minutos, SIN sal al principio: la sal les saca el agua y se cocinan al vapor en vez de dorarse.",
+    "Sala al final, agrega la espinaca 30 segundos y retira.",
+    "Baja el fuego, echa el huevo batido y revuelve lento 2 minutos.",
+    "Calienta la tortilla 30 segundos por lado, rellena con todo y el aguacate, y enrolla."]},
+
+arepaaguacate:{n:"Arepa de arroz con aguacate y huevo",min:8,rinde:"1 porción",
+  ing:[["1","arepa de arroz"],["2","huevos"],["2","claras"],["70 g","aguacate"],["80 g","tomate"],["1 cdta","ghee o AOVE"],["","limón, sal y pimienta"]],
+  pasos:["Arepa al airfryer, 180 °C por 3–4 minutos.",
+    "Huevos revueltos a fuego medio-bajo mientras tanto.",
+    "Machaca el aguacate con limón y sal y úntalo sobre la arepa caliente.",
+    "Encima el huevo y el tomate en rodajas."]},
+
+chiamango:{n:"Pudín de chía con mango",min:5,rinde:"1 porción · se deja la noche antes",
+  ing:[["3 cdas","chía (30 g)"],["250 ml","leche de almendras sin azúcar"],["150 g","mango"],["15 g","almendras picadas"],["","canela"]],
+  pasos:["Mezcla la chía con la leche y la canela. Revuelve MUY bien y vuelve a revolver a los 5 minutos para que no se apelmace.",
+    "A la nevera toda la noche.",
+    "En la mañana corona con el mango en cubos y las almendras."],
+  nota:"El desayuno más rápido de las tres semanas: en la mañana son 30 segundos. Y 30 g de chía son 10 g de fibra."},
+
+/* ========== SEMANA 2 · ALMUERZOS ========== */
+bowlcurry:{n:"Bowl de pollo al curry con quinoa",min:20,rinde:"1 porción",
+  ing:[["120 g","pechuga de pollo en cubos"],["200 g","quinoa cocida"],["150 g","verduras asadas del prep"],["30 g","aguacate"],["1 cdta","cúrcuma"],["½ cdta","comino"],["1 trocito","jengibre rallado"],["5 g","AOVE"],["2 cdas","leche de coco"],["","sal, pimienta y cilantro"]],
+  pasos:["Sazona el pollo con cúrcuma, comino, sal y pimienta.",
+    "Sartén caliente con el aceite. Dora el pollo sin moverlo 3 minutos, luego revuelve 3 más.",
+    "Agrega el jengibre 30 segundos y la leche de coco. Deja 2 minutos hasta que espese.",
+    "Monta sobre la quinoa con las verduras asadas y el aguacate. Cilantro encima."],
+  nota:"La pimienta negra multiplica la absorción de la cúrcuma. No la dejes por fuera."},
+
+albondigas:{n:"Albóndigas de res con arroz",min:25,rinde:"1 porción",
+  ing:[["120 g","carne molida magra"],["1","huevo pequeño"],["2 cdas","harina de almendras"],["¼","cebolla rallada"],["200 g","arroz cocido"],["200 g","tomate"],["1 diente","ajo"],["5 g","AOVE"],["","orégano, sal, pimienta y perejil"]],
+  pasos:["Mezcla la carne con el huevo, la harina de almendras, la cebolla, sal y pimienta. Forma bolitas del tamaño de una nuez.",
+    "Dóralas en el sartén con el aceite, 6–7 minutos girándolas. Retíralas.",
+    "En el mismo sartén sofríe el ajo 30 segundos y agrega el tomate picado y el orégano.",
+    "Cocina 8 minutos hasta que se deshaga, devuelve las albóndigas y deja 3 minutos más.",
+    "Sirve sobre el arroz con perejil."],
+  nota:"Haz doble tanda y congela crudas: son almuerzo de emergencia para cualquier día."},
+
+salmonauyama:{n:"Salmón con puré de ahuyama",min:22,rinde:"1 porción",
+  ing:[["120 g","salmón"],["280 g","ahuyama"],["150 g","ensalada de hojas y tomate"],["5 g","AOVE"],["1 cdta","ghee"],["","nuez moscada, sal, pimienta y limón"]],
+  pasos:["Cocina la ahuyama en trozos, 15 minutos, hasta que un cuchillo entre sin resistencia.",
+    "Escúrrela muy bien y déjala 1 minuto en la olla caliente para que se seque: si queda agua, el puré queda aguado.",
+    "Machaca con tenedor, agrega el ghee, sal, pimienta y una pizca de nuez moscada.",
+    "Salmón al airfryer a 200 °C, 8–10 minutos. En el centro debe quedar apenas rosado.",
+    "Sirve con la ensalada y limón."]},
+
+tilapiayuca:{n:"Tilapia con yuca al airfryer",min:26,rinde:"1 porción",
+  ing:[["120 g","filete de tilapia"],["250 g","yuca"],["150 g","ensalada"],["150 g","mango"],["5 g","AOVE"],["","paprika, ajo en polvo, limón y sal"]],
+  pasos:["Cocina la yuca en agua con sal 18–20 minutos. Escúrrela y RETIRA LA VENA del centro.",
+    "Córtala en bastones, mézclalos con la mitad del aceite y sal, y al airfryer 200 °C por 12–15 minutos.",
+    "Seca bien la tilapia, sazónala con paprika, ajo y limón.",
+    "Airfryer a 190 °C, 8–10 minutos.",
+    "Sirve con la ensalada y el mango."],
+  nota:"La yuca cocida se congela perfecto. Cocina el doble en el prep y tienes para dos almuerzos."},
+
+arepapollo:{n:"Arepa rellena de pollo desmechado",min:12,rinde:"1 porción",
+  ing:[["2","arepas de arroz"],["120 g","pollo desmechado del prep"],["70 g","aguacate"],["3 cdas","hogao del prep"],["150 g","ensalada"],["","cilantro, limón, sal y pimienta"]],
+  pasos:["Calienta las arepas al airfryer, 180 °C por 4 minutos.",
+    "Calienta el pollo con el hogao y un poco de caldo para que no quede seco.",
+    "Ábrelas por la mitad y rellena con el pollo, el aguacate y cilantro.",
+    "Ensalada al lado con limón."],
+  nota:"Doce minutos y sale del tupper. Es el almuerzo más fácil de las tres semanas."},
+
+bowlgarbanzos:{n:"Bowl de garbanzos con pollo",min:18,rinde:"1 porción",
+  ing:[["120 g","pechuga de pollo"],["150 g","garbanzos cocidos"],["150 g","verduras asadas"],["30 g","aguacate"],["1 cda","ajonjolí o tahini"],["5 g","AOVE"],["","limón, comino, sal, pimienta y perejil"]],
+  pasos:["Sazona el pollo con comino, sal y pimienta y hazlo a la plancha, 5 minutos por lado. Reposa 3 minutos antes de cortar.",
+    "Saltea los garbanzos 4 minutos con un poco de aceite hasta que se doren un poco por fuera.",
+    "Monta el bowl con las verduras, el pollo en tiras y el aguacate.",
+    "Aliña con tahini o ajonjolí, limón y perejil."],
+  nota:"Los garbanzos son la fibra más potente del plan: 150 g son 11 g. Si nunca los comes, arranca con media porción — producen gas si el cambio es brusco."},
+
+carneasada:{n:"Carne asada con papa criolla",min:22,rinde:"1 porción",
+  ing:[["120 g","lomo o punta de anca"],["250 g","papa criolla"],["150 g","ensalada"],["5 g","AOVE"],["","ajo, romero, sal, pimienta y limón"]],
+  pasos:["Saca la carne de la nevera 15 minutos antes y sécala con papel.",
+    "Papas criollas enteras con aceite y sal, airfryer 200 °C por 18–20 minutos.",
+    "Sartén MUY caliente. Sella la carne 3–4 minutos por lado sin moverla.",
+    "Retira, salpimienta, agrega el romero y déjala reposar 5 minutos.",
+    "Córtala CONTRA la fibra y sirve con las papas y la ensalada."]},
+
+/* ========== SEMANA 2 · CENAS ========== */
+sopacalabacin:{n:"Crema de calabacín y albahaca",min:28,rinde:"2 porciones",soup:1,
+  ing:[["200 g","papa cocida del prep, AL LADO"],["240 g","pollo cocido"],["500 g","calabacín"],["80 g","cebolla"],["1 diente","ajo"],["500 ml","caldo"],["10 hojas","albahaca fresca"],["10 g","AOVE"],["","sal, pimienta y limón"]],
+  pasos:["Sofríe la cebolla y el ajo con el aceite, 4 minutos sin dorar.",
+    "Agrega el calabacín en rodajas y el caldo. Cocina 15 minutos.",
+    "Licúa con la albahaca FUERA del fuego: el calor le mata el aroma.",
+    "Termina con limón, sal y pimienta.",
+    "Sirve con 120 g de pollo encima y la papa al lado."],
+  nota:"Verde y fresca. Rinde dos cenas: lunes y sábado."},
+
+sopabatata:{n:"Crema de batata y jengibre",min:32,rinde:"2 porciones",soup:1,
+  ing:[["1","arepa de arroz, AL LADO"],["240 g","pollo cocido"],["500 g","batata (camote)"],["80 g","cebolla"],["10 g","jengibre"],["½ cdta","cúrcuma"],["500 ml","caldo"],["10 g","AOVE"],["","sal, pimienta y cilantro"]],
+  pasos:["Rostiza la batata en trozos a 190 °C por 20 minutos: así se concentra su dulzor.",
+    "Sofríe la cebolla y el jengibre rallado con el aceite, 4 minutos.",
+    "Agrega la batata, la cúrcuma y el caldo. Cocina 5 minutos.",
+    "Licúa hasta que quede lisa. Sal, pimienta y cilantro.",
+    "Sirve con el pollo encima y la arepa al lado."],
+  nota:"Dulce y especiada. Rinde martes y domingo."},
+
+sopalentejas:{n:"Sopa de lentejas con carne",min:40,rinde:"2 porciones",soup:1,
+  ing:[["240 g","carne de res magra en cubos"],["200 g","lentejas crudas"],["150 g","zanahoria"],["100 g","papa"],["80 g","cebolla"],["2 dientes","ajo"],["1 litro","caldo"],["10 g","AOVE"],["","comino, laurel, sal, pimienta y cilantro"]],
+  pasos:["Sella la carne en cubos con el aceite, 4 minutos. Retírala.",
+    "Sofríe la cebolla y el ajo, agrega la zanahoria y la papa en cubos.",
+    "Devuelve la carne, agrega las lentejas enjuagadas, el caldo, el comino y el laurel.",
+    "Cocina 30 minutos a fuego bajo hasta que las lentejas estén blandas.",
+    "Saca el laurel y termina con cilantro."],
+  nota:"Esta NO necesita guarnición: ya trae su carbohidrato y su proteína. Y es la comida con más fibra de las tres semanas — 200 g de lentejas son 16 g."},
+
+cazuelapescado:{n:"Cazuela de pescado con papa",min:30,rinde:"2 porciones",soup:1,
+  ing:[["300 g","filete de tilapia o pescado blanco"],["400 g","papa en cubos"],["150 g","zanahoria"],["80 g","cebolla"],["100 g","tomate"],["2 dientes","ajo"],["700 ml","caldo"],["10 g","AOVE"],["","cúrcuma, comino, cilantro, limón y sal"]],
+  pasos:["Sofríe la cebolla, el ajo y el tomate con el aceite hasta que se deshaga, 6 minutos.",
+    "Agrega la papa, la zanahoria, la cúrcuma, el comino y el caldo. Cocina 15 minutos.",
+    "Corta el pescado en trozos grandes y agrégalo AL FINAL, 5 minutos. Si lo metes antes, se deshace.",
+    "Apaga, tapa 3 minutos y termina con cilantro y limón."],
+  nota:"La única cena con pescado. Ya trae su papa, no necesita guarnición."},
+
+sopaespinaca:{n:"Crema de espinaca y puerro",min:28,rinde:"2 porciones",soup:1,
+  ing:[["200 g","papa cocida del prep, AL LADO"],["240 g","pollo cocido"],["300 g","espinaca"],["150 g","puerro"],["200 g","papa"],["500 ml","caldo"],["10 g","AOVE"],["","nuez moscada, sal, pimienta y limón"]],
+  pasos:["Lava muy bien el puerro: entre las capas se esconde tierra. Usa solo la parte blanca.",
+    "Sofríe el puerro con el aceite 6 minutos, sin dorar.",
+    "Agrega la papa en cubos y el caldo. Cocina 18 minutos.",
+    "Echa la espinaca y apaga de inmediato: con el calor residual se ablanda y conserva el color verde.",
+    "Licúa. Nuez moscada, sal, pimienta y limón.",
+    "Sirve con el pollo y la papa al lado."],
+  nota:"Si hierves la espinaca se pone café y pierde la gracia. Va al final, con el fuego apagado."},
+
+
+/* ========== SEMANA 3 · DESAYUNOS ========== */
+huevoshogao:{n:"Huevos revueltos con hogao",min:8,rinde:"1 porción",
+  ing:[["2","huevos"],["2","claras"],["1","arepa de arroz"],["3 cdas","hogao del prep"],["50 g","aguacate"],["1 cdta","ghee"],["","sal y pimienta"]],
+  pasos:["Arepa al airfryer, 180 °C por 4 minutos.",
+    "Huevos revueltos a fuego medio-bajo, retirándolos cuando todavía se vean brillantes.",
+    "Calienta el hogao 40 segundos.",
+    "Sirve el hogao sobre el huevo, con la arepa y el aguacate."]},
+
+avenamanzana:{n:"Avena con manzana y canela",min:9,rinde:"1 porción",
+  ing:[["60 g","avena certificada sin gluten"],["200 ml","leche de almendras sin azúcar"],["1","manzana"],["1 cda","linaza molida"],["15 g","mantequilla de almendras"],["","canela y 1 pizca de sal"]],
+  pasos:["Ralla media manzana y échala a cocinar CON la avena, la leche, la canela y la sal: se deshace y endulza todo sin agregar nada.",
+    "Cocina 6–7 minutos revolviendo.",
+    "Fuera del fuego agrega la linaza — si la hierves pierde sus grasas buenas.",
+    "Corona con la otra media manzana en cubos y la mantequilla de almendras."],
+  nota:"La manzana rallada dentro es el truco: queda dulce de verdad sin una pizca de azúcar."},
+
+tostadasajonjoli:{n:"Tostadas de aguacate y ajonjolí",min:6,rinde:"1 porción",
+  ing:[["3 tajadas","pan de arroz"],["2","huevos"],["2","claras"],["70 g","aguacate"],["1 cda","ajonjolí tostado"],["80 g","tomate cherry"],["1 cdta","ghee"],["","limón, sal y pimienta"]],
+  pasos:["Pan a la tostadora mientras haces el huevo.",
+    "Huevos revueltos a fuego medio-bajo.",
+    "Machaca el aguacate con limón y sal y úntalo sobre el pan.",
+    "Encima el huevo, los cherries partidos y el ajonjolí."]},
+
+/* ========== SEMANA 3 · ALMUERZOS ========== */
+tilapiapure:{n:"Tilapia con puré de papa",min:24,rinde:"1 porción",
+  ing:[["120 g","filete de tilapia"],["280 g","papa"],["150 g","ensalada"],["150 g","mango"],["4 cdas","caldo caliente"],["5 g","AOVE"],["1 cdta","ghee"],["","paprika, limón, sal y pimienta"]],
+  pasos:["Cocina la papa pelada hasta que esté muy blanda, 20 minutos.",
+    "Escúrrela y déjala 1 minuto en la olla caliente para que se seque.",
+    "Machaca con tenedor — NUNCA en licuadora, se vuelve engrudo. Agrega el caldo caliente poco a poco y el ghee.",
+    "Tilapia seca con papel, sazonada con paprika y limón, al airfryer 190 °C por 8–10 minutos.",
+    "Sirve con la ensalada y el mango."]},
+
+batatarellena:{n:"Batata rellena de carne molida",min:45,rinde:"1 porción",
+  ing:[["300 g","batata (camote)"],["120 g","carne molida magra"],["70 g","aguacate"],["100 g","tomate"],["40 g","cebolla"],["1 diente","ajo"],["5 g","AOVE"],["","comino, paprika, cilantro, limón, sal y pimienta"]],
+  pasos:["Batata entera con cáscara al horno o airfryer, 200 °C por 35–40 minutos, hasta que esté muy blanda.",
+    "Sofríe la cebolla y el ajo, sube el fuego y echa la carne. Déjala quieta 2 minutos antes de desbaratarla, para que dore.",
+    "Agrega comino y paprika y cocina 6 minutos más.",
+    "Abre la batata por la mitad sin separarla y afloja la pulpa con el tenedor.",
+    "Rellena con la carne, el aguacate y el pico de gallo. Cilantro y limón encima."],
+  nota:"La versión de la loaded potato que te gustó, pero con batata: más dulce y más fibra. Si dejas la batata cocida del prep, son 12 minutos."},
+
+bowlfrijoles:{n:"Bowl de fríjoles con pollo",min:18,rinde:"1 porción",
+  ing:[["120 g","pechuga de pollo"],["150 g","fríjoles cocidos"],["200 g","arroz cocido"],["70 g","aguacate"],["100 g","tomate"],["40 g","cebolla"],["5 g","AOVE"],["","comino, paprika, cilantro, limón y sal"]],
+  pasos:["Corta el pollo en cubos, sazona con paprika, comino y sal, y dóralo 6 minutos en total.",
+    "Calienta los fríjoles con un poco de su caldo.",
+    "Monta sobre el arroz: los fríjoles, el pollo, el aguacate, el tomate y la cebolla.",
+    "Cilantro y limón al servir."],
+  nota:"Arroz con fríjoles: la combinación de toda la vida, y resulta que juntos dan proteína completa. 150 g de fríjoles son 10 g de fibra."},
+
+pollolimonpapa:{n:"Pollo al limón con papa criolla",min:22,rinde:"1 porción",
+  ing:[["120 g","pechuga de pollo en filetes"],["250 g","papa criolla"],["150 g","ensalada"],["1","limón (jugo y ralladura)"],["1 diente","ajo picado"],["5 g","AOVE"],["2 cdas","caldo"],["","orégano, sal y pimienta"]],
+  pasos:["Papas criollas enteras con aceite y sal, airfryer 200 °C por 18–20 minutos.",
+    "Sazona el pollo y dóralo 4 minutos por lado. Retíralo.",
+    "Saltea el ajo 30 segundos — que no se queme o amarga todo.",
+    "Agrega el jugo de limón, la ralladura y el caldo, y raspa el fondo del sartén: ahí está el sabor.",
+    "Devuelve el pollo y deja 3 minutos hasta que la salsa espese."]},
+
+/* ========== SEMANA 3 · CENAS ========== */
+ajiaco:{n:"Ajiaco ligero de pollo",min:45,rinde:"2 porciones",soup:1,
+  ing:[["300 g","pechuga de pollo"],["400 g","papa sabanera o pastusa"],["300 g","papa criolla"],["80 g","cebolla larga"],["2 dientes","ajo"],["1,2 litros","caldo o agua"],["1 cda","guascas secas"],["1","mazorca — OMITIR, el maíz está eliminado"],["","cilantro, alcaparras, sal y pimienta"]],
+  pasos:["Pon el pollo con la cebolla larga, el ajo y el caldo. Cocina 25 minutos.",
+    "Saca el pollo y desméchalo.",
+    "Agrega la papa pastusa en rodajas finas: esa es la que se deshace y espesa el ajiaco. Cocina 15 minutos.",
+    "Agrega la papa criolla entera y las guascas. Cocina 12 minutos más.",
+    "Devuelve el pollo. Cilantro y alcaparras al servir."],
+  nota:"El ajiaco de verdad lleva mazorca y crema de leche: el maíz y los lácteos están eliminados, así que van fuera. Las guascas y las dos papas hacen todo el trabajo. Ya trae su carbohidrato."},
+
+sopaapio:{n:"Crema de apio y manzana verde",min:28,rinde:"2 porciones",soup:1,
+  ing:[["200 g","papa cocida del prep, AL LADO"],["240 g","pollo cocido"],["300 g","apio"],["1","manzana verde"],["200 g","papa"],["80 g","cebolla"],["500 ml","caldo"],["10 g","AOVE"],["","tomillo, sal, pimienta y limón"]],
+  pasos:["Sofríe la cebolla con el aceite 4 minutos.",
+    "Agrega el apio en trozos, la manzana pelada en cubos, la papa y el caldo.",
+    "Cocina 20 minutos con el tomillo.",
+    "Licúa hasta que quede lisa. Sal, pimienta y limón.",
+    "Sirve con el pollo encima y la papa al lado."],
+  nota:"La manzana verde le quita el amargo al apio y le da un fondo dulce. Suena raro y funciona."},
+
+sopapimenton:{n:"Crema de pimentón rostizado",min:40,rinde:"2 porciones",soup:1,
+  ing:[["200 g","arroz cocido, AL LADO"],["240 g","pollo cocido"],["4","pimentones rojos"],["100 g","cebolla"],["2 dientes","ajo"],["150 g","papa"],["500 ml","caldo"],["10 g","AOVE"],["","paprika ahumada, sal, pimienta y albahaca"]],
+  pasos:["Pimentones enteros al horno a 200 °C por 25 minutos, hasta que la piel se ampolle y se queme un poco.",
+    "Mételos en un recipiente tapado 10 minutos: el vapor despega la piel sola. Pélalos y quita las semillas.",
+    "Sofríe la cebolla y el ajo, agrega la papa y el caldo, cocina 15 minutos.",
+    "Licúa con los pimentones y la paprika ahumada.",
+    "Sirve con el pollo, albahaca y el arroz al lado."],
+  nota:"Los 25 minutos de horno son lo que la convierte en otra cosa. Es dulce sin llevar nada de azúcar."},
+
+sopagarbanzos:{n:"Sopa de garbanzos con pollo",min:35,rinde:"2 porciones",soup:1,
+  ing:[["240 g","pollo cocido desmechado"],["300 g","garbanzos cocidos"],["150 g","zanahoria"],["150 g","calabacín"],["100 g","tomate"],["80 g","cebolla"],["2 dientes","ajo"],["800 ml","caldo"],["10 g","AOVE"],["","cúrcuma, comino, cilantro, sal y pimienta"]],
+  pasos:["Sofríe la cebolla, el ajo y el tomate con el aceite hasta que se deshaga.",
+    "Agrega la zanahoria, el calabacín, la cúrcuma, el comino y el caldo. Cocina 15 minutos.",
+    "Echa los garbanzos y el pollo, y deja 8 minutos más.",
+    "Cilantro al servir."],
+  nota:"No necesita guarnición: los garbanzos son el carbohidrato. Y son 11 g de fibra por porción."},
+
+sopatilapia:{n:"Sopa de tilapia con papa y cilantro",min:30,rinde:"2 porciones",soup:1,
+  ing:[["300 g","filete de tilapia"],["400 g","papa"],["150 g","zanahoria"],["80 g","cebolla"],["2 dientes","ajo"],["100 g","tomate"],["700 ml","caldo"],["10 g","AOVE"],["","cúrcuma, cilantro, limón, sal y pimienta"]],
+  pasos:["Sofríe la cebolla, el ajo y el tomate, 6 minutos.",
+    "Agrega la papa en cubos, la zanahoria, la cúrcuma y el caldo. Cocina 15 minutos.",
+    "Corta el pescado en trozos grandes y agrégalo al final, 5 minutos. Si lo metes antes, se deshace.",
+    "Apaga, tapa 3 minutos, y termina con mucho cilantro y limón."],
+  nota:"Ya trae su papa. Cierra las tres semanas con algo liviano y caliente."},
 };
 
 /* ====================== LOS 7 DÍAS ====================== */
-const DIAS = [
+/* ====================== LAS 3 SEMANAS ======================
+   El menú se engancha al día real de la semana, y la semana sale del día
+   de protocolo en que vas. Los días 22–28 repiten la semana 1. */
+const SEM = [
+{n:1, titulo:"Semana 1 · aterrizar",
+ nota:"La semana de aprender el sistema: cinco sopas que se cocinan de una vez y almuerzos que salen del tupper.",
+ dias:[
  {dia:"Lunes", lema:"Arrancamos suave y con todo listo.",
   m:[{k:"d",r:"pancakes",sub:"fresas + mantequilla de almendras",min:12},
      {k:"a",r:"bowlmex",sub:"arroz, aguacate, pico de gallo, cilantro y limón",min:18,prep:1},
@@ -860,7 +1110,87 @@ const DIAS = [
   m:[{k:"d",r:"tostadas",sub:"huevo revuelto, aguacate y tomate",min:6},
      {k:"a",r:"carnepapas",sub:"papas a la francesa, guacamole y pico de gallo",min:30},
      {k:"c",r:"sopazanahoria",sub:"la segunda porción, con papa y aguacate",min:5,prep:1,soup:"🥕"}]}
+]},
+
+{n:2, titulo:"Semana 2 · variedad",
+ nota:"Ya sabes cocinar el sistema. Ahora entran lentejas y garbanzos, que son la fibra que le faltaba a la semana 1.",
+ dias:[
+ {dia:"Lunes", lema:"Semana nueva, sopas nuevas. Ya sabes cómo se hace.",
+  m:[{k:"d",r:"avenaarandanos",sub:"arándanos, chía y mantequilla de almendras",min:8},
+     {k:"a",r:"bowlcurry",sub:"quinoa, verduras asadas y aguacate",min:20,prep:1},
+     {k:"c",r:"sopacalabacin",sub:"con pollo y papa al lado",min:5,prep:1,soup:"🥬"}]},
+
+ {dia:"Martes", lema:"Albóndigas. Nadie diría que estás en un protocolo.",
+  m:[{k:"d",r:"wrapchampinon",sub:"champiñones, espinaca y aguacate",min:7},
+     {k:"a",r:"albondigas",sub:"en salsa de tomate, sobre arroz",min:25},
+     {k:"c",r:"sopabatata",sub:"con pollo y arepa de arroz",min:5,prep:1,soup:"🍠"}]},
+
+ {dia:"Miércoles", lema:"Hoy entra la fibra de verdad: lentejas.",
+  m:[{k:"d",r:"pancakes",sub:"fresas + mantequilla de almendras",min:12},
+     {k:"a",r:"salmonauyama",sub:"puré de ahuyama y ensalada",min:22},
+     {k:"c",r:"sopalentejas",sub:"trae su propio carbohidrato",min:8,prep:1,soup:"🫘"}]},
+
+ {dia:"Jueves", lema:"Noche de prep corto. Ya te sabes la rutina.",
+  m:[{k:"d",r:"arepaaguacate",sub:"aguacate machacado, huevo y tomate",min:8},
+     {k:"a",r:"tilapiayuca",sub:"yuca al airfryer y mango",min:26,prep:1},
+     {k:"c",r:"cazuelapescado",sub:"lleva su papa adentro",min:8,prep:1,soup:"🐟"}]},
+
+ {dia:"Viernes", lema:"Arepa rellena: doce minutos y sale del tupper.",
+  m:[{k:"d",r:"tostadas",sub:"huevo revuelto, aguacate y tomate",min:6},
+     {k:"a",r:"arepapollo",sub:"pollo desmechado, hogao y aguacate",min:12,prep:1},
+     {k:"c",r:"sopaespinaca",sub:"con pollo y papa al lado",min:5,prep:1,soup:"🌿"}]},
+
+ {dia:"Sábado", lema:"Garbanzos al mediodía y quesadilla en la mañana.",
+  m:[{k:"d",r:"quesadilla",sub:"tomate, aguacate y fresas al lado",min:12},
+     {k:"a",r:"bowlgarbanzos",sub:"verduras asadas, tahini y limón",min:18,prep:1},
+     {k:"c",r:"sopacalabacin",sub:"la segunda porción, con papa",min:5,prep:1,soup:"🥬"}]},
+
+ {dia:"Domingo", lema:"Cierras la semana 2. Falta una sola.",
+  m:[{k:"d",r:"chiamango",sub:"lo dejas listo la noche anterior",min:5,prep:1},
+     {k:"a",r:"carneasada",sub:"papa criolla y ensalada",min:22},
+     {k:"c",r:"sopabatata",sub:"la segunda porción, con arepa",min:5,prep:1,soup:"🍠"}]}
+]},
+
+{n:3, titulo:"Semana 3 · la recta final",
+ nota:"La última de la eliminación. Cierra con ajiaco y con los platos que ya sabes que te gustan.",
+ dias:[
+ {dia:"Lunes", lema:"Última semana. El 11 de octubre esto se acaba.",
+  m:[{k:"d",r:"pancakes",sub:"fresas + mantequilla de almendras",min:12},
+     {k:"a",r:"bowlmedi",sub:"quinoa y verduras asadas",min:25,prep:1},
+     {k:"c",r:"ajiaco",sub:"sin mazorca ni crema, y sabe igual",min:8,prep:1,soup:"🍲"}]},
+
+ {dia:"Martes", lema:"Hamburguesas de pollo. Del recetario de tu médica.",
+  m:[{k:"d",r:"huevoshogao",sub:"hogao del prep y arepa de arroz",min:8,prep:1},
+     {k:"a",r:"hamburguesaspollo",sub:"con papas al airfryer y ensalada",min:18},
+     {k:"c",r:"sopaapio",sub:"con pollo y papa al lado",min:5,prep:1,soup:"🌿"}]},
+
+ {dia:"Miércoles", lema:"Salmón otra vez: es puro omega 3.",
+  m:[{k:"d",r:"avenamanzana",sub:"manzana rallada, canela y linaza",min:9},
+     {k:"a",r:"salmonjengibre",sub:"arroz, aguacate y piña",min:16,prep:1},
+     {k:"c",r:"sopapimenton",sub:"con pollo y arroz al lado",min:5,prep:1,soup:"🫑"}]},
+
+ {dia:"Jueves", lema:"El último prep corto de las tres semanas.",
+  m:[{k:"d",r:"wrapcoco",sub:"huevo, queso vegano, espinaca y aguacate",min:6},
+     {k:"a",r:"tilapiapure",sub:"puré de papa, ensalada y mango",min:24},
+     {k:"c",r:"sopagarbanzos",sub:"los garbanzos son el carbohidrato",min:6,prep:1,soup:"🫘"}]},
+
+ {dia:"Viernes", lema:"Batata rellena. Como la loaded potato, pero mejor.",
+  m:[{k:"d",r:"tostadasajonjoli",sub:"aguacate, cherries y ajonjolí",min:6},
+     {k:"a",r:"batatarellena",sub:"carne molida, aguacate y pico de gallo",min:45,prep:1},
+     {k:"c",r:"sopatilapia",sub:"lleva su papa adentro",min:8,prep:1,soup:"🐟"}]},
+
+ {dia:"Sábado", lema:"Arroz con fríjoles. Lo de toda la vida, y está permitido.",
+  m:[{k:"d",r:"omelette",sub:"espinaca, tomate y aguacate",min:9},
+     {k:"a",r:"bowlfrijoles",sub:"arroz, pollo, aguacate y pico de gallo",min:18,prep:1},
+     {k:"c",r:"ajiaco",sub:"la segunda porción",min:5,prep:1,soup:"🍲"}]},
+
+ {dia:"Domingo", lema:"Último día de eliminación. Mañana empieza la fase 2.",
+  m:[{k:"d",r:"chia",sub:"lo dejas listo la noche anterior",min:5,prep:1},
+     {k:"a",r:"pollolimonpapa",sub:"papa criolla y ensalada",min:22},
+     {k:"c",r:"sopaapio",sub:"la segunda porción, con papa",min:5,prep:1,soup:"🌿"}]}
+]}
 ];
+const DIAS = SEM[0].dias;   /* compatibilidad con lo que ya existía */
 const KN = {d:"Desayuno", a:"Almuerzo", c:"Cena"};
 
 /* ====================== NO NEGOCIABLES ====================== */
@@ -970,6 +1300,150 @@ const MERCADO = [
    ["Proteína Thorne Plant","","postentreno"]]}
 ];
 
+
+const MERCADO2 = [
+ {g:"Proteína", e:"🍗", it:[
+   ["Pechuga de pollo","1,5 kg","bowls, arepa rellena y el pollo de tres sopas"],
+   ["Carcasa o alas de pollo","500 g","el caldo, base de todo"],
+   ["Carne de res en cubos","300 g","sopa de lentejas del miércoles"],
+   ["Carne molida magra","250 g","albóndigas del martes"],
+   ["Salmón","120 g","miércoles"],
+   ["Tilapia","450 g · 4 filetes","jueves al almuerzo y la cazuela"],
+   ["Huevos","30 unidades",""]]},
+
+ {g:"Carbohidratos", e:"🥔", it:[
+   ["Papa","2 kg","las guarniciones de las cenas y la cazuela"],
+   ["Papa criolla","250 g","carne asada del domingo"],
+   ["Yuca","500 g","jueves al airfryer"],
+   ["Batata o camote","500 g","la crema del martes y domingo"],
+   ["Ahuyama","300 g","el puré del salmón"],
+   ["Arroz blanco","500 g",""],
+   ["Quinoa","250 g","bowl de curry"],
+   ["Avena CERTIFICADA SIN GLUTEN","500 g",""],
+   ["Lentejas crudas","250 g","16 g de fibra por porción"],
+   ["Garbanzos cocidos","1 frasco de 400 g","bowl del sábado"],
+   ["Arepa de arroz · La Mary","1 bolsa × 5",""],
+   ["Tortillas de harina de coco · Bodai","1 bolsa × 5",""],
+   ["Pan de arroz tajado · Spiga","1 bolsa",""]]},
+
+ {g:"Frutas", e:"🍓", it:[
+   ["Fresas","300 g","miércoles y sábado"],
+   ["Mango","3 unidades","jueves y el pudín del domingo"],
+   ["Arándanos","100 g","la avena del lunes"],
+   ["Manzana verde","2 unidades","jugo verde"],
+   ["Aguacate","6 unidades","aparece todos los días"]]},
+
+ {g:"Verduras", e:"🥕", it:[
+   ["Calabacín","700 g","la crema del lunes se lleva 500 g"],
+   ["Espinaca","400 g","la crema del viernes y los desayunos"],
+   ["Puerro","150 g","crema de espinaca"],
+   ["Champiñones","200 g","el wrap del martes"],
+   ["Zanahoria","500 g",""],
+   ["Tomate","1,2 kg",""],
+   ["Cebolla blanca","6 unidades",""],
+   ["Cebolla morada","2 unidades",""],
+   ["Pimentón rojo","2 unidades","verduras asadas"],
+   ["Berenjena","1 unidad","verduras asadas"],
+   ["Albahaca fresca","1 manojo","va fuera del fuego, en la crema de calabacín"],
+   ["Apio","1 manojo","jugo verde"],
+   ["Pepino","2 unidades","SOLO para el jugo verde"],
+   ["Jengibre","1 trozo grande",""],
+   ["Ajo","2 cabezas",""],
+   ["Cilantro","2 manojos",""],
+   ["Perejil","1 manojo",""],
+   ["Hojas verdes y lechuga","2 bolsas",""],
+   ["Limón","12 unidades",""]]},
+
+ {g:"Grasas y semillas", e:"🫒", it:[
+   ["Aceite de oliva extra virgen","1 botella",""],
+   ["Mantequilla de almendras","1 frasco",""],
+   ["Almendras","200 g",""],
+   ["Chía","200 g","el pudín y la avena · 4 g de fibra por cucharada"],
+   ["Tahini o ajonjolí","1 frasco","el aliño del bowl de garbanzos"],
+   ["Leche de almendras sin azúcar","1 litro",""],
+   ["Leche de coco sin azúcar","1 lata","el curry y la crema de batata"],
+   ["Ghee","1 frasco",""],
+   ["Queso vegano · Violife","1 paquete","la quesadilla del sábado"]]},
+
+ {g:"Especias", e:"🧂", it:[
+   ["Curry o cúrcuma, comino, paprika","","revisa lo que te quedó de la semana 1"],
+   ["Nuez moscada","","el puré de ahuyama"],
+   ["Tomillo y laurel","","la sopa de lentejas"],
+   ["Orégano, canela, sal marina","",""]]}
+];
+
+const MERCADO3 = [
+ {g:"Proteína", e:"🍗", it:[
+   ["Pechuga de pollo","1,8 kg","el ajiaco solo se lleva 300 g"],
+   ["Carcasa o alas de pollo","500 g","caldo"],
+   ["Pollo molido","250 g","hamburguesas del martes"],
+   ["Carne molida magra","150 g","la batata rellena del viernes"],
+   ["Salmón","120 g","miércoles"],
+   ["Tilapia","450 g · 4 filetes","jueves y la sopa del viernes"],
+   ["Huevos","30 unidades",""]]},
+
+ {g:"Carbohidratos", e:"🥔", it:[
+   ["Papa pastusa o sabanera","1,5 kg","la que se deshace y espesa el ajiaco"],
+   ["Papa criolla","800 g","ajiaco, hamburguesas y pollo al limón"],
+   ["Batata o camote","300 g","la rellena del viernes"],
+   ["Arroz blanco","500 g",""],
+   ["Quinoa","250 g","bowl mediterráneo"],
+   ["Avena CERTIFICADA SIN GLUTEN","500 g",""],
+   ["Fríjoles cocidos","1 frasco de 400 g","el bowl del sábado"],
+   ["Garbanzos cocidos","300 g","la sopa del jueves"],
+   ["Harina de almendras","250 g","hamburguesas de pollo"],
+   ["Arepa de arroz · La Mary","1 bolsa × 5",""],
+   ["Tortillas de harina de coco · Bodai","1 bolsa × 5",""],
+   ["Pan de arroz tajado · Spiga","1 bolsa",""]]},
+
+ {g:"Frutas", e:"🍓", it:[
+   ["Fresas","300 g","lunes y domingo"],
+   ["Mango","2 unidades","jueves"],
+   ["Piña","1 unidad","miércoles"],
+   ["Manzana verde","4 unidades","la avena, la crema de apio y el jugo"],
+   ["Banano pequeño","2 unidades","pancakes"],
+   ["Aguacate","6 unidades",""]]},
+
+ {g:"Verduras", e:"🥕", it:[
+   ["Apio","2 manojos","la crema del martes se lleva 300 g"],
+   ["Pimentón rojo","5 unidades","4 van a la crema rostizada"],
+   ["Cebolla larga","1 manojo","el ajiaco"],
+   ["Guascas secas","1 bolsita","SIN esto no es ajiaco · en plaza o supermercado"],
+   ["Alcaparras","1 frasco pequeño","para servir el ajiaco"],
+   ["Zanahoria","500 g",""],
+   ["Calabacín","300 g","la sopa de garbanzos"],
+   ["Tomate","1 kg",""],
+   ["Cebolla blanca","6 unidades",""],
+   ["Cebolla morada","2 unidades",""],
+   ["Espinaca","300 g",""],
+   ["Berenjena","1 unidad","verduras asadas"],
+   ["Pepino","2 unidades","SOLO para el jugo verde"],
+   ["Jengibre","1 trozo",""],
+   ["Ajo","2 cabezas",""],
+   ["Cilantro","3 manojos","el ajiaco y la sopa de tilapia se lo comen"],
+   ["Hojas verdes y lechuga","2 bolsas",""],
+   ["Limón","12 unidades",""]]},
+
+ {g:"Grasas y semillas", e:"🫒", it:[
+   ["Aceite de oliva extra virgen","1 botella",""],
+   ["Mantequilla de almendras","1 frasco",""],
+   ["Almendras","200 g",""],
+   ["Chía","200 g","el pudín del domingo"],
+   ["Linaza molida","200 g","la avena del miércoles"],
+   ["Ajonjolí","1 frasco","las tostadas del viernes"],
+   ["Leche de almendras sin azúcar","1 litro",""],
+   ["Ghee","1 frasco",""],
+   ["Queso vegano · Violife","1 paquete","el wrap del jueves"]]},
+
+ {g:"Especias", e:"🧂", it:[
+   ["Paprika ahumada","","la crema de pimentón · no es lo mismo que la normal"],
+   ["Cúrcuma, comino, orégano","",""],
+   ["Tomillo y laurel","",""],
+   ["Canela y sal marina","",""]]}
+];
+
+const MERCADOS = [MERCADO, MERCADO2, MERCADO3];
+
 /* ====================== MEAL PREP ====================== */
 const PREPS = [
  {id:"p1", cuando:"antes de arrancar", dow:0, t:"Prep grande", dur:"≈ 90 min",
@@ -1000,6 +1474,60 @@ const PREPS = [
    ["52 min","Verduras asadas al airfryer","Calabacín, pimentón, berenjena y cebolla, 190 °C por 15–18 min. Sin brócoli."],
    ["58 min","Renueva el pico de gallo","El del domingo ya cumplió. Este alcanza para viernes y domingo."]]}
 ];
+
+
+const PREPS2 = [
+ {id:"p1s2", cuando:"antes de arrancar la semana 2", dow:0, t:"Prep grande", dur:"≈ 90 min",
+  covers:"Deja lunes, martes y miércoles resueltos: tres cenas, el pollo de la semana y el caldo.",
+  tasks:[
+   ["0 min","Pon el caldo al fuego","Igual que la semana pasada: carcasa y verduras en AGUA FRÍA, hervor suave, 75 minutos solo."],
+   ["5 min","Horno a 190 °C · rostiza la batata","500 g en trozos, 20 minutos. Es lo que le da el dulzor a la crema del martes."],
+   ["10 min","Cocina 1,5 kg de pollo","Con cebolla, ajo, laurel y cúrcuma. 20 minutos y 10 más reposando en su caldo."],
+   ["30 min","Desmecha y porciona el pollo","Dos tercios desmechado, un tercio en trozos para el crispy."],
+   ["40 min","🥬 Crema de calabacín y albahaca","La albahaca va FUERA del fuego. Salen 2 porciones: lunes y sábado."],
+   ["55 min","🍠 Crema de batata y jengibre","Con la batata ya rostizada. Salen 2: martes y domingo."],
+   ["70 min","🫘 Sopa de lentejas con carne","30 minutos a fuego bajo. No necesita guarnición: ya trae papa y lentejas."],
+   ["78 min","Cuela el caldo","Frascos de 500 ml. Lo que sobre, al congelador."],
+   ["82 min","Quinoa","Enjuágala frotándola y tuéstala 2 minutos antes. Para el bowl de curry."],
+   ["88 min","Cocina 1 kg de papa","Enteras con cáscara. Son la guarnición de las cenas."],
+   ["92 min","Hogao y hojas lavadas","El hogao dura 5 días. Las hojas, en tupper con papel abajo."]]},
+
+ {id:"p2s2", cuando:"por la noche", dow:4, t:"Prep corto", dur:"≈ 55 min",
+  covers:"Cierra la semana: las dos sopas que faltan y la yuca del almuerzo.",
+  tasks:[
+   ["0 min","Cocina la yuca","18–20 minutos. Retira la vena del centro y córtala en bastones. Congela la mitad."],
+   ["10 min","🐟 Cazuela de pescado con papa","El pescado entra AL FINAL, 5 minutos. Si lo metes antes se deshace. Es tu cena de esta noche."],
+   ["30 min","🌿 Crema de espinaca y puerro","La espinaca va con el fuego ya apagado: si hierve se pone café."],
+   ["42 min","Verduras asadas al airfryer","Calabacín, pimentón, berenjena y cebolla. Sin brócoli."],
+   ["50 min","Escurre los garbanzos","Enjuágalos bien. Para el bowl del sábado."]]}
+];
+
+const PREPS3 = [
+ {id:"p1s3", cuando:"antes de arrancar la semana 3", dow:0, t:"Prep grande", dur:"≈ 95 min",
+  covers:"La última vez que cocinas así. Deja el ajiaco y dos cremas listas.",
+  tasks:[
+   ["0 min","Pon el caldo al fuego","Ya te lo sabes de memoria."],
+   ["5 min","Horno a 200 °C · rostiza los pimentones","4 enteros, 25 minutos, hasta que la piel se ampolle."],
+   ["10 min","Cocina 1,3 kg de pollo","Reserva 300 g aparte: esos van crudos al ajiaco."],
+   ["30 min","🍲 Ajiaco ligero","La papa pastusa en rodajas finas es la que espesa. Las guascas al final. Salen 2: lunes y sábado."],
+   ["50 min","Pela los pimentones","Tapados 10 minutos y la piel sale sola."],
+   ["55 min","🫑 Crema de pimentón rostizado","Licúa con la paprika ahumada. Para el miércoles."],
+   ["68 min","🌿 Crema de apio y manzana verde","La manzana le quita el amargo al apio. Salen 2: martes y domingo."],
+   ["80 min","Cuela el caldo",""],
+   ["84 min","Arroz y quinoa","Porciona en tuppers de 200 g."],
+   ["92 min","Papa cocida, hogao y hojas","Lo de siempre. Última vez."]]},
+
+ {id:"p2s3", cuando:"por la noche", dow:4, t:"Prep corto", dur:"≈ 45 min",
+  covers:"El último prep de la eliminación. El domingo empieza la fase 2.",
+  tasks:[
+   ["0 min","🫘 Sopa de garbanzos con pollo","No necesita guarnición: los garbanzos son el carbohidrato. Es tu cena de hoy."],
+   ["18 min","🐟 Sopa de tilapia con papa","El pescado al final, 5 minutos. Mucho cilantro y limón."],
+   ["32 min","Batata al horno","300 g entera con cáscara, 35 minutos. Para la rellena del viernes."],
+   ["38 min","Verduras asadas y pico de gallo",""],
+   ["45 min","Mira la pestaña Plan → Fase 2","El domingo es tu último día. El lunes arrancas con el café."]]}
+];
+
+const PREPS_SEM = [PREPS, PREPS2, PREPS3];
 
 /* ====================== FASE 2 · REINTRODUCCIÓN ======================
    El método es el del documento: un alimento a la vez, 2–3 porciones al día
@@ -1046,7 +1574,7 @@ const LOGROS = [
 /* =========================================================
    ESTADO
    ========================================================= */
-const APP_VERSION = "2026-09-25 · 11";
+const APP_VERSION = "2026-09-25 · 12";
 const KEY = "liviana.v1";
 const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", aguaV2:1, peso:[]});
 let S = DEF();
@@ -1081,14 +1609,17 @@ function fechaDe(n){ return fechaObj(n).toLocaleDateString("es-CO",{weekday:"lon
 function fechaCorta(n){ return fechaObj(n).toLocaleDateString("es-CO",{day:"numeric", month:"short"}); }
 /* El menú está construido por días de la semana, así que se engancha al día real:
    si arrancas un sábado, el sábado ves el brunch, no el lunes. */
-const menuDe = n => DIAS[(fechaObj(n).getDay() + 6) % 7];
+const semanaDe = n => Math.floor((n - 1) / 7) % SEM.length;   /* 22–28 repiten la semana 1 */
+const menuDe = n => SEM[semanaDe(n)].dias[(fechaObj(n).getDay() + 6) % 7];
+let semVista = 0;   /* semana que estás mirando en Plan, Mercado y Prep */
 
 /* Cada prep cae en un día real, calculado desde tu fecha de arranque:
    el grande es la víspera del Día 1; el corto, el primer jueves. */
 function fechaPrep(P){
-  if(P.id === "p1") return fechaObj(0);
-  for(let n = 1; n <= 7; n++){ if(fechaObj(n).getDay() === P.dow) return fechaObj(n); }
-  return fechaObj(4);
+  const base = semVista * 7;                       /* día 1 de esa semana */
+  if(P.cuando.indexOf("antes") === 0) return fechaObj(base);   /* la víspera */
+  for(let n = base + 1; n <= base + 7; n++){ if(fechaObj(n).getDay() === P.dow) return fechaObj(n); }
+  return fechaObj(base + 4);
 }
 function prepLbl(P){
   const d = fechaPrep(P);
@@ -1127,10 +1658,10 @@ function stats(){
     if(D.h.glutamina && D.h.probiotico && D.h.omega) st.suplDias++;
     if(Object.keys(D.sint||{}).length >= 3) st.diasSintomas++;
   });
-  PREPS.forEach(P => {
+  PREPS_SEM.forEach(ps => ps.forEach(P => {
     const done = Object.keys(S.prep[P.id]||{}).filter(k => S.prep[P.id][k]).length;
     if(done >= P.tasks.length) st.prepsHechos++;
-  });
+  }));
   return st;
 }
 const nivelDe = xp => NIVELES.slice().reverse().find(l => xp >= l.min) || NIVELES[0];
@@ -1326,8 +1857,13 @@ function renderHoy(){
    VISTA · PLAN
    ========================================================= */
 function renderPlan(){
+  const W = SEM[semVista];
   const list = $("#planList"); list.innerHTML = "";
-  DIAS.forEach((men, i) => {
+  list.appendChild(selectorSemana(renderPlan));
+  const intro = el("div","note sage");
+  intro.innerHTML = "<b>" + esc(W.titulo) + ".</b> " + esc(W.nota);
+  list.appendChild(intro);
+  W.dias.forEach((men, i) => {
     const card = el("div","card"); card.style.marginBottom = "10px";
     const hd = el("div"); hd.style.cssText = "padding:13px 15px 9px;border-bottom:1px solid var(--line-soft)";
     hd.appendChild(el("div","meal-when","<b>" + men.dia + "</b>"));
@@ -1375,7 +1911,8 @@ function renderPlan(){
   +'<div class="note sage"><b>La frase que resuelve todo.</b> «Estoy en un plan médico: sin gluten, sin lácteos y sin salsas. ¿Me lo pueden hacer a la plancha con sal y aceite de oliva, y la ensalada con limón aparte?» Dicho así nadie discute, y no tienes que dar explicaciones toda la comida.</div>'
   +'<div class="note"><b>Y si se rompe, se rompió.</b> Un plato fuera del plan no borra los días que llevas — solo significa que ese alimento entra a la lista de sospechosos y lo pruebas con calma en la reintroducción. Anótalo en el registro del día y sigue. Rendirte por una comida sí borra todo.</div>';
 
-  const usados = new Set(); DIAS.forEach(d => d.m.forEach(m => usados.add(m.r)));
+  const usados = new Set();
+  SEM.forEach(w => w.dias.forEach(d => d.m.forEach(m => usados.add(m.r))));
   const extras = Object.keys(R).filter(k => !usados.has(k));
   $("#recCnt").textContent = Object.keys(R).length + " recetas";
   const rl = $("#recList"); rl.innerHTML = "";
@@ -1396,11 +1933,28 @@ function renderPlan(){
 }
 
 /* Fibra estimada por día del menú actual. Meta: 25 g/día para mujeres. */
-const FIBRA = [["Lunes",31.0],["Martes",31.1],["Miércoles",23.9],["Jueves",19.7],
-               ["Viernes",28.4],["Sábado",30.9],["Domingo",31.9]];
+const FIBRA_SEM = [
+ [["Lunes",31.0],["Martes",31.1],["Miércoles",23.9],["Jueves",19.7],["Viernes",28.4],["Sábado",30.9],["Domingo",31.9]],
+ [["Lunes",32.5],["Martes",20.6],["Miércoles",36.8],["Jueves",23.4],["Viernes",27.9],["Sábado",34.5],["Domingo",31.4]],
+ [["Lunes",37.1],["Martes",24.7],["Miércoles",32.7],["Jueves",32.7],["Viernes",31.1],["Sábado",35.4],["Domingo",28.4]]
+];
 const META_FIBRA = 25;
 
+/* Selector de semana compartido por Plan, Mercado y Prep. */
+function selectorSemana(onChange){
+  const box = el("div","semsel");
+  SEM.forEach((w, i) => {
+    const hoySem = semanaDe(hoyNum());
+    const b = el("button", i === semVista ? "on" : "",
+      "Semana " + w.n + "<small>" + (i === hoySem ? "vas aquí" : "días " + (i*7+1) + "–" + (i*7+7)) + "</small>");
+    b.onclick = () => { semVista = i; onChange(); buzz(); window.scrollTo({top:0}); };
+    box.appendChild(b);
+  });
+  return box;
+}
+
 function renderFibra(){
+  const FIBRA = FIBRA_SEM[semVista];
   const prom = FIBRA.reduce((a,x) => a + x[1], 0) / FIBRA.length;
   $("#fibCnt").textContent = prom.toFixed(0) + " g promedio";
   const box = $("#fibBox"); box.innerHTML = "";
@@ -1422,13 +1976,18 @@ function renderFibra(){
   });
   box.appendChild(wrap);
 
-  box.appendChild(el("div","note",
-    "<b>Miércoles y jueves se quedan cortos.</b> El jueves es el más flojo: la ahuyama tiene poca fibra "
-    + "y ese día llevas dos arepas de arroz, que casi no aportan."));
+  const flojos = FIBRA.filter(x => x[1] < META_FIBRA).map(x => x[0]);
+  const PORQUE = [
+    "El jueves es el más flojo: la ahuyama tiene poca fibra y ese día llevas dos arepas de arroz, que casi no aportan.",
+    "El martes cae por el arroz blanco y la arepa; el jueves, por la yuca. Los dos se arreglan con una cucharada de chía en el desayuno.",
+    "Solo el martes queda justo, y por muy poco. Esta es la semana con más fibra de las tres — las lentejas, los garbanzos y los fríjoles hacen la diferencia."
+  ];
+  if(flojos.length) box.appendChild(el("div","note",
+    "<b>" + flojos.join(" y ") + (flojos.length > 1 ? " se quedan cortos." : " se queda corto.") + "</b> " + PORQUE[semVista]));
 
   box.appendChild(el("div","rsect","Tres arreglos sin riesgo"));
   const ul = el("ul","lst yes");
-  [["1 cda de chía en la avena del miércoles","+4 g · ya la tienes en la despensa, no cambia el sabor"],
+  [["1 cda de chía en la avena o el pudín","+4 g · ya la tienes en la despensa, no cambia el sabor"],
    ["1 cda de linaza molida sobre el huevo o la sopa","+3 g · también la tienes, para las arepas de yuca"],
    ["La papa SIEMPRE con cáscara","la fibra de la papa está casi toda ahí, y la pelas por costumbre"]
   ].forEach(([a,b2]) => ul.appendChild(el("li", null, "<b>" + a + "</b><br><span style='color:var(--muted)'>" + b2 + "</span>")));
@@ -1498,10 +2057,11 @@ function renderReintro(){
 function renderMercado(){
   let tot = 0, got = 0;
   const list = $("#mktList"); list.innerHTML = "";
-  MERCADO.forEach((g, gi) => {
+  list.appendChild(selectorSemana(renderMercado));
+  MERCADOS[semVista].forEach((g, gi) => {
     const wrap = el("div","mgroup");
     const gTot = g.it.length;
-    const gGot = g.it.filter((_, ii) => S.mkt[gi + "-" + ii]).length;
+    const gGot = g.it.filter((_, ii) => S.mkt[semVista + "-" + gi + "-" + ii]).length;
     tot += gTot; got += gGot;
     const hd = el("div","mghead");
     hd.appendChild(el("span","e", g.e));
@@ -1510,7 +2070,7 @@ function renderMercado(){
     wrap.appendChild(hd);
     const card = el("div","card");
     g.it.forEach((it, ii) => {
-      const id = gi + "-" + ii, on = !!S.mkt[id];
+      const id = semVista + "-" + gi + "-" + ii, on = !!S.mkt[id];
       const row = el("div","mitem" + (on ? " on" : ""));
       const c = chk(on); c.classList.add("sm");
       c.onclick = () => { S.mkt[id] = !S.mkt[id]; save(); buzz(); renderMercado(); };
@@ -1529,14 +2089,18 @@ function renderMercado(){
   $("#mktBar").style.width = (tot ? got/tot*100 : 0) + "%";
   $("#mktDot").classList.toggle("show", got > 0 && got < tot);
 }
-$("#clearMkt").onclick = () => { S.mkt = {}; save(); renderMercado(); toast("Lista reiniciada"); };
+$("#clearMkt").onclick = () => {
+  Object.keys(S.mkt).forEach(k => { if(k.startsWith(semVista + "-")) delete S.mkt[k]; });
+  save(); renderMercado(); toast("Lista de la semana " + (semVista+1) + " reiniciada");
+};
 
 /* =========================================================
    VISTA · PREP
    ========================================================= */
 function renderPrep(){
   const list = $("#prepList"); list.innerHTML = "";
-  PREPS.forEach(P => {
+  list.appendChild(selectorSemana(renderPrep));
+  PREPS_SEM[semVista].forEach(P => {
     S.prep[P.id] = S.prep[P.id] || {};
     const st = S.prep[P.id];
     const done = P.tasks.filter((_, i) => st[i]).length;
@@ -1855,6 +2419,7 @@ $("#btnUpdate").onclick = async () => {
 };
 
 /* ---------- arranque ---------- */
+semVista = semanaDe(hoyNum());
 renderHoy();
 </script>
 </body>
