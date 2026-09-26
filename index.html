@@ -502,6 +502,7 @@ label.fl{display:block;font-size:12px;font-weight:700;color:var(--muted);letter-
     <input class="txt" id="inName" placeholder="¿Cómo te llamas?" autocomplete="off">
     <label class="fl">Día en que arrancaste</label>
     <input class="txt" id="inStart" type="date">
+    <div class="note sage" id="fechaBox" style="margin-top:10px"></div>
     <button class="btn ghost" id="btnExport">Exportar mi registro para la nutrióloga</button>
     <button class="btn ghost" id="btnUpdate">Buscar actualización</button>
     <button class="btn danger" id="btnReset">Borrar todo y empezar de cero</button>
@@ -1574,12 +1575,20 @@ const LOGROS = [
 /* =========================================================
    ESTADO
    ========================================================= */
-const APP_VERSION = "2026-09-25 · 12";
+const APP_VERSION = "2026-09-26 · 13";
 const KEY = "liviana.v1";
-const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", aguaV2:1, peso:[]});
+const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", peso:[]});
 let S = DEF();
 try{ const raw = localStorage.getItem(KEY); if(raw) S = Object.assign(DEF(), JSON.parse(raw)); }catch(e){}
 /* El agua se contaba en vasos de 250 ml; ahora se cuenta en llenadas del termo. */
+/* El carrito pasó a guardarse por semana: "0-3" ahora es "0-0-3". */
+if(!S.mktV2){
+  const viejo = S.mkt || {}, nuevo = {};
+  Object.keys(viejo).forEach(k => {
+    if(k.split("-").length === 2) nuevo["0-" + k] = viejo[k]; else nuevo[k] = viejo[k];
+  });
+  S.mkt = nuevo; S.mktV2 = 1;
+}
 if(!S.aguaV2){
   Object.keys(S.d||{}).forEach(n => {
     const D = S.d[n];
@@ -2146,6 +2155,7 @@ function renderPrep(){
    ========================================================= */
 function renderYo(){
   const st = stats();
+  renderFechas();
   $("#stDays").textContent = st.diasBuenos;
   $("#stXp").textContent = st.xp;
   $("#stPct").textContent = Math.round(Math.min(100, hoyNum()/META*100)) + "%";
@@ -2287,6 +2297,20 @@ function renderPeso(){
   box.appendChild(list);
 }
 
+/* Muestra en texto plano lo que la app cree, para que no haya que adivinar
+   cuando algo se ve raro. */
+function renderFechas(){
+  const box = $("#fechaBox"); if(!box) return;
+  const inp = $("#inStart"); if(inp && inp.value !== S.start) inp.value = S.start;
+  const n = hoyNum();
+  box.innerHTML =
+    "<b>Esto es lo que la app tiene guardado:</b><br>"
+  + "Tu <b>día 1</b> fue el " + fechaDe(1) + ".<br>"
+  + "Hoy es <b>día " + n + " de " + TOTAL + "</b>, semana " + (semanaDe(n) + 1) + ".<br>"
+  + "Terminas los 21 días el " + fechaDe(META) + ".<br><br>"
+  + "Si alguna de esas fechas no es la tuya, corrige el campo de arriba y todo lo demás se reacomoda solo.";
+}
+
 /* =========================================================
    LOGROS
    ========================================================= */
@@ -2332,7 +2356,10 @@ $("#inName").oninput = e => { S.name = e.target.value; save(); };
 $("#inStart").value = S.start;
 $("#inStart").onchange = e => {
   if(!e.target.value) return;
-  S.start = e.target.value; save(); cur = hoyNum(); renderHoy();
+  S.start = e.target.value; save();
+  cur = hoyNum();
+  semVista = semanaDe(cur);     /* la semana también se reacomoda */
+  renderHoy(); renderYo();
   toast("Día 1 = " + fechaDe(1));
 };
 
