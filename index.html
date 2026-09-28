@@ -158,13 +158,25 @@ nav.tabs .dot.show{display:block}
 .hero-bar .lbl{display:flex;justify-content:space-between;font-size:11.5px;opacity:.78;margin-bottom:5px;font-family:var(--fm)}
 .track{height:7px;border-radius:99px;background:rgba(255,255,255,.18);overflow:hidden}
 .track span{display:block;height:100%;border-radius:99px;background:#EBD9A8;transition:width .5s cubic-bezier(.2,.8,.3,1)}
-.daynav{display:flex;gap:6px;margin-top:14px;position:relative;z-index:1}
+.daynav{
+  display:flex;gap:6px;margin-top:14px;position:relative;z-index:1;
+  overflow-x:auto;overflow-y:hidden;-webkit-overflow-scrolling:touch;
+  scrollbar-width:none;scroll-padding-inline:44px;padding-bottom:2px;
+}
+.daynav::-webkit-scrollbar{display:none}
 .daynav button{
-  flex:1;padding:7px 0;border-radius:9px;background:rgba(255,255,255,.1);
+  flex:0 0 auto;min-width:44px;padding:7px 8px;border-radius:9px;background:rgba(255,255,255,.1);
   font-family:var(--fm);font-size:12px;font-weight:600;color:rgba(255,255,255,.66);
+  scroll-snap-align:center;
 }
 .daynav button.on{background:#F2F7F2;color:#2E4736}
 .daynav button.done:not(.on){color:#CFE3D4}
+/* Separador fino donde arranca cada semana, para no perderse entre 28 botones */
+.daynav i.sep{
+  flex:0 0 auto;width:1.5px;align-self:stretch;margin:2px 1px;border-radius:2px;
+  background:rgba(255,255,255,.22);
+}
+
 .daynav button.done:not(.on):after{content:"·";margin-left:2px}
 
 /* ---------- MEAL CARDS ---------- */
@@ -1576,7 +1588,7 @@ const LOGROS = [
 /* =========================================================
    ESTADO
    ========================================================= */
-const APP_VERSION = "2026-09-26 · 14";
+const APP_VERSION = "2026-09-27 · 15";
 const KEY = "liviana.v1";
 const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", peso:[]});
 let S = DEF();
@@ -1741,14 +1753,25 @@ function renderHoy(){
   $("#protoLbl").textContent = "día " + Math.min(diaHoy, META) + " de " + META;
   $("#protoBar").style.width = Math.min(100, diaHoy/META*100) + "%";
 
-  const semana = Math.ceil(cur/7), base = (semana-1)*7;
+  /* Los 28 días en una tira que se desliza: antes solo se veía la semana en curso
+     y no había manera de llegar al día 8. El umbral de "cumplido" es 45, el mismo
+     que usa el resto de la app — antes decía 60 y las tres comidas (48) no marcaban. */
   const nav = $("#daynav"); nav.innerHTML = "";
-  for(let i=1; i<=7; i++){
-    const n = base + i; if(n > TOTAL) break;
-    const b = el("button", (n===cur?"on ":"") + (ptsDia(n)>=60?"done":""), "D" + n);
+  let actual = null;
+  for(let n = 1; n <= TOTAL; n++){
+    if(n > 1 && (n - 1) % 7 === 0){
+      nav.appendChild(el("i","sep"));
+    }
+    const b = el("button", (n === cur ? "on " : "") + (ptsDia(n) >= 45 ? "done" : ""), "D" + n);
+    b.setAttribute("aria-label", "Día " + n + " · " + fechaDe(n));
+    if(n === cur) actual = b;
     b.onclick = () => { cur = n; renderHoy(); buzz(); };
     nav.appendChild(b);
   }
+  /* Centra el día en el que estás, para que siempre veas lo que viene. */
+  if(actual) requestAnimationFrame(() => {
+    nav.scrollLeft = Math.max(0, actual.offsetLeft - nav.clientWidth / 2 + actual.offsetWidth / 2);
+  });
 
   /* Si la fecha guardada no es la de hoy y todavía no has marcado nada,
      lo más probable es que hoy sea tu Día 1 de verdad. Un toque lo arregla. */
