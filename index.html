@@ -1588,7 +1588,7 @@ const LOGROS = [
 /* =========================================================
    ESTADO
    ========================================================= */
-const APP_VERSION = "2026-09-27 · 15";
+const APP_VERSION = "2026-09-29 · 16";
 const KEY = "liviana.v1";
 const DEF = () => ({name:"", start:"", d:{}, prep:{}, mkt:{}, seen:[], theme:"", peso:[]});
 let S = DEF();
@@ -1617,7 +1617,17 @@ const TERMOS = 3;       // 2.307 ml — cubre los 2 L que pide el plan
 const day = n => (S.d[n] = S.d[n] || {m:{}, h:{}, agua:0, sint:{}});
 const pad = n => String(n).padStart(2,"0");
 const todayISO = () => { const t=new Date(); return t.getFullYear()+"-"+pad(t.getMonth()+1)+"-"+pad(t.getDate()); };
-if(!S.start){ S.start = todayISO(); save(); }
+/* El día 1 es un hecho fijo: lunes 21 de septiembre de 2026. Estaba saliendo de
+   todayISO(), así que cada vez que el teléfono borraba los datos guardados (iOS
+   descarta el almacenamiento de las apps web que no abres en varios días) el plan
+   "arrancaba" de nuevo ese día. Ahora vive en el código y no se recalcula. */
+const START_DEFAULT = "2026-09-21";
+if(!S.start) S.start = START_DEFAULT;
+if(!S.startFix2){ S.start = START_DEFAULT; S.startFix2 = 1; }
+save();
+
+/* Le pide al navegador que NO borre los datos por falta de uso. */
+try{ navigator.storage && navigator.storage.persist && navigator.storage.persist(); }catch(e){}
 
 function hoyNum(){
   const a = new Date(S.start+"T00:00:00"), b = new Date(todayISO()+"T00:00:00");
@@ -1773,25 +1783,12 @@ function renderHoy(){
     nav.scrollLeft = Math.max(0, actual.offsetLeft - nav.clientWidth / 2 + actual.offsetWidth / 2);
   });
 
-  /* Si la fecha guardada no es la de hoy y todavía no has marcado nada,
-     lo más probable es que hoy sea tu Día 1 de verdad. Un toque lo arregla. */
+  /* Aquí vivía un botón de "¿hoy es tu día 1?" que reescribía la fecha de arranque.
+     Era la trampa que te movía el plan: fuera. La fecha solo se cambia a mano,
+     desde Ajustes. */
   const fix = $("#startFix"); fix.innerHTML = "";
   /* Solo en los 2 primeros días: más allá de eso, una fecha de arranque en el pasado
      es intencional y ofrecer "reiniciar a hoy" le borraría los días que lleva. */
-  if(S.start !== todayISO() && st.xp === 0 && hoyNum() <= 2){
-    const n = el("div","note terra");
-    n.innerHTML = "<b>¿Hoy es tu Día 1?</b> Tienes guardado que arrancaste el " + fechaDe(1) + ", pero no has marcado nada todavía.";
-    const b = el("button","btn","Sí, arranqué hoy");
-    b.style.marginTop = "10px";
-    b.onclick = () => {
-      S.start = todayISO(); save(); cur = 1;
-      $("#inStart").value = S.start;
-      renderHoy(); toast("Listo. Día 1 = hoy.");
-    };
-    n.appendChild(b);
-    fix.appendChild(n);
-  }
-
   /* Los primeros 9 días son la ventana de abstinencia de cafeína.
      Verlo escrito el día que te sientes mal cambia cómo lo interpretas. */
   if(cur <= 9){
@@ -2332,7 +2329,9 @@ function renderFechas(){
   + "Tu <b>día 1</b> fue el " + fechaDe(1) + ".<br>"
   + "Hoy es <b>día " + n + " de " + TOTAL + "</b>, semana " + (semanaDe(n) + 1) + ".<br>"
   + "Terminas los 21 días el " + fechaDe(META) + ".<br><br>"
-  + "Si alguna de esas fechas no es la tuya, corrige el campo de arriba y todo lo demás se reacomoda solo.";
+  + (S.start === START_DEFAULT
+      ? "Tu día 1 está <b>fijo en el código</b> de la app, no en la memoria del teléfono. Aunque iOS borre los datos, esta fecha vuelve sola."
+      : "<b>Ojo:</b> tu día 1 debería ser el lunes 21 de septiembre y está en otra fecha. Corrígelo arriba.");
 }
 
 /* =========================================================
@@ -2422,8 +2421,9 @@ $("#btnExport").onclick = () => {
 $("#btnReset").onclick = () => {
   if(!confirm("Esto borra todos tus checks, tu registro de síntomas y tus logros. ¿Seguro?")) return;
   const keep = S.theme;
-  S = DEF(); S.theme = keep; S.start = todayISO(); save();
-  cur = 1; $("#inName").value = ""; $("#inStart").value = S.start;
+  S = DEF(); S.theme = keep; S.start = START_DEFAULT; S.startFix2 = 1; save();
+  cur = hoyNum(); semVista = semanaDe(cur);
+  $("#inName").value = ""; $("#inStart").value = S.start;
   go("hoy"); toast("Todo limpio. Cuando quieras empezamos.");
 };
 
